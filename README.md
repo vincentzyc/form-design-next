@@ -1,6 +1,6 @@
 # 动态表单页面设计 —— Vue3.0 版本
 
-Vue3 + Typescript + Element-Plus 重构中...
+Vue3 + Typescript + Element-Plus 重构中......
 
 自动生成H5页面，一些简单的页面无需前端参与，运营人员自己新建修改即可
 
