@@ -1,5 +1,8 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import App from './App'
 import store from './store'
+import Element from './plugins/element'
 
-createApp(App).use(store).mount('#app')
+import '@/assets/css/base.css'
+
+createApp(App).use(store).use(Element).mount('#app')
