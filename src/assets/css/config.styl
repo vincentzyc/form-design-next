@@ -1,0 +1,207 @@
+.widget-config-container {
+  position: relative;
+
+  .ghost {
+    position: relative;
+
+    &::after {
+      display: block;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+    }
+  }
+
+  .el-header {
+    border-bottom: solid 2px #e4e7ed;
+    padding: 0 5px;
+  }
+
+  .absolute-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .wg-col-config {
+    .col-itemlist {
+      position: relative;
+      padding: 20px 10px 10px;
+      margin-top: 10px;
+      border: 1px dotted #ccc;
+      background-color: #f9f9f9;
+    }
+
+    .move-icon {
+      position: absolute;
+      top: 0px;
+      left: -10px;
+    }
+
+    .delect-icon {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+  }
+
+  .move-icon {
+    font-size: 20px;
+    color: #999;
+    margin: 0 10px;
+    cursor: move;
+
+    &:hover {
+      color: #409EFF;
+    }
+  }
+
+  .delect-icon {
+    font-size: 20px;
+    color: #999;
+    margin-left: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: #f56c6c;
+    }
+  }
+
+  .config-tab {
+    height: 45px;
+    line-height: 45px;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+
+    &.active {
+      border-bottom: solid 2px $primary-color;
+    }
+  }
+
+  .config-content {
+    padding: 10px;
+
+    .el-form-item__label {
+      padding: 0;
+      font-weight: 500;
+    }
+
+    .el-form-item {
+      border-bottom: solid 1px #e1e1e1;
+      padding-bottom: 10px;
+    }
+  }
+
+  .animation-config {
+    .animation-demo {
+      text-align: center;
+      border-radius: 20px;
+      color: #fff;
+      background-color: rgb(64, 158, 255);
+    }
+  }
+}
+
+.quill-editor {
+  position: relative;
+
+  .ql-toolbar {
+    &>button, &>span {
+      position: relative;
+      padding: 0;
+      margin: 4px 7px;
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  .ql-picker.ql-size {
+    width: 20px;
+  }
+
+  .el-color-picker__trigger {
+    border: none;
+  }
+
+  .el-color-picker__color {
+    display: none;
+  }
+
+  .el-color-picker.el-color-picker--mini::before {
+    content: 'A';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #333;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+  }
+
+  .ql-picker.ql-size>.ql-picker-label, .ql-picker.ql-textIndent>.ql-picker-label {
+    position: absolute;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: #333;
+      width: 100%;
+      height: 100%;
+      font-size: 20px;
+    }
+
+    &>svg {
+      display: none;
+    }
+  }
+
+  .ql-picker.ql-size>.ql-picker-label::before {
+    content: 'T';
+  }
+
+  .ql-picker.ql-textIndent>.ql-picker-label::before {
+    content: 'I';
+  }
+
+  .ql-toolbar.ql-snow .ql-picker-label {
+    outline: 0;
+  }
+
+  .ql-snow .ql-color-picker .ql-picker-label svg, .ql-snow .ql-icon-picker .ql-picker-label svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .ql-container {
+    min-height: 120px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .ql-align .ql-picker-label {
+    top: -5px;
+  }
+
+  .ql-picker.ql-size .ql-picker-item:before, .ql-picker.ql-textIndent .ql-picker-item:before {
+    content: attr(data-value);
+  }
+
+  .ql-snow .ql-picker-options .ql-picker-item {
+    line-height: 1.8;
+    padding: 0;
+  }
+}
