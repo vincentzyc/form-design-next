@@ -59,34 +59,30 @@ export default defineComponent({
 
     const widgetLevel2 = ref(widgetLevel1[0])
 
-    function handleWidget(item: any) {
+    function handleWidget(item) {
       widgetLevel2.value = item;
     }
     function dragEnd() {
       store.commit('setDragWg', null)
     }
 
-    function disFormList(wgItem: any) {
+    function disFormList(wgItem: Record<string, unknown>) {
       // 阻止组件嵌套
       if (!hasKey(wgItem, 'list')) return false;
       if (pageData.value.list) {
-        return (pageData.value.list.some((v: any) => {
+        return (pageData.value.list.some(v => {
           return v.type === wgItem.type;
         }))
       }
       return false
     }
 
-    function cloneData(obj: any) {
+    function cloneData(obj: Record<string, unknown>) {
       const elKey = Date.now() + '_' + Math.ceil(Math.random() * 1000000);
       const newObj = deepClone(obj);
       newObj.key = newObj.type + '_' + elKey;
       store.commit('setDragWg', newObj)
       return newObj;
-    }
-
-    function handleConfigSelect(value: any) {
-      store.commit('setConfigTab', value)
     }
 
     return {
@@ -95,8 +91,7 @@ export default defineComponent({
       handleWidget,
       dragEnd,
       disFormList,
-      cloneData,
-      handleConfigSelect
+      cloneData
     }
   }
 })
