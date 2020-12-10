@@ -55,7 +55,7 @@ export default defineComponent({
   setup() {
     const store = useStore()
 
-    const pageData = computed(() => store.state.pageData)
+    const pageData = computed(() => store.state.pageData).value
 
     const widgetLevel2 = ref(widgetLevel1[0])
 
@@ -69,8 +69,8 @@ export default defineComponent({
     function disFormList(wgItem: Record<string, unknown>) {
       // 阻止组件嵌套
       if (!hasKey(wgItem, 'list')) return false;
-      if (pageData.value.list) {
-        return (pageData.value.list.some(v => {
+      if (pageData.list) {
+        return (pageData.list.some(v => {
           return v.type === wgItem.type;
         }))
       }
