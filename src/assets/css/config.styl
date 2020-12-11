@@ -1,3 +1,5 @@
+$primary-color = rgb(64, 158, 255);
+
 .widget-config-container {
   position: relative;
 
@@ -80,8 +82,10 @@
     font-weight: 500;
     position: relative;
     cursor: pointer;
+    transition: 0.2s;
 
     &.active {
+      color: $primary-color;
       border-bottom: solid 2px $primary-color;
     }
   }
