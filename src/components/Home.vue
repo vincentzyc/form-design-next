@@ -11,23 +11,26 @@
           <el-button class="mg-r15" icon="el-icon-document" size="medium" type="text">保存</el-button>
         </el-header>
         <el-main>
-          <WidgetForm></WidgetForm>
+          <WidgetForm />
         </el-main>
       </el-container>
-      <el-aside class="widget-config-container" style="min-width:300px;width:20vw">Aside</el-aside>
+      <el-aside class="widget-config-container" style="min-width:300px;width:20vw">
+        <PageConfig />
+      </el-aside>
     </el-container>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ComponentsList from "./ComponentsList.vue"
-import WidgetForm from '../WidgetForm/index.vue'
+import ComponentsList from "./ComponentsList/index.vue"
+import WidgetForm from './WidgetForm/index.vue'
+import PageConfig from './PageConfig/index.vue'
 
 export default defineComponent({
   name: 'Home',
   components: {
-    ComponentsList,WidgetForm
+    ComponentsList, WidgetForm, PageConfig
   }
 });
 </script>

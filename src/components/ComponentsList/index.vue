@@ -44,9 +44,9 @@
 import { defineComponent, ref, computed } from "vue";
 import Draggable from 'vuedraggable'
 import { useStore } from "vuex";
-import widgetLevel1 from '@/assets/js/widget'
 import { hasKey } from "@/utils/index"
 import { deepClone } from "@/utils/deep-clone"
+import widgetLevel1 from '@/assets/js/widget'
 
 
 export default defineComponent({
@@ -55,7 +55,7 @@ export default defineComponent({
   setup() {
     const store = useStore()
 
-    const pageData = computed(() => store.state.pageData).value
+    const pageData = computed(() => store.state.pageData)
 
     const widgetLevel2 = ref(widgetLevel1[0])
 
@@ -69,8 +69,8 @@ export default defineComponent({
     function disFormList(wgItem: Record<string, unknown>) {
       // 阻止组件嵌套
       if (!hasKey(wgItem, 'list')) return false;
-      if (pageData.list) {
-        return (pageData.list.some(v => {
+      if (pageData.value.list) {
+        return (pageData.value.list.some(v => {
           return v.type === wgItem.type;
         }))
       }

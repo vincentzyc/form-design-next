@@ -136,12 +136,12 @@ export default defineComponent({
       formList: 'WgFormList', // 表单内容区 
     })
     const store = useStore()
-    const selectWg = computed(() => store.state.selectWg).value
+    const selectWg = computed(() => store.state.selectWg)
     const clonebtn = computed(() => {
-      if (selectWg.positionFixed && selectWg.positionFixed !== 'auto') return false;
-      if (selectWg.fixedBottom) return false;
-      if (Array.isArray(selectWg.list)) return false;
-      if (selectWg.key === item.key) return true;
+      if (selectWg.value.positionFixed && selectWg.value.positionFixed !== 'auto') return false;
+      if (selectWg.value.fixedBottom) return false;
+      if (Array.isArray(selectWg.value.list)) return false;
+      if (selectWg.value.key === item.key) return true;
       return false;
     })
     const wgViewStyle = computed(() => {
