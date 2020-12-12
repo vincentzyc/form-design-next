@@ -13,6 +13,11 @@ export default createStore({
       style: {
         backgroundColor: "#fff",
         backgroundImage: "",
+      },
+      hijackBack: {
+        isHijack: false,
+        alertImg: '',
+        alertLink: ''
       }
     },
     dragWg: {},
@@ -42,16 +47,6 @@ export default createStore({
       state.dragWg = payload;
     },
     setPageData(state, payload) {
-      if (!payload.fixedBottom) payload.fixedBottom = [];
-      if (!payload.fixedCustom) payload.fixedCustom = [];
-      if (!payload.fixedTop) payload.fixedTop = [];
-      if (!payload.hijackBack) {
-        payload.hijackBack = {
-          isHijack: false,
-          alertImg: '',
-          alertLink: ''
-        }
-      }
       state.pageData = payload;
     },
     setSelectWg(state, payload) {
