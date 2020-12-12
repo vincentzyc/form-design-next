@@ -19,10 +19,10 @@ import {
   // ElCheckboxButton,
   // ElCheckboxGroup,
   // ElCol,
-  // ElCollapse,
-  // ElCollapseItem,
+  ElCollapse,
+  ElCollapseItem,
   // ElCollapseTransition,
-  // ElColorPicker,
+  ElColorPicker,
   ElContainer,
   // ElDatePicker,
   // ElDialog,
@@ -32,13 +32,13 @@ import {
   // ElDropdownItem,
   // ElDropdownMenu,
   // ElFooter,
-  // ElForm,
-  // ElFormItem,
+  ElForm,
+  ElFormItem,
   ElHeader,
   // ElIcon,
   // ElImage,
-  // ElInput,
-  // ElInputNumber,
+  ElInput,
+  ElInputNumber,
   // ElLink,
   ElMain,
   // ElMenu,
@@ -52,9 +52,9 @@ import {
   // ElPopover,
   // ElPopper,
   // ElProgress,
-  // ElRadio,
-  // ElRadioButton,
-  // ElRadioGroup,
+  ElRadio,
+  ElRadioButton,
+  ElRadioGroup,
   // ElRate,
   // ElRow,
   // ElScrollBar,
@@ -63,7 +63,7 @@ import {
   // ElStep,
   // ElSteps,
   // ElSubmenu,
-  // ElSwitch,
+  ElSwitch,
   // ElTabPane,
   // ElTable,
   // ElTableColumn,
@@ -79,7 +79,7 @@ import {
   // ElUpload,
   // ElInfiniteScroll,
   // ElLoading,
-  // ElMessage,
+  ElMessage,
   // ElMessageBox,
   // ElNotification,
 } from 'element-plus';
@@ -105,10 +105,10 @@ const components = [
   // ElCheckboxButton,
   // ElCheckboxGroup,
   // ElCol,
-  // ElCollapse,
-  // ElCollapseItem,
+  ElCollapse,
+  ElCollapseItem,
   // ElCollapseTransition,
-  // ElColorPicker,
+  ElColorPicker,
   ElContainer,
   // ElDatePicker,
   // ElDialog,
@@ -118,12 +118,12 @@ const components = [
   // ElDropdownItem,
   // ElDropdownMenu,
   // ElFooter,
-  // ElForm,
-  // ElFormItem,
+  ElForm,
+  ElFormItem,
   ElHeader,
   // ElIcon,
   // ElImage,
-  // ElInput,
+  ElInput,
   // ElInputNumber,
   // ElLink,
   ElMain,
@@ -138,9 +138,9 @@ const components = [
   // ElPopover,
   // ElPopper,
   // ElProgress,
-  // ElRadio,
-  // ElRadioButton,
-  // ElRadioGroup,
+  ElRadio,
+  ElRadioButton,
+  ElRadioGroup,
   // ElRate,
   // ElRow,
   // ElScrollBar,
@@ -149,7 +149,7 @@ const components = [
   // ElStep,
   // ElSteps,
   // ElSubmenu,
-  // ElSwitch,
+  ElSwitch,
   // ElTabPane,
   // ElTable,
   // ElTableColumn,
@@ -165,21 +165,21 @@ const components = [
   // ElUpload,
 ]
 
-// const plugins = [
+const plugins = [
   // ElInfiniteScroll,
   // ElLoading,
-  // ElMessage,
+  ElMessage
   // ElMessageBox,
   // ElNotification,
-// ]
+]
 const install = (app: any) => {
   components.forEach(component => {
     app.component(component.name, component)
   })
 
-  // plugins.forEach(plugin => {
-  //   app.use(plugin)
-  // })
+  plugins.forEach(plugin => {
+    app.use(plugin)
+  })
 }
 
 export default install
