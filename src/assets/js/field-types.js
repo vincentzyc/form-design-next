@@ -20,8 +20,8 @@ export default {
     "options": ["男", "女"]
   }, {
     "value": "loanTimeList",
-    "label": "贷款时间",
-    "options": ["12个月", "24个月", "36个月", "48个月"]
+    "label": "分期时长",
+    "options": ["3个月", "6个月", "12个月", "24个月"]
   }],
 
   "selectTypes": [{
