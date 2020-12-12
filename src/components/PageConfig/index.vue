@@ -12,19 +12,25 @@
         class="config-tab flex-auto"
       >页面配置</div>
     </el-header>
-    <!-- <el-main class="config-content">
-      <widget-config v-show="configTab=='widget'"></widget-config>
-      <page-config v-show="configTab=='page'"></page-config>
-    </el-main>-->
+    <el-main class="config-content">
+      <WidgetConfig v-show="configTab=='widget'" />
+      <CommonConfig v-show="configTab=='page'" />
+    </el-main>
   </el-container>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
+import WidgetConfig from "./WidgetConfig/index.vue";
+import CommonConfig from "./CommonConfig/index.vue";
 
 export default defineComponent({
-  name: 'ConfigArea',
+  name: 'PageConfig',
+  components: {
+    WidgetConfig,
+    CommonConfig
+  },
   setup() {
     const store = useStore()
     const configTab = computed(() => store.state.configTab)
