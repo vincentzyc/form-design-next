@@ -9,7 +9,7 @@
         <div class="wg-fixed-top" v-if="Array.isArray(pageData.fixedTop)&&pageData.fixedTop.length>0">
           <!-- 可支持多个组件悬浮，目前未开放，限制一个-->
           <template :key="item.key" v-for="(item,index) in pageData.fixedTop">
-            <WidgetFormList :data="pageData.fixedTop" :index="index" :item="item" />
+            <WidgetFormList v-model:data="pageData.fixedTop" :index="index" :item="item" />
           </template>
         </div>
         <div
@@ -19,7 +19,7 @@
           <!-- 可支持多个组件悬浮，目前未开放，限制一个 -->
           <template :key="item.key" v-for="(item,index) in pageData.fixedCustom">
             <WidgetFormList
-              :data="pageData.fixedCustom"
+              v-model:data="pageData.fixedCustom"
               :index="index"
               :item="item"
               :style="fixedCustomStyle(item)"
@@ -42,7 +42,7 @@
           v-model="pageData.list"
         >
           <template #item="{element,index}">
-            <WidgetFormList :data="pageData.list" :index="index" :item="element" />
+            <WidgetFormList v-model:data="pageData.list" :index="index" :item="element" />
           </template>
         </Draggable>
 
@@ -52,7 +52,7 @@
         >
           <!-- 可支持多个组件悬浮，目前未开放，限制一个-->
           <template :key="item.key" v-for="(item,index) in pageData.fixedBottom">
-            <WidgetFormList :data="pageData.fixedBottom" :index="index" :item="item" />
+            <WidgetFormList v-model:data="pageData.fixedBottom" :index="index" :item="item" />
           </template>
         </div>
       </div>
