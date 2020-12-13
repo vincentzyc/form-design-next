@@ -1,7 +1,7 @@
-import SplitLine from "./split-line"
+import SplitLine from "./SplitLine"
 
 export default [{
   name: "分割线",
-  value: "splitLine",
+  value: "SplitLine",
   data: SplitLine
 }]

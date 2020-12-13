@@ -1,5 +1,5 @@
 export default [{
-  type: "marquee",
+  type: "Marquee",
   name: "跑马灯",
   positionFixed: 'auto',
   fixedTypes: ['auto', 'top', 'bottom'], // auto--正常 top--顶部悬浮  custom--自定义位置悬浮  bottom--底部悬浮

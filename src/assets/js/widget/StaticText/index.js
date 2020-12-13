@@ -1,7 +1,7 @@
-import StaticText from "./static-text"
+import StaticText from "./StaticText"
 
 export default [{
   name: "基本样式",
-  value: "staticText",
+  value: "StaticText",
   data: StaticText
 }]

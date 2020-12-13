@@ -1,5 +1,5 @@
 export default [{
-  type: "randomCode",
+  type: "RandomCode",
   name: "随机码",
   placeholder: "请输入验证码",
   showLabel: false,

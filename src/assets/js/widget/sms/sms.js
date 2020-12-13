@@ -1,5 +1,5 @@
 export default [{
-  type: "sms",
+  type: "Sms",
   name: "短信",
   isImgBtn: false,
   dialog: {

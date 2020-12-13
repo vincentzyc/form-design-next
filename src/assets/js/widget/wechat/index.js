@@ -1,7 +1,7 @@
-import Wechat from "./wechat"
+import Wechat from "./Wechat"
 
 export default [{
   name: "基本样式",
-  value: "base",
+  value: "Wechat",
   data: Wechat
 }]

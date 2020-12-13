@@ -1,7 +1,7 @@
-import Marquee from "./marquee"
+import Marquee from "./Marquee"
 
 export default [{
   name: "基本样式",
-  value: "marquee",
+  value: "Marquee",
   data: Marquee
 }]

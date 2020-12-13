@@ -1,5 +1,5 @@
 export default [{
-  type: "button",
+  type: "Button",
   name: "按钮",
   btnText: "提交",
   btnType: "submit",

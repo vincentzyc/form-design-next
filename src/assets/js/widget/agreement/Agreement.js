@@ -1,5 +1,5 @@
 export default [{
-  type: "agreement",
+  type: "Agreement",
   name: "用户协议",
   apiKey: "agreement",
   value: false,

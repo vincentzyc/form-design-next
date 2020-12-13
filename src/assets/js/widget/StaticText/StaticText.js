@@ -1,5 +1,5 @@
 export default [{
-  type: "staticText",
+  type: "StaticText",
   name: "文本描述",
   value: "这是一段文本",
   link: "",

@@ -1,7 +1,7 @@
-import AgreementBase from "./agreement-base"
+import Agreement from "./Agreement"
 
 export default [{
   name: "基本样式",
-  value: "base",
-  data: AgreementBase
+  value: "Agreement",
+  data: Agreement
 }]

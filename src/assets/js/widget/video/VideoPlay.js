@@ -1,5 +1,5 @@
 export default [{
-  type: "videoPlay",
+  type: "VideoPlay",
   name: "视频播放",
   videoAttr: {
     src: "https://www.runoob.com/try/demo_source/movie.mp4",

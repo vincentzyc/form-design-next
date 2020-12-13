@@ -1,7 +1,7 @@
-import VideoPlay from "./video-play"
+import VideoPlay from "./VideoPlay"
 
 export default [{
   name: "视频播放",
-  value: "videoPlay",
+  value: "VideoPlay",
   data: VideoPlay
 }]

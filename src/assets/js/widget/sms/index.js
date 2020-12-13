@@ -1,7 +1,7 @@
-import Sms from "./sms"
+import Sms from "./Sms"
 
 export default [{
   name: "基本样式",
-  value: "sms",
+  value: "Sms",
   data: Sms
 }]

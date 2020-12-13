@@ -1,5 +1,5 @@
 export default [{
-  type: "wechat",
+  type: "Wechat",
   name: "微信关注",
   value: "微信账号",
   wechatName: "",

@@ -1,5 +1,5 @@
 export default [{
-  type: "phone",
+  type: "Phone",
   name: "手机号",
   placeholder: "请输入手机号",
   showLabel: false,
