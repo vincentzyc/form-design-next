@@ -11,9 +11,8 @@
           <TagConfig />
         </el-collapse-item>
 
-        <el-collapse-item name="style" title="外观样式" v-if="selectWg.hasOwnProperty('style')">
-          333
-          <!-- <StyleConfig :selectWg="selectWg" /> -->
+        <el-collapse-item name="style" title="外观样式" v-if="selectWg.hasOwnProperty('style')" class="asdfasdfds">
+          <StyleConfig />
         </el-collapse-item>
 
         <el-collapse-item name="animation" title="动画设置" v-if="selectWg.hasOwnProperty('animation')">
@@ -31,13 +30,13 @@ import { useStore } from "vuex";
 
 // import BaseConfig from "./base-config"
 import TagConfig from "./TagConfig.vue"
-// import StyleConfig from "./style-config"
+import StyleConfig from "./StyleConfig.vue"
 // import AnimationConfig from "./animation-config"
 export default defineComponent({
   components: {
     // BaseConfig,
     TagConfig,
-    // StyleConfig,
+    StyleConfig,
     // AnimationConfig
   },
   setup() {
