@@ -9,11 +9,6 @@ import RandomCode from "./RandomCode"
 import HPicker from "./HPicker"
 
 export default [{
-  name: "表单内容区",
-  value: "FormList",
-  dragOnce: true,
-  data: FormList
-}, {
   name: "手机",
   value: "phone",
   data: Phone
@@ -45,4 +40,9 @@ export default [{
   name: "开关",
   value: "Switch",
   data: Switch
+}, {
+  name: "表单内容区",
+  value: "FormList",
+  dragOnce: true,
+  data: FormList
 }]
