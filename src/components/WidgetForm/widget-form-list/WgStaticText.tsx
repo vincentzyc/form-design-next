@@ -8,7 +8,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup(props: any) {
     const { item } = reactive(props)
     const wrapStyle = { backgroundColor: item.backgroundColor, backgroundImage: `url(${item.backgroundImage || ''})` }
     return () => (
