@@ -8,6 +8,10 @@ export default [{
   backgroundImage: "",
   backgroundColor: "",
   style: {
-    margin: "0px 0px 0px 0px"
+    margin: "0px 0px 0px 0px",
+    lineheight: 20,
+    lineHeight: "20px",
+    fontSize: "12px",
+    fontsize: 12
   }
 }]
