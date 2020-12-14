@@ -85,7 +85,6 @@
     </el-form-item>
     <el-form-item label="背景图片" v-if="selectWg.hasOwnProperty('backgroundImage')">
       <!-- <FileUpload :value.sync="selectWg.backgroundImage" /> -->
-      <p>背景图片</p>
     </el-form-item>
     <el-form-item label="左边距(px)" v-if="selectWg.style.hasOwnProperty('marginleft')">
       <el-input-number
