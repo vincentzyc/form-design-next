@@ -49,8 +49,7 @@ export default {
       instance.txt.html(props.modelValue)
     }
 
-    watch(() => props.modelValue, (newVal, oldVal) => {
-      // console.log(newVal, oldVal);
+    watch(() => props.modelValue, newVal => {
       if (instance) {
         if (newVal && newVal !== curContent) {
           htmlChange(newVal)
