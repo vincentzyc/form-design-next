@@ -3,8 +3,7 @@
     <el-form label-position="top">
       <el-collapse accordion v-model="wgCollapse">
         <el-collapse-item name="base" title="基础设置">
-          111
-          <!-- <BaseConfig :selectWg="selectWg" /> -->
+          <BaseConfig :selectWg="selectWg" />
         </el-collapse-item>
 
         <el-collapse-item name="tag" title="标签设置" v-if="selectWg.label&&selectWg.showLabel!==false">
@@ -28,13 +27,13 @@
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 
-// import BaseConfig from "./base-config"
+import BaseConfig from "./BaseConfig/index.vue"
 import TagConfig from "./TagConfig.vue"
 import StyleConfig from "./StyleConfig.vue"
 // import AnimationConfig from "./animation-config"
 export default defineComponent({
   components: {
-    // BaseConfig,
+    BaseConfig,
     TagConfig,
     StyleConfig,
     // AnimationConfig
