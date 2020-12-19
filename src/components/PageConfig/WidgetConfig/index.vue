@@ -3,20 +3,20 @@
     <el-form label-position="top">
       <el-collapse accordion v-model="wgCollapse">
         <el-collapse-item name="base" title="基础设置">
-          <BaseConfig :selectWg="selectWg" />
+          <BaseConfig />
         </el-collapse-item>
 
         <el-collapse-item name="tag" title="标签设置" v-if="selectWg.label&&selectWg.showLabel!==false">
           <TagConfig />
         </el-collapse-item>
 
-        <el-collapse-item name="style" title="外观样式" v-if="selectWg.hasOwnProperty('style')" class="asdfasdfds">
+        <el-collapse-item name="style" title="外观样式" v-if="selectWg.hasOwnProperty('style')">
           <StyleConfig />
         </el-collapse-item>
 
         <el-collapse-item name="animation" title="动画设置" v-if="selectWg.hasOwnProperty('animation')">
-          444
-          <!-- <AnimationConfig :selectWg="selectWg" /> -->
+          haha
+          <!-- <AnimationConfig /> -->
         </el-collapse-item>
       </el-collapse>
     </el-form>
