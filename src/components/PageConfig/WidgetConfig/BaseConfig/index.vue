@@ -3,14 +3,15 @@
     <!-- <PopupConfig :selectWg="selectWg" /> -->
     <!-- <FixedConfig :selectWg="selectWg" /> -->
     <Common />
-    <component :is="'Wg'+selectWg.type" :selectWg="selectWg" />
+    <component :is="'Wg'+selectWg.type" v-if="hadComponent"/>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
-import Common from "./Common.vue"
+import { hasKey } from "@/utils/index";
+import Common from "./Common.vue";
 // import FixedConfig from "./fixed-config"
 // import PopupConfig from "./popup-config"
 
@@ -22,11 +23,15 @@ export default defineComponent({
     // Common: () => import('./Common.vue'),
   },
   setup() {
+    const vm: any = getCurrentInstance()?.proxy
+
     const store = useStore()
     const selectWg = computed(() => store.state.selectWg)
 
+    const hadComponent = computed(() => hasKey(vm.$options.components, selectWg.value.type))
+
     return {
-      selectWg
+      selectWg, hadComponent
     }
   }
 })
