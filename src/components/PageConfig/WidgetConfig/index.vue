@@ -15,8 +15,7 @@
         </el-collapse-item>
 
         <el-collapse-item name="animation" title="动画设置" v-if="selectWg.hasOwnProperty('animation')">
-          haha
-          <!-- <AnimationConfig /> -->
+          <AnimationConfig />
         </el-collapse-item>
       </el-collapse>
     </el-form>
@@ -30,13 +29,13 @@ import { useStore } from "vuex";
 import BaseConfig from "./BaseConfig/index.vue"
 import TagConfig from "./TagConfig.vue"
 import StyleConfig from "./StyleConfig.vue"
-// import AnimationConfig from "./animation-config"
+import AnimationConfig from "./AnimationConfig.vue"
 export default defineComponent({
   components: {
     BaseConfig,
     TagConfig,
     StyleConfig,
-    // AnimationConfig
+    AnimationConfig
   },
   setup() {
     const store = useStore()
