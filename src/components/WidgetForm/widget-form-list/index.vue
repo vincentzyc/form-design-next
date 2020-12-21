@@ -27,11 +27,13 @@ import { useStore } from 'vuex';
 import { deepClone } from '@/utils/deep-clone';
 
 import WgStaticText from './WgStaticText'
+import WgButton from './WgButton'
 
 export default defineComponent({
   name: "WidgetFormList",
   components: {
     WgStaticText,
+    WgButton
 
     //下面是按需加载，组件多的话可选择此方式
     // WgStaticText: () => import('./WgStaticText'),
