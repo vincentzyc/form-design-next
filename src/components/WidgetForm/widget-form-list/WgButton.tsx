@@ -29,18 +29,13 @@ export default defineComponent({
       return `flex flex-center ${item.animation.className}`
     })
 
+    const getImageDom = () => item.style.value
+      ? <img src={item.style.value} alt="图片按钮" width="100%" />
+      : <img alt="图片展示" src={require('@/assets/img/img-placeholder.png')} />
+
     const getButtonDom = () => item.style.isImgBtn
-      ? (
-        <div class={{ 'img-placeholder': !item.style.value }}>
-          {
-            item.style.value
-              ? <img src={item.style.value} alt="图片按钮" width="100%" />
-              : <img alt="图片展示" src={require('@/assets/img/img-placeholder.png')} />
-          }
-        </div>
-      ) : (
-        <button style={item.style.btnStyle} class="wg-button">{item.btnText}</button>
-      )
+      ? <div class={{ 'img-placeholder': !item.style.value }}>{getImageDom()}</div>
+      : <button style={item.style.btnStyle} class="wg-button">{item.btnText}</button>
 
     return () => (
       <div class={wrapClass.value} style={wrapStyle.value}>
