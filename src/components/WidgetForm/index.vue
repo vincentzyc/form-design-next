@@ -64,7 +64,8 @@
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import Draggable from 'vuedraggable'
-import WidgetFormList from './widget-form-list/index.vue'
+import WidgetFormList from './widget-form-list'
+// import WidgetFormList from './widget-form-list/index.vue'
 
 export default defineComponent({
   name: "WidgetForm",
