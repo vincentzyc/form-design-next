@@ -84,6 +84,24 @@ export default defineComponent({
       store.commit('setSelectWg', props.data[props.index + 1])
     }
 
+    const renderDragIcon = () => Array.isArray(props.item.list) && <i class="el-icon-rank"></i>
+
+    const renderDeleteIcon = () => selectWg.value.key === props.item.key && (
+      <span
+        onClick={handleWidgetDelete}
+        class="widget-action-btn widget-action-delete el-icon-delete"
+        title="删除"
+      ></span>
+    )
+
+    const renderCloneIcon = () => clonebtn.value && (
+      <span
+        onClick={handleWidgetClone}
+        class="widget-action-btn widget-action-clone el-icon-document-copy"
+        title="复制"
+      ></span>
+    )
+
     return () => {
       const Widget: any = resolveComponent('Wg' + props.item.type)
 
@@ -93,20 +111,10 @@ export default defineComponent({
           style={wgViewStyle.value}
           onClick={handleSelectWidget}
         >
-          {Array.isArray(props.item.list) ? <i class="el-icon-rank"></i> : null}
+          {renderDragIcon()}
           <Widget item={props.item} />
-          {selectWg.value.key === props.item.key ?
-            <span
-              onClick={handleWidgetDelete}
-              class="widget-action-btn widget-action-delete el-icon-delete"
-              title="删除"
-            ></span> : null}
-          {clonebtn.value ?
-            <span
-              onClick={handleWidgetClone}
-              class="widget-action-btn widget-action-clone el-icon-document-copy"
-              title="复制"
-            ></span> : null}
+          {renderDeleteIcon()}
+          {renderCloneIcon()}
         </div>
       )
     }
