@@ -6,13 +6,15 @@ import { deepClone } from '@/utils/deep-clone';
 import WgStaticText from './WgStaticText'
 import WgButton from './WgButton'
 import WgVideoPlay from './WgVideoPlay'
+import WgImgShow from './WgImgShow'
 
 export default defineComponent({
   name: "WidgetFormList",
   components: {
     WgStaticText,
     WgButton,
-    WgVideoPlay
+    WgVideoPlay,
+    WgImgShow
 
     //下面是按需加载，组件多的话可选择此方式
     // WgStaticText: () => import('./WgStaticText'),
