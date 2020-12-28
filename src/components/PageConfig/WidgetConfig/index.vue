@@ -28,7 +28,7 @@ import { useStore } from "vuex";
 
 import BaseConfig from "./BaseConfig/index.vue"
 import TagConfig from "./TagConfig.vue"
-import StyleConfig from "./StyleConfig.vue"
+import StyleConfig from "./StyleConfig/index.vue"
 import AnimationConfig from "./AnimationConfig.vue"
 export default defineComponent({
   components: {
