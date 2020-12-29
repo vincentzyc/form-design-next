@@ -58,7 +58,8 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+// import { defineComponent } from "vue";
+import { defineComponent, ref, watch } from "vue";
 export default defineComponent({
   props: {
     style: {
@@ -67,39 +68,38 @@ export default defineComponent({
     }
   },
   emits: ['update:style'],
-  data() {
-    return {
-      nStyle: {}
-    }
-  },
-  watch: {
-    style: {
-      handler(newVal) {
-        this.nStyle = newVal
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    updateStyle(key, v) {
-      this.nStyle[key] = v
-      this.$emit("update:style", this.nStyle)
-    }
-  }
-  // setup(props, { emit }) {
-  //   let nStyle = reactive({})
-
-  //   watch(() => props.style, newVal => nStyle = newVal, { immediate: true })
-
-  //   function updateStyle(key, v) {
-  //     nStyle[key] = v
-  //     emit("update:style", nStyle)
-  //   }
-
+  // data() {
   //   return {
-  //     nStyle,
-  //     updateStyle
+  //     nStyle: {}
+  //   }
+  // },
+  // watch: {
+  //   style: {
+  //     handler(newVal) {
+  //       this.nStyle = newVal
+  //     },
+  //     immediate: true
+  //   }
+  // },
+  // methods: {
+  //   updateStyle(key, v) {
+  //     this.nStyle[key] = v
+  //     this.$emit("update:style", this.nStyle)
   //   }
   // }
+  setup(props, { emit }) {
+    const nStyle = ref({})
+    watch(() => props.style, newVal => nStyle.value = newVal, { immediate: true })
+
+    function updateStyle(key, v) {
+      nStyle.value[key] = v
+      emit("update:style", nStyle.value)
+    }
+
+    return {
+      nStyle,
+      updateStyle
+    }
+  }
 })
 </script>
