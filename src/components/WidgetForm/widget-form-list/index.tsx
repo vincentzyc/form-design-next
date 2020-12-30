@@ -7,6 +7,7 @@ import WgStaticText from './WgStaticText'
 import WgButton from './WgButton'
 import WgVideoPlay from './WgVideoPlay'
 import WgImgShow from './WgImgShow'
+import WgSplitLine from './WgSplitLine'
 
 export default defineComponent({
   name: "WidgetFormList",
@@ -14,7 +15,8 @@ export default defineComponent({
     WgStaticText,
     WgButton,
     WgVideoPlay,
-    WgImgShow
+    WgImgShow,
+    WgSplitLine
 
     //下面是按需加载，组件多的话可选择此方式
     // WgStaticText: () => import('./WgStaticText'),
