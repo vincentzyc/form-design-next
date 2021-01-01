@@ -1,8 +1,16 @@
 <template>
-  <div class="wg-item wg-padding" :class="[item.label.labelPosition==='top'?'flex-column':'align-middle']" :style="item.style">
-    <div class="wg-title" :style="{width:item.label.labelWidth}" v-show="item.showLabel">{{item.label.labelTitle}}</div>
+  <div
+    :class="[item.label.labelPosition==='top'?'flex-column':'align-middle']"
+    :style="item.style"
+    class="wg-item wg-padding"
+  >
+    <div
+      :style="{width:item.label.labelWidth}"
+      class="wg-title"
+      v-show="item.showLabel"
+    >{{item.label.labelTitle}}</div>
     <div class="flex-auto">
-      <input v-model="item.value" :placeholder="item.placeholder" class="wg-input">
+      <input :placeholder="item.placeholder" :value="item.value" class="wg-input" />
     </div>
   </div>
 </template>
