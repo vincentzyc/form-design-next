@@ -142,12 +142,13 @@
   </el-form-item>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 import allLabelText from "./labelText"
 
 export default defineComponent({
+  name: "StyleItemConfig",
   props: {
     style: {
       required: true,
