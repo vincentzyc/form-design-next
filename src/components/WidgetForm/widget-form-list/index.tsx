@@ -9,7 +9,7 @@ import WgVideoPlay from './WgVideoPlay'
 import WgImgShow from './WgImgShow'
 import WgSplitLine from './WgSplitLine'
 import WgPhone from './WgPhone.vue'
-// import WgInput from './WgInput.vue'
+import WgInput from './WgInput.vue'
 
 export default defineComponent({
   name: "WidgetFormList",
@@ -19,7 +19,8 @@ export default defineComponent({
     WgVideoPlay,
     WgImgShow,
     WgSplitLine,
-    WgPhone
+    WgPhone,
+    WgInput
 
     //下面是按需加载，组件多的话可选择此方式
     // WgStaticText: () => import('./WgStaticText'),
