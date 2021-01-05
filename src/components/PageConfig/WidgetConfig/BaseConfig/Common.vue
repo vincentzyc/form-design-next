@@ -1,6 +1,6 @@
 <template>
   <section>
-    <el-form-item label="选择控件" v-if="hasKey(selectWg,'fieldTypes')">
+    <!-- <el-form-item label="选择控件" v-if="hasKey(selectWg,'fieldTypes')">
       <el-select
         @change="selectfield(selectWg.apiKey,fieldTypes[selectWg.fieldTypes])"
         filterable
@@ -14,7 +14,7 @@
           v-for="item in fieldTypes[selectWg.fieldTypes]"
         ></el-option>
       </el-select>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="是否必填/选" v-if="hasKey(selectWg, 'isRequired')">
       <el-switch v-model="selectWg.isRequired"></el-switch>
     </el-form-item>
