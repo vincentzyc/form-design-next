@@ -145,7 +145,7 @@
 <script lang="ts">
 import { defineComponent, computed, ref, watch } from "vue";
 import { useStore } from "vuex";
-import allLabelText from "./labelText"
+import allLabelText from "./labeltext"
 
 export default defineComponent({
   name: "StyleItemConfig",
