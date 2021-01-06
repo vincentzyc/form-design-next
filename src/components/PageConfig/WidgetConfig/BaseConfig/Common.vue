@@ -1,9 +1,8 @@
 <template>
   <section>
-    <!-- <el-form-item label="选择控件" v-if="hasKey(selectWg,'fieldTypes')">
+    <el-form-item label="选择控件" v-if="hasKey(selectWg,'fieldTypes')">
       <el-select
         @change="selectfield(selectWg.apiKey,fieldTypes[selectWg.fieldTypes])"
-        filterable
         placeholder="请选择"
         v-model="selectWg.apiKey"
       >
@@ -14,7 +13,7 @@
           v-for="item in fieldTypes[selectWg.fieldTypes]"
         ></el-option>
       </el-select>
-    </el-form-item> -->
+    </el-form-item>
     <el-form-item label="是否必填/选" v-if="hasKey(selectWg, 'isRequired')">
       <el-switch v-model="selectWg.isRequired"></el-switch>
     </el-form-item>
@@ -80,12 +79,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, getCurrentInstance } from "vue";
+import { defineComponent, computed, getCurrentInstance, reactive } from "vue";
 import { useStore } from "vuex";
 import Draggable from 'vuedraggable'
 import Editor from "@/components/Editor";
 import { hasKey } from "@/utils/index"
 import { isLink } from '@/utils/validate/link';
+import allFieldTypes from '@/assets/js/field-types.js'
 
 export default defineComponent({
   components: {
@@ -93,73 +93,41 @@ export default defineComponent({
   },
   setup() {
     const vm: any = getCurrentInstance()?.proxy
+
+    const fieldTypes = reactive(allFieldTypes)
+
     const store = useStore()
     const selectWg = computed(() => store.state.selectWg)
+
+    function isRadio(flag) {
+      selectWg.value.value = flag ? "" : []
+    }
 
     function checkLink(v) {
       if (!isLink(v)) vm.$message.error('请输入正确的网址');
     }
 
+    function selectfield(key, types) {
+      const selectItem = types.find(item => key === item.value);
+      selectWg.value.label.labelTitle = selectItem.label;
+      selectWg.value.options ? selectWg.value.options = selectItem.options : "";
+      if (hasKey(selectWg.value, 'placeholder')) {
+        selectWg.value.placeholder = selectWg.value.type === "input" ? `请输入${selectItem.label}` : `请选择${selectItem.label}`;
+      }
+    }
+
+    function handleOptionsRemove(index) {
+      selectWg.value.options.splice(index, 1)
+    }
+    function handleAddOption() {
+      selectWg.value.options.push('新选项')
+    }
+
     return {
+      fieldTypes,
       selectWg,
-      hasKey, checkLink
+      hasKey, isRadio, checkLink, selectfield, handleOptionsRemove, handleAddOption
     }
   }
 })
-
-// import { mapState } from 'vuex';
-// import Draggable from 'vuedraggable'
-// import Editor from "@/components/Editor";
-
-// import allFieldTypes from '@/assets/js/field-types.js'
-// export default {
-//   components: {
-//     Draggable, Editor
-//   },
-//   props: {
-//     selectWg: {
-//       type: Object,
-//       required: true
-//     }
-//   },
-//   data() {
-//     return {
-//       fieldTypes: allFieldTypes,
-//       editorOption: {
-//         modules: {
-//           toolbar: '#toolbar'
-//         }
-//       }
-//     }
-//   },
-//   computed: {
-//     ...mapState({
-//       pageData: state => state.common.pageData,
-//       wgConfig: state => state.common.wgConfig
-//     })
-//   },
-//   methods: {
-//     isLink(val) {
-//       let isLink = this.isLink(val);
-//       if (!isLink) this.$message.error('请输入正确的网址');
-//     },
-//     isRadio(flag) {
-//       this.selectWg.value = flag ? "" : []
-//     },
-//     selectfield(key, types) {
-//       let selectItem = types.find(item => key === item.value);
-//       this.selectWg.label.labelTitle = selectItem.label;
-//       this.selectWg.options ? this.selectWg.options = selectItem.options : "";
-//       if (this.hasKey(this.selectWg, 'placeholder')) {
-//         this.selectWg.placeholder = this.selectWg.type === "input" ? `请输入${selectItem.label}` : `请选择${selectItem.label}`;
-//       }
-//     },
-//     handleOptionsRemove(index) {
-//       this.selectWg.options.splice(index, 1)
-//     },
-//     handleAddOption() {
-//       this.selectWg.options.push('新选项')
-//     }
-//   }
-// }
 </script>
