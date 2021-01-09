@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "element-plus": "^1.0.1-beta.7",
+    "element-plus": "^1.0.1-beta.23",
     "vue": "^3.0.4",
     "vuedraggable": "^4.0.1",
     "vuex": "^4.0.0-rc.2"
