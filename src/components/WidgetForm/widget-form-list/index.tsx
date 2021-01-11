@@ -11,7 +11,9 @@ import WgSplitLine from './WgSplitLine'
 import WgDatePicker from './WgDatePicker'
 import WgPhone from './WgPhone'
 import WgInput from './WgInput'
+import WgSelect from './WgSelect'
 import WgAgreement from './WgAgreement'
+import WgRandomCode from './WgRandomCode'
 
 export default defineComponent({
   name: "WidgetFormList",
@@ -24,7 +26,9 @@ export default defineComponent({
     WgDatePicker,
     WgPhone,
     WgInput,
-    WgAgreement
+    WgSelect,
+    WgAgreement,
+    WgRandomCode
 
     //下面是按需加载，组件多的话可选择此方式
     // WgStaticText: () => import('./WgStaticText'),
