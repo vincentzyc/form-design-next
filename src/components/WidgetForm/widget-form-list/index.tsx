@@ -15,6 +15,7 @@ import WgInput from './WgInput'
 import WgSelect from './WgSelect'
 import WgAgreement from './WgAgreement'
 import WgRandomCode from './WgRandomCode'
+import WgSwitch from './WgSwitch'
 
 export default defineComponent({
   name: "WidgetFormList",
@@ -30,7 +31,8 @@ export default defineComponent({
     WgInput,
     WgSelect,
     WgAgreement,
-    WgRandomCode
+    WgRandomCode,
+    WgSwitch
 
     //下面是按需加载，组件多的话可选择此方式
     // WgStaticText: () => import('./WgStaticText'),
