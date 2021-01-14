@@ -7,6 +7,7 @@ import WgStaticText from './WgStaticText'
 import WgButton from './WgButton'
 import WgVideoPlay from './WgVideoPlay'
 import WgImgShow from './WgImgShow'
+import WgImgSlide from './WgImgSlide'
 import WgSplitLine from './WgSplitLine'
 import WgDatePicker from './WgDatePicker'
 import WgPhone from './WgPhone'
@@ -22,6 +23,7 @@ export default defineComponent({
     WgButton,
     WgVideoPlay,
     WgImgShow,
+    WgImgSlide,
     WgSplitLine,
     WgDatePicker,
     WgPhone,
