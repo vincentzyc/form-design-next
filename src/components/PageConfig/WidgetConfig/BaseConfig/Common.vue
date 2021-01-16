@@ -59,9 +59,9 @@
       <Draggable
         :animation="100"
         :group="{ name:'options'}"
-        :item-key="index"
         ghostClass="ghost"
         handle=".move-icon"
+        item-key="index"
         tag="ul"
         v-model="selectWg.options"
       >
