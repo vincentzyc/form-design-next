@@ -1,5 +1,5 @@
 export default [{
-  type: "FormList",
+  type: "ChildList",
   name: "表单内容区",
   list: [],
   wgClassName: "wg-formlist",
