@@ -19,6 +19,7 @@ import WgSwitch from './WgSwitch'
 import WgCheckbox from './WgCheckbox'
 import WgSms from './WgSms'
 import WgWechat from './WgWechat'
+import WgChildList from './WgChildList'
 
 export default defineComponent({
   name: "WidgetFormList",
@@ -38,7 +39,8 @@ export default defineComponent({
     WgSwitch,
     WgCheckbox,
     WgSms,
-    WgWechat
+    WgWechat,
+    WgChildList
 
     //下面是按需加载，组件多的话可选择此方式
     // WgStaticText: () => import('./WgStaticText'),
