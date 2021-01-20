@@ -67,7 +67,7 @@ export default {
       this.scrollTimeId = setInterval(this.scroll, this.item.durationTime * 1000);
     })
   },
-  beforeDestroy() {
+  beforeUnmount() {
     clearInterval(this.scrollTimeId);
     clearTimeout(this.animateTimeId);
   }
