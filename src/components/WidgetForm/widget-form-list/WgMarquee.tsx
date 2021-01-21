@@ -31,7 +31,7 @@ export default defineComponent({
       </div>
     )
 
-    const renderImg1 = () => (
+    const renderText = () => (
       <div>{
         [...item.textList, ...item.textList].map((texts, key) => (
           <p key={key} class="flex space-around" style={{ width: marqueeWidth.value + 'px' }}>
@@ -52,7 +52,7 @@ export default defineComponent({
           class={inlineClass}
           style={{ animation: `marquee-${item.direction} ${item.durationTime}s linear infinite` }}
         >
-          {item.isImgBtn ? renderImg() : renderImg1()}
+          {item.isImgBtn ? renderImg() : renderText()}
         </div >
       </div >
     )
