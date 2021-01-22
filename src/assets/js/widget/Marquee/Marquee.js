@@ -27,7 +27,7 @@ export default [{
     margin: "0px 0px 0px 0px"
   }
 }, {
-  type: "marqueeSingle",
+  type: "MarqueeSingle",
   name: "跑马灯-单个",
   positionFixed: 'auto', // auto--正常 top--顶部悬浮  custom--自定义位置悬浮  bottom--底部悬浮
   durationTime: 2, //滚动间隔 单位秒
