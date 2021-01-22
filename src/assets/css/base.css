@@ -318,6 +318,9 @@ strong,
 .relative {
 	position: relative;
 }
+.white-space-pre {
+	white-space: pre !important;
+}
 .lh20 {
 	line-height: 20px;
 }
