@@ -53,8 +53,8 @@ export default defineComponent({
           style={{ animation: `marquee-${item.direction} ${item.durationTime}s linear infinite` }}
         >
           {item.isImgBtn ? renderImg() : renderText()}
-        </div >
-      </div >
+        </div>
+      </div>
     )
   }
 })
