@@ -80,7 +80,7 @@ import {
   // ElInfiniteScroll,
   // ElLoading,
   ElMessage,
-  // ElMessageBox,
+  ElMessageBox,
   // ElNotification,
 } from 'element-plus';
 
@@ -168,8 +168,8 @@ const components = [
 const plugins = [
   // ElInfiniteScroll,
   // ElLoading,
-  ElMessage
-  // ElMessageBox,
+  ElMessage,
+  ElMessageBox,
   // ElNotification,
 ]
 const install = (app: any) => {
