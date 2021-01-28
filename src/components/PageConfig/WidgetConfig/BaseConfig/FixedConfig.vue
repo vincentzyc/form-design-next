@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, computed, ref, reactive, getCurrentInstance } from "vue";
+import { defineComponent, watch, computed, ref, reactive } from "vue";
 import { useStore } from "vuex";
 import { ElMessageBox } from "element-plus";
 import { hasKey } from "@/utils"
@@ -51,7 +51,6 @@ const TOP_NAME = 'top',
 export default defineComponent({
   name: "FixedConfig",
   setup() {
-    const vm = getCurrentInstance()
     const fixedTypes = ref([AUTO_NAME, TOP_NAME, BOTTOM_NAME, CUSTOM_NAME])
     const listKey = reactive({
       [TOP_NAME]: 'fixedTop',
@@ -87,7 +86,6 @@ export default defineComponent({
     }, { immediate: true })
 
     function positionConfig(p: string) {
-      if (!vm) return
       if (p === CUSTOM_NAME) {
         if (selectWg.value.style?.margin) delete selectWg.value.style.margin;
         selectWg.value.position = { side: 'left', top: 100, left: 0 }
