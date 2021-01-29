@@ -1,6 +1,7 @@
 import { defineComponent, reactive, ref, watch } from "vue";
 
 export default defineComponent({
+  name: "BuilderPopup",
   props: {
     modelValue: Boolean
   },
