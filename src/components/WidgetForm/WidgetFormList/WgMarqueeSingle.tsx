@@ -11,16 +11,17 @@ export default defineComponent({
   setup(props) {
     const { item } = reactive(props)
 
+    let scrollTimeId = 0
+    let animateTimeId = 0
+
     const scrollList = ref([])
-    const scrollTimeId = ref(0)
-    const animateTimeId = ref(0)
     const animate = ref(false)
 
     const scroll = () => {
       if (animate.value) return;
-      clearTimeout(animateTimeId.value);
+      clearTimeout(animateTimeId);
       animate.value = true;
-      animateTimeId.value = window.setTimeout(() => {
+      animateTimeId = window.setTimeout(() => {
         scrollList.value.push(scrollList.value[0]);
         scrollList.value.shift();
         animate.value = false;
@@ -31,10 +32,10 @@ export default defineComponent({
       scrollList.value = deepClone(newValue) as []
     }, { immediate: true, deep: true })
 
-    watch(() => item.durationTime, (newValue) => {
-      clearInterval(scrollTimeId.value);
-      scrollTimeId.value = window.setInterval(scroll, newValue * 1000);
-    }, { immediate: true, deep: true })
+    watch(() => item.durationTime, (newValue: number) => {
+      clearInterval(scrollTimeId);
+      scrollTimeId = window.setInterval(scroll, newValue * 1000);
+    })
 
     const renderScrollList = () => scrollList.value.map((text: Record<string, any>, i) => (
       <li
@@ -58,12 +59,12 @@ export default defineComponent({
 
     onMounted(async () => {
       await nextTick(() => {
-        scrollTimeId.value = window.setInterval(scroll, item.durationTime * 1000);
+        scrollTimeId = window.setInterval(scroll, item.durationTime * 1000);
       })
     })
     onBeforeUnmount(() => {
-      window.clearInterval(scrollTimeId.value);
-      window.clearTimeout(animateTimeId.value);
+      window.clearInterval(scrollTimeId);
+      window.clearTimeout(animateTimeId);
     })
     return () => (
       <div class="wg-marquee-single flex flex-center">
