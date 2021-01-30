@@ -51,7 +51,7 @@ import {
   // ElPopconfirm,
   // ElPopover,
   // ElPopper,
-  // ElProgress,
+  ElProgress,
   ElRadio,
   ElRadioButton,
   ElRadioGroup,
@@ -76,7 +76,7 @@ import {
   // ElTooltip,
   // ElTransfer,
   // ElTree,
-  // ElUpload,
+  ElUpload,
   // ElInfiniteScroll,
   // ElLoading,
   ElMessage,
@@ -137,7 +137,7 @@ const components = [
   // ElPopconfirm,
   // ElPopover,
   // ElPopper,
-  // ElProgress,
+  ElProgress,
   ElRadio,
   ElRadioButton,
   ElRadioGroup,
@@ -162,7 +162,7 @@ const components = [
   // ElTooltip,
   // ElTransfer,
   // ElTree,
-  // ElUpload,
+  ElUpload,
 ]
 
 const plugins = [
