@@ -10,8 +10,8 @@
         v-for="item in widgetLevel1"
       >{{item.name}}</el-button>
     </div>
-    <ul class="flex-auto components-content">
-      <div :key="level1.value" v-for="level1 in widgetLevel1" v-show="level1.value===widgetLevel2.value">
+    <div class="flex-auto components-content">
+      <ul :key="level1.value" v-for="level1 in widgetLevel1" v-show="level1.value===widgetLevel2.value">
         <li :key="level2.value" v-for="level2 in level1.data">
           <h4 class="widget-title">{{level2.name}}</h4>
           <Draggable
@@ -35,8 +35,8 @@
             </template>
           </Draggable>
         </li>
-      </div>
-    </ul>
+      </ul>
+    </div>
   </div>
 </template>
 
