@@ -1,13 +1,13 @@
 <template>
   <div>
     <el-form-item label="微信名称">
-      <el-input v-model="selectWg.value" placeholder="请输入您的微信名称"></el-input>
+      <el-input placeholder="请输入您的微信名称" v-model="selectWg.value"></el-input>
     </el-form-item>
     <el-form-item label="微信账号">
-      <el-input v-model="selectWg.wechatName" placeholder="请输入您的微信账号"></el-input>
+      <el-input placeholder="请输入您的微信账号" v-model="selectWg.wechatName"></el-input>
     </el-form-item>
     <el-form-item label="微信头像">
-      <FileUpload :value.sync="selectWg.logo" />
+      <FileUpload v-model:modelValue="selectWg.logo" />
     </el-form-item>
     <el-form-item label="显示微信头像">
       <el-switch v-model="selectWg.showLogo"></el-switch>
@@ -18,13 +18,21 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    selectWg: {
-      type: Object,
-      required: true
+<script lang="ts">
+import FileUpload from '@/components/base/FileUpload.vue'
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
+
+export default defineComponent({
+  components: {
+    FileUpload
+  },
+  setup() {
+    const store = useStore()
+    const selectWg = computed(() => store.state.selectWg)
+    return {
+      selectWg
     }
   }
-}
+})
 </script>
