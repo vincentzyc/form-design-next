@@ -40,16 +40,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, reactive, getCurrentInstance } from "vue";
+import { defineComponent, computed, reactive } from "vue";
+// import { defineComponent, computed, reactive, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import pageConfigData from '@/assets/js/page-config.js'
 import { deepClone } from '@/utils/deep-clone';
 import { isLink } from '@/utils/validate/link';
+import { ElMessage } from "element-plus";
 
 export default defineComponent({
   name: 'CommonConfig',
   setup() {
-    const vm: any = getCurrentInstance()?.proxy
+    // const vm: any = getCurrentInstance()?.proxy
+    // vm.$message.error('xxx')
     const store = useStore()
     const themes = reactive(pageConfigData.themes)
     const pageData = computed(() => store.state.pageData)
@@ -60,7 +63,7 @@ export default defineComponent({
       store.commit("setPageData", deepClone(themes[i].pageData));
     }
     function checkLink() {
-      if (!isLink(pageData.value.hijackBack.alertLink)) vm.$message.error('请输入正确的网址');
+      if (!isLink(pageData.value.hijackBack.alertLink)) ElMessage.error('请输入正确的网址');
     }
 
     return {
