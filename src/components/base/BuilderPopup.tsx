@@ -1,4 +1,4 @@
-import { defineComponent, reactive, ref, watch } from "vue";
+import { defineComponent, reactive, ref, watch, Transition } from "vue";
 
 export default defineComponent({
   name: "BuilderPopup",
@@ -21,7 +21,7 @@ export default defineComponent({
       emit('close')
     }
     const setClientRect = () => {
-      let domWrapper = document.getElementById('widget-form-wrapper'),
+      const domWrapper = document.getElementById('widget-form-wrapper'),
         domContainer = document.getElementById('widget-form-container'),
         domWrapperHeight = domWrapper ? domWrapper.clientHeight || domWrapper.offsetHeight : 0,
         domContainerHeight = domContainer ? domContainer.clientHeight || domContainer.offsetHeight : 0,
@@ -34,15 +34,15 @@ export default defineComponent({
     }
     return () => {
       if (slots.default) {
-        return props.modelValue && (
-          <transition name="el-fade-in-linear">
+        return (
+          <Transition name="el-fade-in-linear">
             <div style={setStyle} class="custom-popup-fixed" ref={customPopup}>
               <div onClick={close} class="custom-popup"></div>
               <div class="custom-popup-body">
                 {slots.default()}
               </div>
             </div>
-          </transition>
+          </Transition>
         )
       }
     }
