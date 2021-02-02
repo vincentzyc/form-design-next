@@ -1,9 +1,9 @@
 <template>
   <section>
     <!-- <PopupConfig :selectWg="selectWg" /> -->
-    <!-- <FixedConfig :selectWg="selectWg" /> -->
+    <FixedConfig :selectWg="selectWg" />
     <Common />
-    <component :is="'Wg'+selectWg.type" v-if="hadComponent"/>
+    <component :is="selectWg.type" v-if="hadComponent" />
   </section>
 </template>
 
@@ -12,12 +12,17 @@ import { defineComponent, computed, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import { hasKey } from "@/utils/index";
 import Common from "./Common.vue";
-// import FixedConfig from "./fixed-config"
+import FixedConfig from "./FixedConfig.vue"
+import MarqueeSingle from "./MarqueeSingle.vue"
+import Wechat from "./Wechat.vue"
 // import PopupConfig from "./popup-config"
 
 export default defineComponent({
   components: {
-    Common
+    Common,
+    MarqueeSingle,
+    FixedConfig,
+    Wechat
 
     //按需加载
     // Common: () => import('./Common.vue'),
