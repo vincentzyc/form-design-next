@@ -5,32 +5,41 @@
       <el-switch v-model="selectWg.value"></el-switch>
     </el-form-item>
     <el-form-item label="文字描述">
-      <el-input v-model="selectWg.tipText" placeholder="请输入文字描述"></el-input>
+      <el-input placeholder="请输入文字描述" v-model="selectWg.tipText"></el-input>
     </el-form-item>
 
     <el-form-item label="协议列表">
-      <Draggable tag="ul" :list="selectWg.titleTexts" :group="{ name:'options'}" ghostClass="ghost" handle=".move-icon">
-        <li v-for="(item, index) in selectWg.titleTexts" :key="index">
-          <div class="col-itemlist">
-            <i class="el-icon-menu move-icon"></i>
-            <i class="el-icon-delete delect-icon" @click="handleRemove(index)"></i>
+      <Draggable
+        :group="{ name:'options'}"
+        ghostClass="ghost"
+        handle=".move-icon"
+        item-key="index"
+        tag="ul"
+        v-model="selectWg.titleTexts"
+      >
+        <template #item="{element,index}">
+          <li>
+            <div class="col-itemlist">
+              <i class="el-icon-menu move-icon"></i>
+              <i @click="handleRemove(index)" class="el-icon-delete delect-icon"></i>
 
-            <el-form-item label="协议名称">
-              <el-input v-model="item.title" placeholder="请输入协议名称"></el-input>
-            </el-form-item>
-            <el-form-item label="协议内容（支持链接页面）">
-              <el-input
-                type="textarea"
-                placeholder="请输入协议内容"
-                :autosize="{ minRows: 2, maxRows: 16}"
-                v-model="item.text"
-              ></el-input>
-            </el-form-item>
-          </div>
-        </li>
+              <el-form-item label="协议名称">
+                <el-input placeholder="请输入协议名称" v-model="element.title"></el-input>
+              </el-form-item>
+              <el-form-item label="协议内容（支持链接页面）">
+                <el-input
+                  :autosize="{ minRows: 2, maxRows: 16}"
+                  placeholder="请输入协议内容"
+                  type="textarea"
+                  v-model="element.text"
+                ></el-input>
+              </el-form-item>
+            </div>
+          </li>
+        </template>
       </Draggable>
       <div style="margin-left: 22px;">
-        <el-button type="text" @click="handleAdd()">添加选项</el-button>
+        <el-button @click="handleAdd()" type="text">添加选项</el-button>
       </div>
     </el-form-item>
 
@@ -40,38 +49,39 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex';
+<script lang="ts">
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
 import Draggable from 'vuedraggable'
-export default {
+import { deepClone } from "@/utils/deep-clone";
+
+export default defineComponent({
   components: {
     Draggable
   },
-  props: {
-    selectWg: {
-      type: Object,
-      required: true
+  setup() {
+    const store = useStore()
+    const selectWg = computed(() => store.state.selectWg)
+    const predefineColors = computed(() => store.state.predefineColors)
+
+    const handleRemove = (index: number) => {
+      selectWg.value.titleTexts.splice(index, 1)
     }
-  },
-  computed: {
-    ...mapState({
-      predefineColors: state => state.common.predefineColors
-    })
-  },
-  methods: {
-    handleRemove(index) {
-      this.selectWg.titleTexts.splice(index, 1)
-    },
-    handleAdd() {
+    const handleAdd = () => {
       let newItem =
-        this.selectWg.titleTexts.length > 0
-          ? this.$util.deepClone(this.selectWg.titleTexts[this.selectWg.titleTexts.length - 1])
+        selectWg.value.titleTexts.length > 0
+          ? deepClone(selectWg.value.titleTexts[selectWg.value.titleTexts.length - 1])
           : {
             title: "《协议名称》",
             text: ""
           }
-      this.selectWg.titleTexts.push(newItem)
+      selectWg.value.titleTexts.push(newItem)
+    }
+
+    return {
+      selectWg, predefineColors,
+      handleRemove, handleAdd
     }
   }
-}
+})
 </script>
