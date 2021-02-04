@@ -52,8 +52,14 @@ export default defineComponent({
       type: String,
       default: TYPE_IMG
     },
-    height: String,
-    width: String,
+    height: {
+      type: String,
+      default: '100px'
+    },
+    width: {
+      type: String,
+      default: '100px'
+    }
   },
   setup(props, { emit }) {
     // const drawer = ref(false)
