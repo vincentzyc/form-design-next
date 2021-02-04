@@ -6,8 +6,7 @@
       <el-color-picker :predefine="predefineColors" show-alpha v-model="selectWg.backgroundColor" />
     </el-form-item>
     <el-form-item label="背景图片" v-if="selectWg.hasOwnProperty('backgroundImage')">
-      <!-- <FileUpload :value.sync="selectWg.backgroundImage" /> -->
-      <p>TODO 上传图片</p>
+      <FileUpload v-model:modelValue="selectWg.backgroundImage" />
     </el-form-item>
 
     <el-form-item label="每项宽度" v-if="selectWg.hasOwnProperty('itemWidth')">
@@ -25,8 +24,7 @@
     </el-form-item>
     <el-form-item label="按钮样式：" v-if="selectWg.style.hasOwnProperty('btnStyle')">
       <el-form-item label="上传按钮图片" v-if="selectWg.style.isImgBtn">
-        <!-- <FileUpload :value.sync="selectWg.style.value" /> -->
-        <p>TODO 上传图片</p>
+        <FileUpload v-model:modelValue="selectWg.style.value" />
       </el-form-item>
       <div v-else>
         <Style labelPrefix="按钮" v-model:style="selectWg.style.btnStyle" />
@@ -38,12 +36,15 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
-import Style from "./style.vue"
+import FileUpload from '@/components/base/FileUpload.vue'
+
+import Style from "./Style.vue"
 
 export default defineComponent({
   name: "StyleConfig",
   components: {
-    Style
+    Style,
+    FileUpload
   },
   setup() {
     const store = useStore()
