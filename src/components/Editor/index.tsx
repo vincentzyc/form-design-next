@@ -57,7 +57,8 @@ export default {
         ],
         onchange: htmlChange,
         styleWithCSS: true,
-        fontSizes: fontSizes
+        fontSizes: fontSizes,
+        zIndex: 1000
       });
       instance.create();
       instance.txt.html(props.modelValue)
