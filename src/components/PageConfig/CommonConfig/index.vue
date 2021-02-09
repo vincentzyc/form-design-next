@@ -43,7 +43,7 @@
 import { defineComponent, computed, reactive } from "vue";
 // import { defineComponent, computed, reactive, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
-import pageConfigData from '@/assets/js/page-config.js'
+import pageConfigData from '@/assets/js/page-config'
 import { deepClone } from '@/utils/deep-clone';
 import { isLink } from '@/utils/validate/link';
 import { ElMessage } from "element-plus";
