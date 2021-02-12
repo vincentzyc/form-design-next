@@ -1,40 +1,38 @@
 <template>
-  <div>
-    <el-form-item label="显示位置" v-if="hasKey(selectWg,'positionFixed')">
-      <el-radio-group size="mini" v-model="selectWg.positionFixed">
-        <el-radio-button :key="type" :label="type" v-for="type in fixedTypeList">{{fixedName[type]}}</el-radio-button>
+  <el-form-item label="显示位置" v-if="hasKey(selectWg,'positionFixed')">
+    <el-radio-group size="mini" v-model="selectWg.positionFixed">
+      <el-radio-button :key="type" :label="type" v-for="type in fixedTypeList">{{fixedName[type]}}</el-radio-button>
+    </el-radio-group>
+  </el-form-item>
+  <div v-if="hasKey(selectWg,'position')">
+    <el-form-item label="悬浮位置">
+      <el-radio-group size="small" v-model="selectWg.position.side">
+        <el-radio-button label="left">左悬浮</el-radio-button>
+        <el-radio-button label="right">右悬浮</el-radio-button>
       </el-radio-group>
     </el-form-item>
-    <div v-if="hasKey(selectWg,'position')">
-      <el-form-item label="悬浮位置">
-        <el-radio-group size="small" v-model="selectWg.position.side">
-          <el-radio-button label="left">左悬浮</el-radio-button>
-          <el-radio-button label="right">右悬浮</el-radio-button>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="左边距(%)" v-show="selectWg.position.side==='left'">
-        <el-slider class="pd-l10 pd-r10" v-model="selectWg.position.left"></el-slider>
-      </el-form-item>
-      <el-form-item label="右边距(%)" v-show="selectWg.position.side==='right'">
-        <el-slider class="pd-l10 pd-r10" v-model="selectWg.position.right"></el-slider>
-      </el-form-item>
-      <el-form-item label="上边距(px)">
-        <el-input-number :min="0" :precision="0" :step="5" size="small" v-model="selectWg.position.top" />
-      </el-form-item>
-    </div>
-    <el-form-item label="设置页面滑动距离显示悬浮内容" v-if="setScrollHeight">
-      <p class="lh24 c999 fs12">请预览查看具体效果（0则一直显示）</p>
-      <el-input-number
-        :max="1000"
-        :min="0"
-        :step="1"
-        size="small"
-        step-strictly
-        v-model="selectWg.scrollHeight"
-      />
-      <span class="mg-l10">px</span>
+    <el-form-item label="左边距(%)" v-show="selectWg.position.side==='left'">
+      <el-slider class="pd-l10 pd-r10" v-model="selectWg.position.left"></el-slider>
+    </el-form-item>
+    <el-form-item label="右边距(%)" v-show="selectWg.position.side==='right'">
+      <el-slider class="pd-l10 pd-r10" v-model="selectWg.position.right"></el-slider>
+    </el-form-item>
+    <el-form-item label="上边距(px)">
+      <el-input-number :min="0" :precision="0" :step="5" size="small" v-model="selectWg.position.top" />
     </el-form-item>
   </div>
+  <el-form-item label="设置页面滑动距离显示悬浮内容" v-if="setScrollHeight">
+    <p class="lh24 c999 fs12">请预览查看具体效果（0则一直显示）</p>
+    <el-input-number
+      :max="1000"
+      :min="0"
+      :step="1"
+      size="small"
+      step-strictly
+      v-model="selectWg.scrollHeight"
+    />
+    <span class="mg-l10">px</span>
+  </el-form-item>
 </template>
 
 <script lang="ts">
