@@ -55,6 +55,7 @@ import Draggable from 'vuedraggable'
 import { useStore } from "vuex";
 
 export default defineComponent({
+  name: "MarqueeConfig",
   components: {
     FileUpload, Draggable
   },
