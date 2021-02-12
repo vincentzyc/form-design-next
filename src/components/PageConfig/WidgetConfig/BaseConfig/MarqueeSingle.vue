@@ -46,6 +46,7 @@ import { useStore } from "vuex";
 import { deepClone } from "@/utils/deep-clone";
 
 export default defineComponent({
+  name: "MarqueeSingleConfig",
   components: {
     Draggable
   },
