@@ -53,6 +53,7 @@ import { ElMessage } from "element-plus";
 
 
 export default defineComponent({
+  name:"ImgShowConfig",
   components: {
     FileUpload, Draggable
   },
