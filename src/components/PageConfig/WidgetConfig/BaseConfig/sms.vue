@@ -176,6 +176,7 @@ import Draggable from 'vuedraggable'
 import { deepClone } from "@/utils/deep-clone";
 
 export default defineComponent({
+  name:"SmsConfig",
   components: {
     Draggable, FileUpload
   },
