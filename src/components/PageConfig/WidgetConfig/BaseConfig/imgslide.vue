@@ -52,6 +52,7 @@ import { useStore } from "vuex";
 import FileUpload from '@/components/base/FileUpload.vue'
 
 export default defineComponent({
+  name:"ImgSlideConfig",
   components: {
     FileUpload, Draggable
   },
