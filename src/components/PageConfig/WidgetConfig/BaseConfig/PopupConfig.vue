@@ -1,32 +1,30 @@
 <template>
-  <div>
-    <el-form-item v-if="showConfigBtn">
-      <el-button @click="openPopup" size="small" type="primary">配置弹窗内容</el-button>
-    </el-form-item>
-    <BuilderPopup @close="closePopup" v-model:modelValue="showPopup">
-      <Draggable
-        :animation="100"
-        :class="{'widget-empty': popupList.length === 0}"
-        :group="{ name:'widget',put:!hasKey(dragWg,'list')}"
-        :swapThreshold="0.6"
-        @add="handleWidgetAdd"
-        class="widget-form-list wg-padding"
-        ghostClass="ghost"
-        item-key="key"
-        v-model="popupList"
-      >
-        <template #item="{element,index}">
-          <WidgetFormList
-            :index="index"
-            :isPopup="true"
-            :item="element"
-            @emptied="closePopup"
-            v-model:data="popupList"
-          />
-        </template>
-      </Draggable>
-    </BuilderPopup>
-  </div>
+  <el-form-item v-if="showConfigBtn">
+    <el-button @click="openPopup" size="small" type="primary">配置弹窗内容</el-button>
+  </el-form-item>
+  <BuilderPopup @close="closePopup" v-model:modelValue="showPopup">
+    <Draggable
+      :animation="100"
+      :class="{'widget-empty': popupList.length === 0}"
+      :group="{ name:'widget',put:!hasKey(dragWg,'list')}"
+      :swapThreshold="0.6"
+      @add="handleWidgetAdd"
+      class="widget-form-list wg-padding"
+      ghostClass="ghost"
+      item-key="key"
+      v-model="popupList"
+    >
+      <template #item="{element,index}">
+        <WidgetFormList
+          :index="index"
+          :isPopup="true"
+          :item="element"
+          @emptied="closePopup"
+          v-model:data="popupList"
+        />
+      </template>
+    </Draggable>
+  </BuilderPopup>
 </template>
 
 <script lang="ts">
