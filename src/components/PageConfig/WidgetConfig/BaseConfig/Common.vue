@@ -85,6 +85,7 @@ import { isLink } from '@/utils/validate/link';
 import allFieldTypes from '@/assets/js/field-types.js'
 
 export default defineComponent({
+  name: "CommonConfig",
   components: {
     Draggable, Editor
   },
