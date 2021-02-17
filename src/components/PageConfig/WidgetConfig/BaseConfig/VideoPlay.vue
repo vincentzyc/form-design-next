@@ -18,6 +18,7 @@ import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
+  name:"ViderPlayConfig",
   setup() {
     const store = useStore()
     const selectWg = computed(() => store.state.selectWg)
