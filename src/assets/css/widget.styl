@@ -1,0 +1,492 @@
+$primary-color = #409EFF;
+$primary-background-color = #d8e8fa;
+
+.widget-form-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+
+  .widget-form-container {
+    position: relative;
+    width: 375px; // 如要修改宽度的话，需同步修改 .wg-fixed-custom 的宽度和 style-config 文件的宽度最大值配置项
+    min-height: 640px;
+    margin: 20px auto;
+    -webkit-box-shadow: 0 2px 5px 1px hsla(0, 0%, 48.6%, 0.2);
+    box-shadow: 0 2px 5px 1px hsla(0, 0%, 48.6%, 0.2);
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 100% 100%;
+  }
+
+  img {
+    vertical-align: top;
+  }
+
+  .widget-empty {
+    background-image: url('../img/form_empty.png');
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 66%;
+  }
+
+  .custom-popup-fixed {
+    .widget-form-list {
+      min-height: 200px;
+      padding-bottom: 36px;
+    }
+  }
+
+  .widget-form-list {
+    min-height: 584px;
+    padding-bottom: 36px;
+
+    .widget-form-list {
+      min-height: 360px;
+    }
+
+    .ghost {
+      background: #fff;
+      border: 1px dashed $primary-color;
+
+      &::after {
+        background: #fff;
+      }
+    }
+
+    li.ghost {
+      position: relative;
+      height: 40px;
+      line-height: 40px;
+      overflow: hidden;
+
+      &::after {
+        content: '放到这里';
+        display: block;
+        background: #fff;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        text-align: center;
+        font-size: 16px;
+        color: #999;
+        z-index: 10;
+      }
+    }
+
+    .el-icon-rank {
+      position: absolute;
+      left: -28px;
+      top: 15px;
+      font-size: 24px;
+      padding: 2px;
+      background-color: #409eff;
+      color: #fff;
+      z-index: 1001;
+      cursor: move;
+    }
+  }
+
+  .widget-action-btn {
+    position: absolute;
+    bottom: -10px;
+    color: #fff;
+    z-index: 1199;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 100%;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .widget-action-delete {
+    background-color: #F56C6C;
+    right: 8px;
+  }
+
+  .widget-action-clone {
+    background-color: #409EFF;
+    right: 40px;
+  }
+
+  .widget-view {
+    margin: 0;
+    padding: 0px;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      display: block;
+      z-index: 1001;
+    }
+
+    input::-webkit-input-placeholder {
+      color: #666;
+      opacity: 1;
+    }
+
+    &:hover {
+      box-shadow: 0px 1px 10px 1px #90c7ff inset;
+    }
+
+    &.active {
+      box-shadow: 0px 1px 10px 1px #90c7ff;
+      z-index: 1111;
+    }
+
+    .wg-padding {
+      padding: 5px 10px;
+    }
+
+    .wg-item {
+      display: flex;
+      line-height: 50px;
+    }
+
+    .wg-phone {
+      .getVerCode-btn {
+        outline: 0;
+        font-size: 12px;
+        height: 36px;
+        min-width: 100px;
+        margin-top: 5px;
+        margin-left: 10px;
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+    }
+
+    .wg-staticText {
+      line-height: 1.6;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-position: 0 0;
+    }
+
+    .wg-input, .wg-select {
+      width: 100%;
+      height: 40px;
+      margin: 5px 0;
+      color: #666;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      outline: none;
+      text-indent: 10px;
+      // background: #fff;
+      transition: 0.3s;
+    }
+
+    .wg-title {
+      font-size: 14px;
+      margin-right: 10px;
+      color: #333;
+    }
+
+    .wg-checkbox {
+      .label {
+        float: left;
+        cursor: pointer;
+        position: relative;
+        margin-right: 10px;
+      }
+
+      .label > span {
+        background: #fff;
+        padding: 8px 15px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+      }
+
+      .wg-checkbox-input:checked + span {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: #fff;
+      }
+    }
+
+    .wg-switch {
+      .label {
+        display: flex;
+        cursor: pointer;
+      }
+
+      .wg-switch-core {
+        display: inline-block;
+        position: relative;
+        margin: 0;
+        width: 40px;
+        height: 20px;
+        border: 1px solid #dcdfe6;
+        outline: 0;
+        border-radius: 10px;
+        box-sizing: border-box;
+        background: #dcdfe6;
+        transition: border-color 0.3s, background-color 0.3s;
+      }
+
+      .wg-switch-core:after {
+        content: '';
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        border-radius: 100%;
+        transition: all 0.3s;
+        width: 16px;
+        height: 16px;
+        background-color: #fff;
+      }
+
+      .wg-switch-input:checked + span {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: #fff;
+      }
+
+      .wg-switch-input:checked + span::after {
+        left: 100%;
+        margin-left: -17px;
+      }
+    }
+
+    .wg-button {
+      width: 100%;
+      padding: 0;
+      color: #fff;
+      height: 46px;
+      line-height: 46px;
+      font-size: 18px;
+      outline: none;
+      border: none;
+      letter-spacing: 2px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .wg-horizontal-picker {
+      border: 1px solid #999;
+      border-radius: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      height: 36px;
+      line-height: 36px;
+      margin: 0;
+      padding: 0;
+
+      .picker-item {
+        height: 100%;
+        text-align: center;
+        display: inline-block;
+        white-space: nowrap;
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #707274;
+        box-sizing: border-box;
+        backface-visibility: hidden;
+      }
+    }
+
+    .wg-imgshow {
+      .img-placeholder {
+        background: #f1f1f1;
+      }
+    }
+
+    .wg-imgslide {
+      text-align: center;
+
+      .el-carousel__container {
+        height: 100%;
+      }
+
+      .el-carousel__item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .el-carousel__item:nth-child(2n) {
+        background-color: #99a9bf;
+      }
+
+      .el-carousel__item:nth-child(2n+1) {
+        background-color: #d3dce6;
+      }
+    }
+
+    .wg-splitLine .splitLine-hr {
+      border: 0 none;
+      border-top: 1px solid #d3d3d3;
+    }
+
+    .wg-random-code {
+      .random-code {
+        outline: 0;
+        font-family: 'Helvetica Neue';
+        letter-spacing: 5px;
+        font-style: italic;
+        font-size: 20px;
+        height: 36px;
+        height: 40px;
+        line-height: 38px;
+        width: 110px;
+        margin-left: 10px;
+        cursor: pointer;
+        border: none;
+        user-select: none;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .wg-wechat {
+    .wechat-avatar {
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .wechat-btn {
+      text-align: center;
+      padding: 8px 15px;
+    }
+  }
+
+  .wg-agreement {
+    .el-checkbox {
+      width: 100%;
+      display: flex;
+    }
+
+    .el-checkbox__input {
+      display: flex;
+      align-items: center;
+    }
+
+    .el-checkbox__label {
+      width: calc(100% - 16px);
+      line-height: 1.5;
+      font-size: inherit;
+
+      p>span {
+        word-break: break-all;
+        white-space: normal;
+      }
+    }
+  }
+
+  .wg-formlist {
+    position: relative;
+    transition: 0.2s;
+    padding: 10px;
+  }
+
+  .wg-fixed-top {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1111;
+  }
+
+  .wg-fixed-bottom {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1111;
+  }
+
+  .wg-fixed-custom {
+    position: fixed;
+    z-index: 1211;
+    width: 375px;
+    height: 0 !important;
+
+    .fixed-item {
+      position: absolute !important;
+      top: 0;
+      transition: 0.5s;
+    }
+  }
+
+  .wg-marquee {
+    height: 50px;
+    overflow: hidden;
+
+    .wg-marquee-up {
+      -webkit-animation: marquee-up 5s linear infinite;
+      -ms-animation: marquee-up 5s linear infinite;
+      -o-animation: marquee-up 5s linear infinite;
+      animation: marquee-up 5s linear infinite;
+    }
+
+    .wg-marquee-left {
+      display: inline-flex !important;
+      -webkit-animation: marquee-left 5s linear infinite;
+      -ms-animation: marquee-left 5s linear infinite;
+      -o-animation: marquee-left 5s linear infinite;
+      animation: marquee-left 5s linear infinite;
+    }
+  }
+
+  .wg-marquee-single {
+    .scroll-wrapper {
+      overflow: hidden;
+      padding: 0;
+      margin: 0 auto;
+
+      .scroll-text {
+        margin-left: 5px;
+      }
+
+      .anim {
+        transition: all 0.5s linear;
+      }
+
+      /* 如需要支持自定义头像，使用注释的样式 */
+      /*
+        .scroll-item {
+           height: 100%;
+         }
+      
+         .userimg {
+           height: 100%;
+           padding: 1%;
+         }
+      */
+      .scroll-item {
+        height: 100%;
+        padding: 2px;
+      }
+
+      .userimg {
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: 0 center;
+        background-size: 100% 100%;
+      }
+
+      .man {
+        background-image: url('~@/assets/img/manhead.png');
+      }
+
+      .woman {
+        background-image: url('~@/assets/img/womanhead.png');
+      }
+    }
+  }
+}

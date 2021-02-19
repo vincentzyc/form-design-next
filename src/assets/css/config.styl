@@ -1,0 +1,138 @@
+$primary-color = rgb(64, 158, 255);
+
+.widget-config-container {
+  position: relative;
+
+  .ghost {
+    position: relative;
+
+    &::after {
+      display: block;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+    }
+  }
+
+  .el-header {
+    border-bottom: solid 2px #e4e7ed;
+    padding: 0 5px;
+  }
+
+  .absolute-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .wg-col-config {
+    .col-itemlist {
+      position: relative;
+      padding: 20px 10px 10px;
+      margin-top: 10px;
+      border: 1px dotted #ccc;
+      background-color: #f9f9f9;
+    }
+
+    .move-icon {
+      position: absolute;
+      top: 0px;
+      left: -10px;
+    }
+
+    .delect-icon {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+  }
+
+  .move-icon {
+    font-size: 20px;
+    color: #999;
+    margin: 0 10px;
+    cursor: move;
+
+    &:hover {
+      color: #409EFF;
+    }
+  }
+
+  .delect-icon {
+    font-size: 20px;
+    color: #999;
+    margin-left: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: #f56c6c;
+    }
+  }
+
+  .config-tab {
+    height: 45px;
+    line-height: 45px;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &.active {
+      color: $primary-color;
+      border-bottom: solid 2px $primary-color;
+    }
+  }
+
+  .config-content {
+    padding: 10px;
+
+    .el-form-item__label {
+      padding: 0;
+      font-weight: 500;
+    }
+
+    .el-form-item {
+      border-bottom: solid 1px #e1e1e1;
+      padding-bottom: 10px;
+    }
+  }
+
+  .animation-config {
+    .animation-demo {
+      text-align: center;
+      border-radius: 20px;
+      color: #fff;
+      background-color: rgb(64, 158, 255);
+    }
+  }
+}
+
+.editor-color-picker {
+  z-index: 11111 !important;
+}
+
+.wangEditor {
+  position: relative;
+
+  .color-picker {
+    position: absolute;
+    top: 0;
+    left: 6px;
+    z-index: 11111;
+  }
+
+  .el-color-picker__trigger {
+    border: none;
+  }
+
+  .el-color-picker__color {
+    display: none;
+  }
+}
