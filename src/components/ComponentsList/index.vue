@@ -48,7 +48,6 @@ import { hasKey } from "@/utils/index"
 import { deepClone } from "@/utils/deep-clone"
 import widgetLevel1 from '@/assets/js/widget'
 
-
 export default defineComponent({
   name: 'ComponentsList',
   components: { Draggable },
@@ -59,7 +58,7 @@ export default defineComponent({
 
     const widgetLevel2 = ref(widgetLevel1[0])
 
-    function handleWidget(item) {
+    function handleWidget(item: any) {
       widgetLevel2.value = item;
     }
     function dragEnd() {
