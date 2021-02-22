@@ -7,7 +7,7 @@ export function previewUrl() {
     const arr = window.location.origin.split(":");
     return `${arr[0]}:${arr[1]}:9010`
   }
-  return window.location.origin + "/form-design-h5"
+  return window.location.origin + "/form-design-render"
 }
 export function previewOrigin() {
   if (env() === "development") {
