@@ -2,25 +2,24 @@ module.exports = {
   publicPath: "./",
   outputDir: "docs",
   productionSourceMap: false,
-  // configureWebpack: {
-  //   // 以下库使用cdn，不会被打包
-  //   externals: process.env.NODE_ENV === 'production' ? {
-  //     "vue": "Vue",
-  //     "vue-router": 'VueRouter',
-  //     "vuex": "Vuex",
-  //     "vuedraggable": "vuedraggable",
-  //     "compressorjs": "Compressor"
-  //   } : {}
-  // },
-  // chainWebpack: config => {
-  //   config.plugins.delete('preload')
-  //   config.plugins.delete('prefetch')
-  //   config.module
-  //     .rule('images')
-  //     .use('url-loader')
-  //     .loader('url-loader')
-  //     .tap(options => Object.assign(options, { limit: 10240 }))
-  // },
+  configureWebpack: {
+    // 以下库使用cdn，不会被打包
+    externals: process.env.NODE_ENV === 'production' ? {
+      "vue": "Vue",
+      "vuex": "Vuex",
+      "vuedraggable": "vuedraggable",
+      "compressorjs": "Compressor"
+    } : {}
+  },
+  chainWebpack: config => {
+    config.plugins.delete('preload')
+    config.plugins.delete('prefetch')
+    config.module
+      .rule('images')
+      .use('url-loader')
+      .loader('url-loader')
+      .tap(options => Object.assign(options, { limit: 8192 }))
+  },
   devServer: {
     port: 9000
   }
