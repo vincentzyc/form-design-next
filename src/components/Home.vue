@@ -7,7 +7,7 @@
       <el-container class="center-container" direction="vertical">
         <el-header class="btn-bar" style="height: 45px;">
           <el-button @click="handleReset()" class="mg-r15" icon="el-icon-refresh" size="medium" type="text">重置</el-button>
-          <el-button class="mg-r15" icon="el-icon-view" size="medium" type="text">预览</el-button>
+          <el-button @click="handlePreview()" class="mg-r15" icon="el-icon-view" size="medium" type="text">预览</el-button>
           <el-button @click="handleSave()" class="mg-r15" icon="el-icon-document" size="medium" type="text">保存</el-button>
         </el-header>
         <el-main>
@@ -30,6 +30,7 @@ import pageConfigData from '@/assets/js/page-config'
 import { setLocalStorage } from "@/utils/storage";
 import { useStore } from "vuex";
 import { deepClone } from "@/utils/deep-clone";
+import { previewUrl, previewOrigin } from "@/api"
 
 export default defineComponent({
   name: 'Home',
@@ -50,8 +51,19 @@ export default defineComponent({
       setLocalStorage('pageData', pageData.value);
       vm.$alert('保存成功', { showClose: false });
     }
+    const handlePreview = () => {
+      vm.$bus.emit("formDesign_savePage")
+      let newWin = window.open(previewUrl());
+      let timer = setInterval(() => {
+        newWin?.postMessage(pageData.value, previewUrl());
+      }, 200);
+      window.addEventListener('message', event => {
+        if (event.origin !== previewOrigin()) return;
+        if (event.data === 'Received') clearInterval(timer)
+      }, false);
+    }
     return {
-      handleSave, handleReset
+      handleSave, handleReset, handlePreview
     }
   }
 });
