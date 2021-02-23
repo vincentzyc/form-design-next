@@ -135,6 +135,7 @@ export default defineComponent({
       emit('update:modelValue', compressUrl);
     }
     const compressFail = (err: any) => {
+      // eslint-disable-next-line
       console.log(err);
     }
     const uploadError = () => {
