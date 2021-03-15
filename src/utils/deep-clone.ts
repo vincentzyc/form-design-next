@@ -1,13 +1,23 @@
-import { deepAssign } from './deep-assign';
+import { isObject, isArray } from '.';
 
-export function deepClone(obj: Record<string, any>): Record<string, any> {
-  if (Array.isArray(obj)) {
-    return obj.map((item) => deepClone(item));
+type ObjectIndex = Record<string, any>;
+
+/**
+ * 对象深拷贝
+ * @param {Object} obj 初始对象
+ * @return {Object} 拷贝后对象
+ */
+export function deepClone(obj: ObjectIndex): ObjectIndex {
+  let result = isArray(obj) ? [] : {};
+  for (let key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      if (obj[key] === undefined || obj[key] === null) continue
+      if (isObject(obj[key]) || isArray(obj[key])) {
+        result[key] = deepClone(obj[key]);
+      } else {
+        result[key] = obj[key];
+      }
+    }
   }
-
-  if (typeof obj === 'object') {
-    return deepAssign({}, obj);
-  }
-
-  return obj;
+  return result;
 }
