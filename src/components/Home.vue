@@ -55,8 +55,8 @@ export default defineComponent({
       vm.$bus.emit("formDesign_savePage")
       let newWin = window.open(previewUrl());
       let timer = setInterval(() => {
-        newWin?.postMessage(pageData.value, previewUrl());
-      }, 200);
+        newWin?.postMessage(deepClone(pageData.value), previewUrl());
+      }, 300);
       window.addEventListener('message', event => {
         if (event.origin !== previewOrigin()) return;
         if (event.data === 'Received') clearInterval(timer)
