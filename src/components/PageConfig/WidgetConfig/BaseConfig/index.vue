@@ -1,6 +1,6 @@
 <template>
   <section>
-    <PopupConfig v-if="selectWg.popupList" />
+    <PopupConfig />
     <FixedConfig />
     <Common />
     <component :is="selectWg.type" v-if="hadComponent" />
