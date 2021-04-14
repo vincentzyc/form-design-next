@@ -2,17 +2,17 @@
   <el-form-item v-if="showConfigBtn">
     <el-button @click="openPopup" size="small" type="primary">配置弹窗内容</el-button>
   </el-form-item>
-  <BuilderPopup @close="closePopup" v-model:modelValue="showPopup">
+  <BuilderPopup @close="closePopup" v-model="showPopup">
     <Draggable
       :animation="100"
-      :class="{'widget-empty': popupList.length === 0}"
+      :class="{'widget-empty': popupWg.length === 0}"
       :group="{ name:'widget',put:!hasKey(dragWg,'list')}"
-      :swapThreshold="0.6"
+      :swapThreshold="0.7"
       @add="handleWidgetAdd"
       class="widget-form-list wg-padding"
       ghostClass="ghost"
       item-key="key"
-      v-model="popupList"
+      v-model="popupWg"
     >
       <template #item="{element,index}">
         <WidgetFormList
@@ -20,7 +20,7 @@
           :isPopup="true"
           :item="element"
           @emptied="closePopup"
-          v-model:data="popupList"
+          v-model:data="popupWg"
         />
       </template>
     </Draggable>
@@ -44,31 +44,32 @@ export default defineComponent({
   setup() {
     const vm: any = getCurrentInstance()?.proxy
 
-    //监听保存操作，组件赋值popupList
-    vm.$bus.on("formDesign_savePage", () => setWgPopupList(pageData.value.list))
-
     const showPopup = ref(false)
     const wgId = ref(null)
-    const popupList = ref([])
+    const popupWg = ref([])
 
     const store = useStore()
     const selectWg = computed(() => store.state.selectWg)
     const pageData = computed(() => store.state.pageData)
     const dragWg = computed(() => store.state.dragWg)
 
-    const showConfigBtn = () => {
+    const showConfigBtn = computed(() => {
       if (showPopup.value) return false
       return hasKey(selectWg.value, 'popupList')
-    }
+    })
 
-    const setWgPopupList = list => {
+
+    //监听保存操作，组件赋值popupList
+    vm.$bus.on("formDesign_savePage", () => setWgPopupList(pageData.value.list))
+
+    const setWgPopupList = (list: Record<string, any>[]) => {
       if (!Array.isArray(list) || list.length === 0) return;
       for (const item of list) {
         if (Array.isArray(item.list) && item.list.length > 0) {
           setWgPopupList(item.list)
         }
         if (item.key === wgId.value) {
-          item.popupList = popupList.value
+          item.popupList = popupWg.value
           return item
         }
       }
@@ -83,19 +84,19 @@ export default defineComponent({
     }
     const openPopup = () => {
       if (showPopup.value) return
-      if (selectWg.value.popupList.length > 0) popupList.value = selectWg.value.popupList
+      if (selectWg.value.popupList.length > 0) popupWg.value = selectWg.value.popupList
       wgId.value = selectWg.value.key
       showPopup.value = true;
     }
     const handleWidgetAdd = (evt: any) => {
       const newIndex = evt.newIndex;
-      store.commit('setSelectWg', popupList.value[newIndex])
+      store.commit('setSelectWg', popupWg.value[newIndex])
       store.commit('setConfigTab', "widget");
     }
 
     return {
-      popupList, dragWg, showPopup,
-      hasKey, showConfigBtn, openPopup, closePopup, handleWidgetAdd
+      popupWg, dragWg, showPopup, showConfigBtn,
+      hasKey, openPopup, closePopup, handleWidgetAdd
     }
   }
 })
