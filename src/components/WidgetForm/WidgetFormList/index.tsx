@@ -45,7 +45,7 @@ export default defineComponent({
     WgChildList,
     WgMarquee,
     WgMarqueeSingle,
-    WgHPicker 
+    WgHPicker
 
     //下面是按需加载，组件多的话可选择此方式
     // WgStaticText: () => import('./WgStaticText'),
