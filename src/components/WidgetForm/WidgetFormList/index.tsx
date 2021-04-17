@@ -8,7 +8,6 @@ import WgVideoPlay from './WgVideoPlay'
 import WgImgShow from './WgImgShow'
 import WgImgSlide from './WgImgSlide'
 import WgSplitLine from './WgSplitLine'
-import WgDatePicker from './WgDatePicker'
 import WgPhone from './WgPhone'
 import WgInput from './WgInput'
 import WgSelect from './WgSelect'
@@ -32,7 +31,7 @@ export default defineComponent({
     WgImgShow,
     WgImgSlide,
     WgSplitLine,
-    WgDatePicker,
+    WgDatePicker: WgSelect,
     WgPhone,
     WgInput,
     WgSelect,
