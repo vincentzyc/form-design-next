@@ -9,6 +9,8 @@ export default [{
   },
   apiKey: "birthday",
   value: "",
+  showLabel: true,
+  placeholder: "请选择日期",
   fieldTypes: "dateTypes",
   style: {
     margin: "0px 0px 0px 0px"
