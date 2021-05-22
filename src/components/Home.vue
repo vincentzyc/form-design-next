@@ -27,7 +27,7 @@ import ComponentsList from "./ComponentsList/index.vue"
 import WidgetForm from './WidgetForm/index.vue'
 import PageConfig from './PageConfig/index.vue'
 import pageConfigData from '@/assets/js/page-config'
-import { setLocalStorage } from "@/utils/storage";
+import { getLocalStorage, setLocalStorage } from "@/utils/storage";
 import { useStore } from "vuex";
 import { deepClone } from "@/utils/deep-clone";
 import { previewUrl, previewOrigin } from "@/api"
@@ -62,6 +62,12 @@ export default defineComponent({
         if (event.data === 'Received') clearInterval(timer)
       }, false);
     }
+
+    const getLocalPageData = () => {
+      const localPageData = getLocalStorage('pageData');
+      if (localPageData) store.commit('setPageData', localPageData);
+    }
+    getLocalPageData()
     return {
       handleSave, handleReset, handlePreview
     }
