@@ -130,7 +130,7 @@
   </el-form-item>
   <el-form-item :label="getLabel('borderStyle')" v-if="nStyle.hasOwnProperty('borderStyle')">
     <el-radio-group
-      @change="v=>updateStyle('borderTopWidth',v==='double'?'3px':'1px')"
+      @change="v=>updateStyle('borderStyle',v)"
       size="mini"
       v-model="nStyle.borderStyle"
     >
