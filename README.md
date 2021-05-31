@@ -10,6 +10,11 @@ QQ交流群：[form-design 交流群：1032491358](https://qm.qq.com/cgi-bin/qm/
 
 ![加群二维码](https://vincentzyc.github.io/form-design/qqqrcode.png "加群二维码")
 
+### 提示
+预览功能需启动 form-design-render 项目
+
+See [form-design-render](https://github.com/vincentzyc/form-design-render).
+
 ## Project setup
 ```
 npm install
