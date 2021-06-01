@@ -1,5 +1,5 @@
 <template>
-  <el-drawer :visible.sync="model" :with-header="false" direction="ltr" size="36%">
+  <el-drawer :visible="model" :with-header="false" direction="ltr" size="36%">
     <div class="drawer-content">
       <el-upload
         :auto-upload="false"
