@@ -16,8 +16,8 @@
       <i class="el-icon-plus avatar-uploader-icon" v-else></i>
       <i @click.stop="removeFile()" class="el-icon-close avatar-close-icon" v-show="modelValue"></i>
     </el-upload>
-    <!-- <el-button @click="drawer=true" type="primary" v-if="showImg">压缩上传</el-button> -->
-    <!-- <ImgUpload @fail="compressFail" @success="compressSuccess" v-model="drawer" /> -->
+    <el-button @click="drawer=true" type="primary" v-if="showImgCompressor">压缩上传</el-button>
+    <ImgUpload @fail="compressFail" @success="compressSuccess" v-model:modelValue="drawer" />
     <transition name="el-fade-in-linear" v-if="uploading">
       <div class="flex flex-column flex-center uploader-progress">
         <el-progress :percentage="uploadPercentage" :width="100" class="progress" type="circle"></el-progress>
@@ -28,9 +28,8 @@
 </template>
 
 <script lang="ts">
-// import ImgUpload from './img-upload'
+import ImgUpload from './img-upload/index.vue'
 import { defineComponent, computed, ref, reactive } from "vue";
-// import { defineComponent, computed, reactive } from "vue";
 import { ElMessage, ElMessageBox } from 'element-plus';
 
 const TYPE_IMG = 'img', TYPE_VIDEO = 'video';
@@ -40,9 +39,9 @@ const imgTypeList = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
 
 export default defineComponent({
   name: "FileUpload",
-  // components: {
-  //   ImgUpload
-  // },
+  components: {
+    ImgUpload
+  },
   props: {
     modelValue: {
       required: true,
@@ -62,13 +61,14 @@ export default defineComponent({
     }
   },
   setup(props, { emit }) {
-    // const drawer = ref(false)
+    const drawer = ref(false)
     const uploading = ref(false)
     const uploadPercentage = ref(0)
     const upload = ref()
     const uploadData = reactive({
       yourData: "yunyi"
     })
+    const showImgCompressor = computed(() => props.type === TYPE_IMG)
     const showImg = computed(() => props.modelValue && props.type === TYPE_IMG)
     const showVideo = computed(() => props.modelValue && props.type === TYPE_VIDEO)
 
@@ -150,8 +150,8 @@ export default defineComponent({
     }
 
     return {
-      uploadData, uploading, uploadPercentage, upload,
-      showImg, showVideo,
+      uploadData, uploading, uploadPercentage, upload, drawer,
+      showImg, showVideo, showImgCompressor,
       removeFile, resetUpload, startUpload, cancelUpload, beforeAvatarUpload,
       handleProgress, imgUpload, videoUpload, handleAvatarSuccess, uploadError,
       compressSuccess, compressFail
