@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "compressorjs": "^1.0.7",
     "core-js": "^3.6.5",
     "element-plus": "^1.0.2-beta.31",
     "mitt": "^2.1.0",
