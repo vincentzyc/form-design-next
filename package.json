@@ -10,7 +10,7 @@
   "dependencies": {
     "compressorjs": "^1.0.7",
     "core-js": "^3.6.5",
-    "element-plus": "^1.0.2-beta.31",
+    "element-plus": "^1.0.2-beta.45",
     "mitt": "^2.1.0",
     "vue": "^3.0.5",
     "vuedraggable": "^4.0.1",
