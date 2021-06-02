@@ -55,9 +55,9 @@
       </div>
       <div class="drawer-footer flex">
         <el-button @click="model=false" class="flex-auto">取 消</el-button>
-        <el-button :disabled="!this.file" @click="submitUpload(true)" class="flex-auto" type="danger">上传源文件</el-button>
+        <el-button :disabled="!file" @click="submitUpload(true)" class="flex-auto" type="danger">上传源文件</el-button>
         <el-button
-          :disabled="!this.compressFile"
+          :disabled="!compressFile"
           @click="submitUpload(false)"
           class="flex-auto"
           type="primary"
@@ -72,129 +72,136 @@
     </transition>
   </el-drawer>
 </template>
-<script>
+
+<script lang="ts">
 import Compressor from 'compressorjs';
-export default {
+import { ElMessage, ElMessageBox } from 'element-plus';
+import { defineComponent, computed, ref, reactive } from "vue";
+
+const imgTypeList = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
+
+export default defineComponent({
   props: {
-    value: Boolean
+    modelValue: Boolean
   },
-  data() {
-    return {
-      imgTypeList: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'],
-      file: null,
-      compressFile: null,
-      compressUrl: '',
-      sourceUrl: '',
-      quality: 80,
-      uploading: false,
-      isUploadSource: false,
-      srcList: [],
-      fileSize: {
-        before: 0,
-        after: 0
-      },
-      uploadPercentage: 0,
-    };
-  },
-  computed: {
-    model: {
+  emits: ['update:modelValue', 'success', 'fail'],
+  setup(props, { emit }) {
+    const elUpload = ref()
+    const uploading = ref(true)
+    const file: any = ref(null)
+    const compressFile: any = ref(null)
+    const isUploadSource = ref(false)
+    const quality = ref(80)
+    const uploadPercentage = ref(0)
+    const compressUrl = ref('')
+    const srcList = ref<string[]>([])
+    const sourceUrl = ref('')
+    const fileSize = reactive({
+      before: '0KB',
+      after: '0KB'
+    })
+
+    const model = computed({
       get() {
-        return this.value;
+        return props.modelValue;
       },
       set(val) {
-        this.$emit("input", val);
+        emit("update:modelValue", val);
       }
-    }
-  },
-  methods: {
-    resetUpload() {
-      this.$refs.upload.clearFiles();
+    })
+
+    const resetUpload = () => {
+      elUpload.value.clearFiles();
       setTimeout(() => {
         Object.assign(this.$data, this.$options.data())
       }, 300);
-    },
-    startUpload() {
-      this.uploading = true;
-    },
-    submitUpload(isUploadSource) {
-      if (!this.file) return
-      if (!this.compressFile) return
-      this.isUploadSource = isUploadSource
-      const realFile = this.isUploadSource ? this.file.raw : this.compressFile
-      const isImg = this.imgTypeList.includes(realFile.type)
+    }
+    const startUpload = () => {
+      uploading.value = true;
+    }
+    const submitUpload = (uploadSource: boolean) => {
+      if (!file.value) return
+      if (!compressFile.value) return
+      isUploadSource.value = uploadSource
+      const realFile = isUploadSource.value ? file.value.raw : compressFile.value
+      const isImg = imgTypeList.includes(realFile.type)
       const isLimit = realFile.size / 1024 <= 50;
       if (!isImg) {
-        this.$message.error('请上传图片');
+        ElMessage.error('请上传图片');
         return false
       }
       if (isLimit) {
-        this.$refs.upload.submit();
+        elUpload.value.submit();
       } else {
-        this.$message.error('上传图片大小不能超过 50 K !');
+        ElMessage.error('上传图片大小不能超过 50 K !');
         return false
       }
-    },
-    changeFile(file) {
-      this.file = file
-      this.compressorFile(this.quality)
-    },
-    uploadError() {
+    }
+    const changeFile = (file) => {
+      file.value = file
+      compressorFile(quality.value)
+    }
+    const uploadError = () => {
       // console.log(err);
-      this.resetUpload()
-      this.$alert('网络繁忙，请稍后重试');
-    },
-    handleProgress(event, file) {
-      this.uploadPercentage = parseInt(file.percentage, 10);
-    },
-    handleSuccess() {
-      this.$emit('success', this.compressUrl)
-      if (this.uploadPercentage !== 100) this.uploadPercentage = 100;
-      this.resetUpload()
-      this.model = false
-    },
-    cancelUpload() {
-      if (!this.uploading) return;
-      this.$refs.upload.abort();
-      this.$message({
+      resetUpload()
+      ElMessageBox.alert('网络繁忙，请稍后重试');
+    }
+    const handleProgress = (event, file) => {
+      uploadPercentage.value = parseInt(file.percentage, 10);
+    }
+    const handleSuccess = () => {
+      emit('success', compressUrl)
+      if (uploadPercentage.value !== 100) uploadPercentage.value = 100;
+      resetUpload()
+      model.value = false
+    }
+    const cancelUpload = () => {
+      if (!uploading.value) return;
+      elUpload.value.abort();
+      ElMessage({
         message: '已取消上传',
         type: 'warning'
       });
-      return this.resetUpload();
-    },
-    compressorFile(v) {
-      if (!this.file) return
-      this.srcList = []
-      this.fileSize.before = Math.round(this.file.size / 1024 * 10) / 10 + 'KB';
-      this.sourceUrl = URL.createObjectURL(this.file.raw);
-      new Compressor(this.file.raw, {
+      return resetUpload();
+    }
+    const compressorFile = (v) => {
+      if (!file.value) return
+      srcList.value = []
+      fileSize.before = Math.round(file.value.size / 1024 * 10) / 10 + 'KB';
+      sourceUrl.value = URL.createObjectURL(file.value.raw);
+      new Compressor(file.value.raw, {
         quality: v / 100,
         convertSize: 51200,  // png图片超过50KB时启用压缩，压缩后会转成jpg图片，失去透明度
         success: res => {
-          this.compressFile = res
-          this.compressUrl = URL.createObjectURL(res);
-          this.fileSize.after = Math.round(res.size / 1024 * 10) / 10 + 'KB';
-          this.srcList = [this.compressUrl, this.sourceUrl]
+          compressFile.value = res
+          compressUrl.value = URL.createObjectURL(res);
+          fileSize.after = Math.round(res.size / 1024 * 10) / 10 + 'KB';
+          srcList.value = [compressUrl.value, sourceUrl.value]
         },
         error: err => {
-          this.compressUrl = ''
-          this.compressFile = null
-          this.fileSize.after = 0
-          this.$emit('fail', err)
+          compressUrl.value = ''
+          compressFile.value = null
+          fileSize.after = '0KB'
+          emit('fail', err)
           console.log(err.message);
         },
       });
-    },
-    beforeUpload() {
-      if (!this.file) return
-      if (!this.compressFile) return
-      const realFile = this.isUploadSource ? this.file.raw : this.compressFile
-      this.startUpload()
+    }
+    const beforeUpload = () => {
+      if (!file.value) return
+      if (!compressFile.value) return
+      const realFile = isUploadSource.value ? file.value.raw : compressFile
+      startUpload()
       return new Promise(resolve => {
         resolve(realFile)
       })
     }
+    return {
+      model, quality, fileSize, srcList, compressUrl, sourceUrl, uploading, compressFile, file,
+      submitUpload, beforeUpload, compressorFile, cancelUpload, handleSuccess, handleProgress, uploadError, changeFile
+    }
   }
-}
+})
 </script>
 
 <style scoped>
