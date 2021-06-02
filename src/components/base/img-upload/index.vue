@@ -1,5 +1,5 @@
 <template>
-  <el-drawer :visible="model" :with-header="false" direction="ltr" size="36%">
+  <el-drawer :with-header="false" direction="ltr" size="36%" v-model="model">
     <div class="drawer-content">
       <el-upload
         :auto-upload="false"
@@ -12,7 +12,7 @@
         :show-file-list="false"
         action="https://jsonplaceholder.typicode.com/posts/"
         drag
-        ref="upload"
+        ref="elUpload"
       >
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">
@@ -22,51 +22,51 @@
       </el-upload>
       <div style="width:100%;height:80px">
         <div class="flex">
-          <span>压缩率：{{quality}}%</span>
+          <span>压缩率：{{state.quality}}%</span>
           <div class="flex-auto mg-l20">
-            <el-slider @change="compressorFile" v-model="quality"></el-slider>
+            <el-slider @change="compressorFile" v-model="state.quality"></el-slider>
           </div>
         </div>
-        <div class="flex" v-if="file">
+        <div class="flex" v-if="state.file">
           <span class="flex-auto">
             源文件大小：
-            <span class="cred">{{fileSize.before}}</span>
+            <span class="cred">{{state.fileSize.before}}</span>
           </span>
           <span class="flex-auto">
             压缩后大小：
-            <span class="cgreen">{{fileSize.after}}</span>
+            <span class="cgreen">{{state.fileSize.after}}</span>
           </span>
         </div>
       </div>
       <div class="preview-body">
-        <div v-if="file">
+        <div v-if="state.file">
           <p>
             压缩后
             <i class="el-icon-bottom"></i>
           </p>
-          <el-image :preview-src-list="srcList" :src="compressUrl" style="width: 100%;" v-if="compressUrl"></el-image>
+          <el-image :preview-src-list="state.srcList" :src="state.compressUrl" style="width: 100%;" v-if="state.compressUrl"></el-image>
           <hr />
           <p>
             源文件
             <i class="el-icon-bottom"></i>
           </p>
-          <el-image :preview-src-list="srcList" :src="sourceUrl" style="width: 100%;" v-if="sourceUrl"></el-image>
+          <el-image :preview-src-list="state.srcList" :src="state.sourceUrl" style="width: 100%;" v-if="state.sourceUrl"></el-image>
         </div>
       </div>
       <div class="drawer-footer flex">
         <el-button @click="model=false" class="flex-auto">取 消</el-button>
-        <el-button :disabled="!file" @click="submitUpload(true)" class="flex-auto" type="danger">上传源文件</el-button>
+        <el-button :disabled="!state.file" @click="submitUpload(true)" class="flex-auto" type="danger">上传源文件</el-button>
         <el-button
-          :disabled="!compressFile"
+          :disabled="!state.compressFile"
           @click="submitUpload(false)"
           class="flex-auto"
           type="primary"
         >上传压缩文件</el-button>
       </div>
     </div>
-    <transition name="el-fade-in-linear" v-if="uploading">
+    <transition name="el-fade-in-linear" v-if="state.uploading">
       <div class="flex flex-column flex-center uploader-progress">
-        <el-progress :percentage="uploadPercentage" :width="100" class="progress" type="circle"></el-progress>
+        <el-progress :percentage="state.uploadPercentage" :width="100" class="progress" type="circle"></el-progress>
         <el-button @click.stop="cancelUpload()" class="mg-t10" type="text">取消上传</el-button>
       </div>
     </transition>
@@ -80,6 +80,22 @@ import { defineComponent, computed, ref, reactive } from "vue";
 
 const imgTypeList = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
 
+type StateType = {
+  uploading: boolean
+  file: any
+  compressFile: any
+  isUploadSource: boolean
+  quality: number
+  uploadPercentage: number
+  compressUrl: string
+  srcList: string[]
+  sourceUrl: string
+  fileSize: {
+    before: string,
+    after: string
+  }
+}
+
 export default defineComponent({
   props: {
     modelValue: Boolean
@@ -87,20 +103,23 @@ export default defineComponent({
   emits: ['update:modelValue', 'success', 'fail'],
   setup(props, { emit }) {
     const elUpload = ref()
-    const uploading = ref(true)
-    const file: any = ref(null)
-    const compressFile: any = ref(null)
-    const isUploadSource = ref(false)
-    const quality = ref(80)
-    const uploadPercentage = ref(0)
-    const compressUrl = ref('')
-    const srcList = ref<string[]>([])
-    const sourceUrl = ref('')
-    const fileSize = reactive({
-      before: '0KB',
-      after: '0KB'
-    })
-
+    const getInitalState: () => StateType = () => {
+      return {
+        uploading: false,
+        file: null,
+        compressFile: null,
+        isUploadSource: false,
+        quality: 80,
+        uploadPercentage: 0,
+        compressUrl: '',
+        srcList: [],
+        sourceUrl: '',
+        fileSize: {
+          before: '0KB',
+          after: '0KB'
+        }
+      }
+    }
     const model = computed({
       get() {
         return props.modelValue;
@@ -110,20 +129,24 @@ export default defineComponent({
       }
     })
 
+    const state = reactive(getInitalState())
+
+    const resetState = () => Object.assign(state, getInitalState())
+
     const resetUpload = () => {
       elUpload.value.clearFiles();
       setTimeout(() => {
-        Object.assign(this.$data, this.$options.data())
+        resetState()
       }, 300);
     }
     const startUpload = () => {
-      uploading.value = true;
+      state.uploading = true;
     }
     const submitUpload = (uploadSource: boolean) => {
-      if (!file.value) return
-      if (!compressFile.value) return
-      isUploadSource.value = uploadSource
-      const realFile = isUploadSource.value ? file.value.raw : compressFile.value
+      if (!state.file) return
+      if (!state.compressFile) return
+      state.isUploadSource = uploadSource
+      const realFile = state.isUploadSource ? state.file.raw : state.compressFile
       const isImg = imgTypeList.includes(realFile.type)
       const isLimit = realFile.size / 1024 <= 50;
       if (!isImg) {
@@ -137,26 +160,26 @@ export default defineComponent({
         return false
       }
     }
-    const changeFile = (file) => {
-      file.value = file
-      compressorFile(quality.value)
+    const changeFile = (nfile: any) => {
+      state.file = nfile
+      compressorFile(state.quality)
     }
     const uploadError = () => {
       // console.log(err);
       resetUpload()
       ElMessageBox.alert('网络繁忙，请稍后重试');
     }
-    const handleProgress = (event, file) => {
-      uploadPercentage.value = parseInt(file.percentage, 10);
+    const handleProgress = (event, nfile: any) => {
+      state.uploadPercentage = parseInt(nfile.percentage, 10);
     }
     const handleSuccess = () => {
-      emit('success', compressUrl)
-      if (uploadPercentage.value !== 100) uploadPercentage.value = 100;
+      emit('success', state.compressUrl)
+      if (state.uploadPercentage !== 100) state.uploadPercentage = 100;
       resetUpload()
       model.value = false
     }
     const cancelUpload = () => {
-      if (!uploading.value) return;
+      if (!state.uploading) return;
       elUpload.value.abort();
       ElMessage({
         message: '已取消上传',
@@ -164,40 +187,40 @@ export default defineComponent({
       });
       return resetUpload();
     }
-    const compressorFile = (v) => {
-      if (!file.value) return
-      srcList.value = []
-      fileSize.before = Math.round(file.value.size / 1024 * 10) / 10 + 'KB';
-      sourceUrl.value = URL.createObjectURL(file.value.raw);
-      new Compressor(file.value.raw, {
+    const compressorFile = (v: number) => {
+      if (!state.file) return
+      state.srcList = []
+      state.fileSize.before = Math.round(state.file.size / 1024 * 10) / 10 + 'KB';
+      state.sourceUrl = URL.createObjectURL(state.file.raw);
+      new Compressor(state.file.raw, {
         quality: v / 100,
         convertSize: 51200,  // png图片超过50KB时启用压缩，压缩后会转成jpg图片，失去透明度
         success: res => {
-          compressFile.value = res
-          compressUrl.value = URL.createObjectURL(res);
-          fileSize.after = Math.round(res.size / 1024 * 10) / 10 + 'KB';
-          srcList.value = [compressUrl.value, sourceUrl.value]
+          state.compressFile = res
+          state.compressUrl = URL.createObjectURL(res);
+          state.fileSize.after = Math.round(res.size / 1024 * 10) / 10 + 'KB';
+          state.srcList = [state.compressUrl, state.sourceUrl]
         },
         error: err => {
-          compressUrl.value = ''
-          compressFile.value = null
-          fileSize.after = '0KB'
+          state.compressUrl = ''
+          state.compressFile = null
+          state.fileSize.after = '0KB'
           emit('fail', err)
           console.log(err.message);
         },
       });
     }
     const beforeUpload = () => {
-      if (!file.value) return
-      if (!compressFile.value) return
-      const realFile = isUploadSource.value ? file.value.raw : compressFile
+      if (!state.file) return
+      if (!state.compressFile) return
+      const realFile = state.isUploadSource ? state.file.raw : state.compressFile
       startUpload()
       return new Promise(resolve => {
         resolve(realFile)
       })
     }
     return {
-      model, quality, fileSize, srcList, compressUrl, sourceUrl, uploading, compressFile, file,
+      elUpload, model, state,
       submitUpload, beforeUpload, compressorFile, cancelUpload, handleSuccess, handleProgress, uploadError, changeFile
     }
   }
