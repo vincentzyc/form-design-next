@@ -156,7 +156,7 @@ export default defineComponent({
       if (isLimit) {
         elUpload.value.submit();
       } else {
-        ElMessage.error('上传图片大小不能超过 50 K !');
+        ElMessage.error('上传图片大小不能超过 30 K !');
         return false
       }
     }
