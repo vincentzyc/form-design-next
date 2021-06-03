@@ -44,13 +44,23 @@
             压缩后
             <i class="el-icon-bottom"></i>
           </p>
-          <el-image :preview-src-list="state.srcList" :src="state.compressUrl" style="width: 100%;" v-if="state.compressUrl"></el-image>
+          <el-image
+            :preview-src-list="state.srcList"
+            :src="state.compressUrl"
+            style="width: 100%;"
+            v-if="state.compressUrl"
+          ></el-image>
           <hr />
           <p>
             源文件
             <i class="el-icon-bottom"></i>
           </p>
-          <el-image :preview-src-list="state.srcList" :src="state.sourceUrl" style="width: 100%;" v-if="state.sourceUrl"></el-image>
+          <el-image
+            :preview-src-list="state.srcList"
+            :src="state.sourceUrl"
+            style="width: 100%;"
+            v-if="state.sourceUrl"
+          ></el-image>
         </div>
       </div>
       <div class="drawer-footer flex">
@@ -232,17 +242,17 @@ export default defineComponent({
   padding: 20px;
   height: 100vh;
 }
-.drawer-content >>> .el-upload.el-upload--text,
-.drawer-content >>> .el-upload-dragger {
+.drawer-content:deep(.el-upload.el-upload--text),
+.drawer-content:deep(.el-upload-dragger) {
   width: 100%;
   height: 120px;
 }
 
-.drawer-content >>> .el-upload-dragger .el-icon-upload {
+.drawer-content:deep(.el-upload-dragger .el-icon-upload) {
   margin: 0;
   line-height: 1;
 }
-.drawer-content >>> .el-icon-circle-close {
+.drawer-content:deep(.el-icon-circle-close) {
   color: #fff;
 }
 .preview-body {
