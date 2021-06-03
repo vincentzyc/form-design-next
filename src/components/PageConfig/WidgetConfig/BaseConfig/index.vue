@@ -21,6 +21,7 @@ import Agreement from "./Agreement.vue"
 import ImgShow from "./ImgShow.vue"
 import ImgSlide from "./ImgSlide.vue"
 import Sms from "./Sms.vue"
+import VideoPlay from "./VideoPlay.vue"
 
 export default defineComponent({
   components: {
@@ -33,7 +34,8 @@ export default defineComponent({
     Agreement,
     ImgShow,
     ImgSlide,
-    Sms
+    Sms,
+    VideoPlay
 
     //按需加载
     // Common: () => import('./Common.vue'),
