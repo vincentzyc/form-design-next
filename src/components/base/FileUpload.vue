@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import ImgUpload from './img-upload/index.vue'
+import ImgUpload from './ImgUpload/index.vue'
 import { defineComponent, computed, ref, reactive } from "vue";
 import { ElMessage, ElMessageBox } from 'element-plus';
 
