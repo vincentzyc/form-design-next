@@ -12,7 +12,7 @@
     "core-js": "^3.6.5",
     "element-plus": "^1.0.2-beta.53",
     "mitt": "^2.1.0",
-    "vue": "^3.1.2",
+    "vue": "^3.1.5",
     "vuedraggable": "^4.0.1",
     "vuex": "^4.0.2"
   },
@@ -23,7 +23,7 @@
     "@vue/cli-plugin-eslint": "~4.5.13",
     "@vue/cli-plugin-typescript": "~4.5.13",
     "@vue/cli-service": "~4.5.13",
-    "@vue/compiler-sfc": "^3.1.2",
+    "@vue/compiler-sfc": "^3.1.5",
     "@vue/eslint-config-typescript": "^7.0.0",
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-import": "^1.13.3",
