@@ -19,6 +19,8 @@ See [form-design-render](https://github.com/vincentzyc/form-design-render).
 ```
 npm install
 ```
+如果遇到 npm ERR! code ERESOLVE 报错，
+使用 `npm install --legacy-peer-deps`
 
 ### Compiles and hot-reloads for development
 ```
