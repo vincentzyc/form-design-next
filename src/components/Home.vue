@@ -21,8 +21,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, getCurrentInstance } from "vue";
+<script lang="ts" setup>
+import { computed, getCurrentInstance } from "vue";
 import ComponentsList from "./ComponentsList/index.vue"
 import WidgetForm from './WidgetForm/index.vue'
 import PageConfig from './PageConfig/index.vue'
@@ -32,45 +32,35 @@ import { useStore } from "vuex";
 import { deepClone } from "@/utils/deep-clone";
 import { previewUrl, previewOrigin } from "@/api"
 
-export default defineComponent({
-  name: 'Home',
-  components: {
-    ComponentsList, WidgetForm, PageConfig
-  },
-  setup() {
-    const vm: any = getCurrentInstance()?.proxy
-    const store = useStore()
-    const pageData = computed(() => store.state.pageData)
+const vm: any = getCurrentInstance()?.proxy
+const store = useStore()
+const pageData = computed(() => store.state.pageData)
 
-    const handleReset = () => {
-      store.commit('setSelectWg', {});
-      store.commit('setPageData', deepClone(pageConfigData.pageConfig));
-    }
-    const handleSave = () => {
-      vm.$bus.emit("formDesign_savePage")
-      setLocalStorage('pageData', pageData.value);
-      vm.$alert('保存成功', { showClose: false });
-    }
-    const handlePreview = () => {
-      vm.$bus.emit("formDesign_savePage")
-      let newWin = window.open(previewUrl());
-      let timer = setInterval(() => {
-        newWin?.postMessage(deepClone(pageData.value), previewUrl());
-      }, 300);
-      window.addEventListener('message', event => {
-        if (event.origin !== previewOrigin()) return;
-        if (event.data === 'Received') clearInterval(timer)
-      }, false);
-    }
+const handleReset = () => {
+  store.commit('setSelectWg', {});
+  store.commit('setPageData', deepClone(pageConfigData.pageConfig));
+}
+const handleSave = () => {
+  vm.$bus.emit("formDesign_savePage")
+  setLocalStorage('pageData', pageData.value);
+  vm.$alert('保存成功', { showClose: false });
+}
+const handlePreview = () => {
+  vm.$bus.emit("formDesign_savePage")
+  let newWin = window.open(previewUrl());
+  let timer = setInterval(() => {
+    newWin?.postMessage(deepClone(pageData.value), previewUrl());
+  }, 300);
+  window.addEventListener('message', event => {
+    if (event.origin !== previewOrigin()) return;
+    if (event.data === 'Received') clearInterval(timer)
+  }, false);
+}
 
-    const getLocalPageData = () => {
-      const localPageData = getLocalStorage('pageData');
-      if (localPageData) store.commit('setPageData', localPageData);
-    }
-    getLocalPageData()
-    return {
-      handleSave, handleReset, handlePreview
-    }
-  }
-});
+const getLocalPageData = () => {
+  const localPageData = getLocalStorage('pageData');
+  if (localPageData) store.commit('setPageData', localPageData);
+}
+getLocalPageData()
+
 </script>
