@@ -19,7 +19,7 @@
         </el-form-item>-->
         <el-form-item label="点击图片跳转链接">
           <el-input
-            :autosize="{ minRows: 2, maxRows: 6}"
+            :autosize="{ minRows: 2, maxRows: 6 }"
             @blur="checkLink"
             placeholder="请输入跳转链接"
             type="textarea"
@@ -27,9 +27,9 @@
           ></el-input>
         </el-form-item>
       </template>
-      <el-form-item label="主题" v-if="themes.length>0">
+      <el-form-item label="主题" v-if="themes.length > 0">
         <el-radio-group @change="setTheme" v-model="pageData.theme">
-          <el-radio-button :key="item.value" :label="item.value" v-for="item in themes">{{item.name}}</el-radio-button>
+          <el-radio-button :key="item.value" :label="item.value" v-for="item in themes">{{ item.name }}</el-radio-button>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="页面统计代码">
@@ -39,8 +39,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, reactive } from "vue";
+<script lang="ts" setup>
+import { computed, reactive } from "vue";
 // import { defineComponent, computed, reactive, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import pageConfigData from '@/assets/js/page-config'
@@ -48,31 +48,31 @@ import { deepClone } from '@/utils/deep-clone';
 import { isLink } from '@/utils/validate/link';
 import { ElMessage } from "element-plus";
 
-export default defineComponent({
-  name: 'CommonConfig',
-  setup() {
-    // const vm: any = getCurrentInstance()?.proxy
-    // vm.$message.error('xxx')
-    const store = useStore()
-    const themes = reactive(pageConfigData.themes)
-    const pageData = computed(() => store.state.pageData)
-    const predefineColors = computed(() => store.state.predefineColors)
+// export default defineComponent({
+//   name: 'CommonConfig',
+//   setup() {
+// const vm: any = getCurrentInstance()?.proxy
+// vm.$message.error('xxx')
+const store = useStore()
+const themes = reactive(pageConfigData.themes)
+const pageData = computed(() => store.state.pageData)
+const predefineColors = computed(() => store.state.predefineColors)
 
-    function setTheme(val) {
-      const i = themes.findIndex(item => item.value === val);
-      store.commit("setPageData", deepClone(themes[i].pageData));
-    }
-    function checkLink() {
-      if (!isLink(pageData.value.hijackBack.alertLink)) ElMessage.error('请输入正确的网址');
-    }
+function setTheme(val) {
+  const i = themes.findIndex(item => item.value === val);
+  store.commit("setPageData", deepClone(themes[i].pageData));
+}
+function checkLink() {
+  if (!isLink(pageData.value.hijackBack.alertLink)) ElMessage.error('请输入正确的网址');
+}
 
-    return {
-      themes,
-      pageData,
-      predefineColors,
-      setTheme,
-      checkLink
-    }
-  }
-})
+//     return {
+//       themes,
+//       pageData,
+//       predefineColors,
+//       setTheme,
+//       checkLink
+//     }
+//   }
+// })
 </script>
