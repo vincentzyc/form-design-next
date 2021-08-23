@@ -58,7 +58,6 @@ export default defineComponent({
       return hasKey(selectWg.value, 'popupList')
     })
 
-
     //监听保存操作，组件赋值popupList
     vm?.$bus.on("formDesign_savePage", () => setWgPopupList(pageData.value.list))
 
