@@ -3,21 +3,21 @@
     <div class="flex flex-column flex-none components-title">
       <el-button
         :key="item.value"
-        :type="item.value===widgetLevel2.value?'primary':'text'"
+        :type="item.value === widgetLevel2.value ? 'primary' : 'text'"
         @click="handleWidget(item)"
         round
         size="small"
         v-for="item in widgetLevel1"
-      >{{item.name}}</el-button>
+      >{{ item.name }}</el-button>
     </div>
     <div class="flex-auto components-content">
-      <ul :key="level1.value" v-for="level1 in widgetLevel1" v-show="level1.value===widgetLevel2.value">
+      <ul :key="level1.value" v-for="level1 in widgetLevel1" v-show="level1.value === widgetLevel2.value">
         <li :key="level2.value" v-for="level2 in level1.data">
-          <h4 class="widget-title">{{level2.name}}</h4>
+          <h4 class="widget-title">{{ level2.name }}</h4>
           <Draggable
             :clone="cloneData"
-            :filter="level2.dragOnce?'.disdraggable':''"
-            :group="{ name:'widget', pull:'clone', put:false }"
+            :filter="level2.dragOnce ? '.disdraggable' : ''"
+            :group="{ name: 'widget', pull: 'clone', put: false }"
             :sort="false"
             @end="dragEnd"
             ghostClass="ghost"
@@ -25,12 +25,9 @@
             tag="ul"
             v-model="level2.data"
           >
-            <template #item="{element}">
-              <li :class="{disdraggable:disFormList(element)}" class="form-edit-widget-label">
-                <img
-                  :alt="element.name"
-                  :src="BASE_URL+'static/img/widget/'+level1.value+'/'+element.type+'.jpg'"
-                />
+            <template #item="{ element }">
+              <li :class="{ disdraggable: disFormList(element) }" class="form-edit-widget-label">
+                <img :alt="element.name" :src="BASE_URL + 'static/img/widget/' + level1.value + '/' + element.type + '.jpg'" />
               </li>
             </template>
           </Draggable>
