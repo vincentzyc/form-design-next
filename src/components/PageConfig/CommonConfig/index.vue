@@ -58,7 +58,7 @@ const themes = reactive(pageConfigData.themes)
 const pageData = computed(() => store.state.pageData)
 const predefineColors = computed(() => store.state.predefineColors)
 
-function setTheme(val) {
+function setTheme(val: string) {
   const i = themes.findIndex(item => item.value === val);
   store.commit("setPageData", deepClone(themes[i].pageData));
 }
