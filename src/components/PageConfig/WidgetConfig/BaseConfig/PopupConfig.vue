@@ -42,7 +42,7 @@ export default defineComponent({
     BuilderPopup
   },
   setup() {
-    const vm: any = getCurrentInstance()?.proxy
+    const vm = getCurrentInstance()?.proxy
 
     const showPopup = ref(false)
     const wgId = ref(null)
@@ -60,7 +60,7 @@ export default defineComponent({
 
 
     //监听保存操作，组件赋值popupList
-    vm.$bus.on("formDesign_savePage", () => setWgPopupList(pageData.value.list))
+    vm?.$bus.on("formDesign_savePage", () => setWgPopupList(pageData.value.list))
 
     const setWgPopupList = (list: Record<string, any>[]) => {
       if (!Array.isArray(list) || list.length === 0) return;
