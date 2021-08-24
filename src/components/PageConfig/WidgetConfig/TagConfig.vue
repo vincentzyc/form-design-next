@@ -7,7 +7,7 @@
       <el-input-number
         :max="300"
         :min="30"
-        @change="val=>selectWg.label.labelWidth = `${val}px`"
+        @change="(val: number) => selectWg.label.labelWidth = `${val}px`"
         size="small"
         v-model="selectWg.label.labelwidth"
       />
@@ -21,14 +21,11 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script lang="ts" setup>
+import { computed } from "vue";
 import { useStore } from "vuex";
-export default defineComponent(() => {
-  const store = useStore()
-  const selectWg = computed(() => store.state.selectWg)
-  return {
-    selectWg
-  }
-})
+
+const store = useStore()
+const selectWg = computed(() => store.state.selectWg)
+
 </script>
