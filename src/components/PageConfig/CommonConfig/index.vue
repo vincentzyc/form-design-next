@@ -41,16 +41,13 @@
 
 <script lang="ts" setup>
 import { computed, reactive } from "vue";
-// import { defineComponent, computed, reactive, getCurrentInstance } from "vue";
+// import { computed, reactive, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import pageConfigData from '@/assets/js/page-config'
 import { deepClone } from '@/utils/deep-clone';
 import { isLink } from '@/utils/validate/link';
 import { ElMessage } from "element-plus";
 
-// export default defineComponent({
-//   name: 'CommonConfig',
-//   setup() {
 // const vm: any = getCurrentInstance()?.proxy
 // vm.$message.error('xxx')
 const store = useStore()
@@ -65,14 +62,4 @@ function setTheme(val: string) {
 function checkLink() {
   if (!isLink(pageData.value.hijackBack.alertLink)) ElMessage.error('请输入正确的网址');
 }
-
-//     return {
-//       themes,
-//       pageData,
-//       predefineColors,
-//       setTheme,
-//       checkLink
-//     }
-//   }
-// })
 </script>
