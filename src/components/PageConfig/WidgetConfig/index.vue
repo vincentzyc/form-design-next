@@ -6,7 +6,7 @@
           <BaseConfig />
         </el-collapse-item>
 
-        <el-collapse-item name="tag" title="标签设置" v-if="selectWg.label&&selectWg.showLabel!==false">
+        <el-collapse-item name="tag" title="标签设置" v-if="selectWg.label && selectWg.showLabel !== false">
           <TagConfig />
         </el-collapse-item>
 
@@ -22,33 +22,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script lang="ts" setup>
+import { computed } from "vue";
 import { useStore } from "vuex";
-
 import BaseConfig from "./BaseConfig/index.vue"
 import TagConfig from "./TagConfig.vue"
 import StyleConfig from "./StyleConfig/index.vue"
 import AnimationConfig from "./AnimationConfig.vue"
-export default defineComponent({
-  components: {
-    BaseConfig,
-    TagConfig,
-    StyleConfig,
-    AnimationConfig
-  },
-  setup() {
-    const store = useStore()
-    const wgCollapse = computed({
-      get: () => store.state.wgCollapse,
-      set: val => store.commit('setWgCollapse', val)
-    })
-    const selectWg = computed(() => store.state.selectWg)
 
-    return {
-      wgCollapse,
-      selectWg
-    }
-  }
+const store = useStore()
+const wgCollapse = computed({
+  get: () => store.state.wgCollapse,
+  set: val => store.commit('setWgCollapse', val)
 })
+const selectWg = computed(() => store.state.selectWg)
 </script>
