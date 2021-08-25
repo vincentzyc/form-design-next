@@ -37,9 +37,16 @@
 import { ref, computed, reactive } from "vue";
 import { useStore } from "vuex";
 
+interface typeAnimation {
+  name: string;
+  value: string;
+  animationName: boolean;
+  className: boolean;
+}
+
 const store = useStore()
 const openAnimation = ref(true)
-const animationList = reactive([{
+const animationList = reactive<typeAnimation[]>([{
   name: "呼吸灯",
   value: "animte-breathlamp",
   animationName: true,
@@ -63,24 +70,24 @@ const animationList = reactive([{
 
 const selectWg = computed(() => store.state.selectWg)
 
-function handleChange(bool) {
+function handleChange(bool: boolean) {
   if (bool) return
   selectWg.value.animation.animationName = ''
   selectWg.value.animation.className = ''
 }
-function getBtnStyle(item) {
+function getBtnStyle(item: typeAnimation) {
   if (!item.animationName) return {}
   return {
     animation: `${item.value} 2s linear infinite`
   }
 }
-function getAnimteStyle(item) {
+function getAnimteStyle(item: typeAnimation) {
   if (!item.className) return {}
   return {
     animation: `${item.value} 2s linear infinite`
   }
 }
-function selectAnimation(item) {
+function selectAnimation(item: typeAnimation) {
   openAnimation.value = true
   selectWg.value.animation.animationName = item.animationName ? item.value : ''
   selectWg.value.animation.className = item.className ? item.value : ''
