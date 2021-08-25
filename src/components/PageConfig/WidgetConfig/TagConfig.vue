@@ -7,7 +7,7 @@
       <el-input-number
         :max="300"
         :min="30"
-        @change="(val: number) => selectWg.label.labelWidth = `${val}px`"
+        @change="val => selectWg.label.labelWidth = `${val}px`"
         size="small"
         v-model="selectWg.label.labelwidth"
       />
