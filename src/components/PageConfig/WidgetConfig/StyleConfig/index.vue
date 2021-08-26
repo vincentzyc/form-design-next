@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Style v-model:style="selectWg.style" />
+    <Styles v-model:styles="selectWg.style" />
 
     <el-form-item label="背景颜色" v-if="selectWg.hasOwnProperty('backgroundColor')">
       <el-color-picker :predefine="predefineColors" show-alpha v-model="selectWg.backgroundColor" />
@@ -16,7 +16,7 @@
       <el-input-number :min="1" size="small" v-model="selectWg.showNumber" />
     </el-form-item>
     <template v-if="selectWg.hasOwnProperty('pickerStyle')">
-      <Style labelPrefix="选中后" v-model:style="selectWg.pickerStyle" />
+      <Styles labelPrefix="选中后" v-model:styles="selectWg.pickerStyle" />
     </template>
 
     <el-form-item label="使用图片按钮" v-if="selectWg.style.hasOwnProperty('isImgBtn')">
@@ -27,33 +27,22 @@
         <FileUpload v-model:modelValue="selectWg.style.value" />
       </el-form-item>
       <div v-else>
-        <Style labelPrefix="按钮" v-model:style="selectWg.style.btnStyle" />
+        <Styles labelPrefix="按钮" v-model:styles="selectWg.style.btnStyle" />
       </div>
     </el-form-item>
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script lang="ts" setup>
+import { computed } from "vue";
 import { useStore } from "vuex";
 import FileUpload from '@/components/base/FileUpload.vue'
 
-import Style from "./Style.vue"
+import Styles from "./Styles.vue"
 
-export default defineComponent({
-  name: "StyleConfig",
-  components: {
-    Style,
-    FileUpload
-  },
-  setup() {
-    const store = useStore()
+const store = useStore()
 
-    const selectWg = computed(() => store.state.selectWg)
-    const predefineColors = computed(() => store.state.predefineColors)
-    return {
-      selectWg, predefineColors
-    }
-  }
-})
+const selectWg = computed(() => store.state.selectWg)
+const predefineColors = computed(() => store.state.predefineColors)
+
 </script>
