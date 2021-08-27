@@ -1,7 +1,11 @@
 <template>
   <el-form-item :label="getLabel('percentWidth')" v-if="nStyle.hasOwnProperty('percentWidth')">
     <!--   :format-tooltip="formatTooltip" -->
-    <el-slider @input="val => updateStyle('width', `${val}%`)" class="pd-l10 pd-r10" v-model="nStyle.percentWidth"></el-slider>
+    <el-slider
+      @input="val => updateStyle('width', `${val}%`)"
+      class="pd-l10 pd-r10"
+      v-model="nStyle.percentWidth"
+    ></el-slider>
   </el-form-item>
   <el-form-item :label="getLabel('pxWidth')" v-if="nStyle.hasOwnProperty('pxWidth')">
     <el-input-number
@@ -134,56 +138,48 @@
   </el-form-item>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, ref, watch } from "vue";
+<script lang="ts" setup>
+import { computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 import allLabelText from "./labeltext"
 
-export default defineComponent({
-  name: "StyleItemConfig",
-  props: {
-    styles: {
-      required: true,
-      type: Object,
-    },
-    labelPrefix: {
-      type: String,
-      default: ''
-    },
-    labels: {
-      type: Object,
-      default: () => ({})
-    }
+const props = defineProps({
+  styles: {
+    required: true,
+    type: Object,
   },
-  emits: ['update:style'],
-  setup(props, { emit }) {
-    const store = useStore()
-
-    const nStyle = ref<Record<string, any>>({})
-
-    const labelText = {
-      ...allLabelText,
-      ...props.labels
-    }
-
-    watch(() => props.styles, newVal => nStyle.value = newVal, { immediate: true })
-
-    const predefineColors = computed(() => store.state.predefineColors)
-
-    function getLabel(key: string) {
-      return props.labels[key] || props.labelPrefix + labelText[key]
-    }
-
-    function updateStyle(key: string, v: any) {
-      nStyle.value[key] = v
-      emit("update:style", nStyle.value)
-    }
-
-    return {
-      nStyle, labelText,
-      predefineColors,
-      getLabel, updateStyle
-    }
+  labelPrefix: {
+    type: String,
+    default: ''
+  },
+  labels: {
+    type: Object,
+    default: () => ({})
   }
 })
+
+const emit = defineEmits(['update:style'])
+
+const store = useStore()
+
+const nStyle = ref<Record<string, any>>({})
+
+const labelText = {
+  ...allLabelText,
+  ...props.labels
+}
+
+watch(() => props.styles, newVal => nStyle.value = newVal, { immediate: true })
+
+const predefineColors = computed(() => store.state.predefineColors)
+
+function getLabel(key: string) {
+  return props.labels[key] || props.labelPrefix + labelText[key]
+}
+
+function updateStyle(key: string, v: any) {
+  nStyle.value[key] = v
+  emit("update:style", nStyle.value)
+}
+
 </script>
