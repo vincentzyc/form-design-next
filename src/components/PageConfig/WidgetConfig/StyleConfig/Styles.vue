@@ -1,11 +1,7 @@
 <template>
   <el-form-item :label="getLabel('percentWidth')" v-if="nStyle.hasOwnProperty('percentWidth')">
     <!--   :format-tooltip="formatTooltip" -->
-    <el-slider
-      @input="val => updateStyle('width', `${val}%`)"
-      class="pd-l10 pd-r10"
-      v-model="nStyle.percentWidth"
-    ></el-slider>
+    <el-slider @input="val => updateStyle('width', `${val}%`)" class="pd-l10 pd-r10" v-model="nStyle.percentWidth"></el-slider>
   </el-form-item>
   <el-form-item :label="getLabel('pxWidth')" v-if="nStyle.hasOwnProperty('pxWidth')">
     <el-input-number
