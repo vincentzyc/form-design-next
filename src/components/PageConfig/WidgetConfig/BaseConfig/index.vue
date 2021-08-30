@@ -8,6 +8,7 @@
 </template>
 
 <script lang="ts" setup>
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { computed, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import { hasKey } from "@/utils/index";
@@ -23,15 +24,13 @@ import ImgSlide from "./ImgSlide.vue"
 import Sms from "./Sms.vue"
 import VideoPlay from "./VideoPlay.vue"
 
+//按需加载
+// Common: () => import('./Common.vue'),
 
+const vm: any = getCurrentInstance()?.proxy
 
-    //按需加载
-    // Common: () => import('./Common.vue'),
-  
-    const vm: any = getCurrentInstance()?.proxy
+const store = useStore()
+const selectWg = computed(() => store.state.selectWg)
 
-    const store = useStore()
-    const selectWg = computed(() => store.state.selectWg)
-
-    const hadComponent = computed(() => hasKey(vm.$options.components, selectWg.value.type))
+const hadComponent = computed(() => hasKey(vm.$options.components, selectWg.value.type))
 </script>
