@@ -27,7 +27,10 @@
           >
             <template #item="{ element }">
               <li :class="{ disdraggable: disFormList(element) }" class="form-edit-widget-label">
-                <img :alt="element.name" :src="BASE_URL + 'static/img/widget/' + level1.value + '/' + element.type + '.jpg'" />
+                <img
+                  :alt="element.name"
+                  :src="BASE_URL + 'static/img/widget/' + level1.value + '/' + element.type + '.jpg'"
+                />
               </li>
             </template>
           </Draggable>
@@ -37,58 +40,58 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+<script lang="ts" setup>
+import { ref, computed } from "vue";
 import Draggable from 'vuedraggable'
 import { useStore } from "vuex";
 import { hasKey } from "@/utils/index"
 import { deepClone } from "@/utils/deep-clone"
 import widgetLevel1 from '@/assets/js/widget'
 
-export default defineComponent({
-  name: 'ComponentsList',
-  components: { Draggable },
-  setup() {
-    const store = useStore()
+// export default defineComponent({
+//   name: 'ComponentsList',
+//   components: { Draggable },
+//   setup() {
+const store = useStore()
 
-    const pageData = computed(() => store.state.pageData)
+const pageData = computed(() => store.state.pageData)
 
-    const widgetLevel2 = ref(widgetLevel1[0])
+const widgetLevel2 = ref(widgetLevel1[0])
 
-    function handleWidget(item: any) {
-      widgetLevel2.value = item;
-    }
-    function dragEnd() {
-      store.commit('setDragWg', null)
-    }
+function handleWidget(item: any) {
+  widgetLevel2.value = item;
+}
+function dragEnd() {
+  store.commit('setDragWg', null)
+}
 
-    function disFormList(wgItem: Record<string, unknown>) {
-      // 阻止组件嵌套
-      if (!hasKey(wgItem, 'list')) return false;
-      if (pageData.value.list) {
-        return (pageData.value.list.some(v => {
-          return v.type === wgItem.type;
-        }))
-      }
-      return false
-    }
-
-    function cloneData(obj: Record<string, unknown>) {
-      const elKey = Date.now() + '_' + Math.ceil(Math.random() * 1000000);
-      const newObj = deepClone(obj);
-      newObj.key = newObj.type + '_' + elKey;
-      store.commit('setDragWg', newObj)
-      return newObj;
-    }
-
-    return {
-      widgetLevel1,
-      widgetLevel2,
-      handleWidget,
-      dragEnd,
-      disFormList,
-      cloneData
-    }
+function disFormList(wgItem: Record<string, unknown>) {
+  // 阻止组件嵌套
+  if (!hasKey(wgItem, 'list')) return false;
+  if (pageData.value.list) {
+    return (pageData.value.list.some(v => {
+      return v.type === wgItem.type;
+    }))
   }
-})
+  return false
+}
+
+function cloneData(obj: Record<string, unknown>) {
+  const elKey = Date.now() + '_' + Math.ceil(Math.random() * 1000000);
+  const newObj = deepClone(obj);
+  newObj.key = newObj.type + '_' + elKey;
+  store.commit('setDragWg', newObj)
+  return newObj;
+}
+
+//     return {
+//       widgetLevel1,
+//       widgetLevel2,
+//       handleWidget,
+//       dragEnd,
+//       disFormList,
+//       cloneData
+//     }
+//   }
+// })
 </script>
