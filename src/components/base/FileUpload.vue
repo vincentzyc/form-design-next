@@ -27,9 +27,9 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import ImgUpload from './ImgUpload/index.vue'
-import { computed, ref, reactive } from "vue";
+import { defineComponent, computed, ref, reactive } from "vue";
 import { ElMessage, ElMessageBox } from 'element-plus';
 
 const TYPE_IMG = 'img', TYPE_VIDEO = 'video';
@@ -37,129 +37,127 @@ const TYPE_IMG = 'img', TYPE_VIDEO = 'video';
 const videoTypeList = ['video/mp4']
 const imgTypeList = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
 
-// export default defineComponent({
-//   name: "FileUpload",
-//   components: {
-//     ImgUpload
-//   },
-const props = defineProps({
-  modelValue: {
-    required: true,
-    type: String
+export default defineComponent({
+  name: "FileUpload",
+  components: {
+    ImgUpload
   },
-  type: {
-    type: String,
-    default: TYPE_IMG
+  props: {
+    modelValue: {
+      required: true,
+      type: String
+    },
+    type: {
+      type: String,
+      default: TYPE_IMG
+    },
+    height: {
+      type: String,
+      default: '100px'
+    },
+    width: {
+      type: String,
+      default: '100px'
+    }
   },
-  height: {
-    type: String,
-    default: '100px'
-  },
-  width: {
-    type: String,
-    default: '100px'
+  setup(props, { emit }) {
+    const drawer = ref(false)
+    const uploading = ref(false)
+    const uploadPercentage = ref(0)
+    const upload = ref()
+    const uploadData = reactive({
+      yourData: "yunyi"
+    })
+    const showImgCompressor = computed(() => props.type === TYPE_IMG)
+    const showImg = computed(() => props.modelValue && props.type === TYPE_IMG)
+    const showVideo = computed(() => props.modelValue && props.type === TYPE_VIDEO)
+
+    const removeFile = () => {
+      emit('update:modelValue', '');
+    }
+    const resetUpload = () => {
+      uploading.value = false;
+      uploadPercentage.value = 0;
+    }
+    const startUpload = () => {
+      uploading.value = true;
+    }
+    const cancelUpload = () => {
+      if (!uploading.value) return;
+      upload.value.abort();
+      ElMessage({
+        message: '已取消上传',
+        type: 'warning'
+      });
+      return resetUpload();
+    }
+    const handleAvatarSuccess = (res: any, file: any) => {
+      emit('update:modelValue', URL.createObjectURL(file.raw));
+      if (uploadPercentage.value !== 100) uploadPercentage.value = 100;
+      setTimeout(() => {
+        resetUpload()
+      }, 500);
+    }
+    const handleProgress = (event: Event, file: any) => {
+      uploadPercentage.value = parseInt(file.percentage, 10);
+    }
+    const imgUpload = (file: File) => {
+      const isImg = imgTypeList.includes(file.type)
+      const isLt1M = file.size / 1024 <= 50;
+      if (!isImg) {
+        ElMessage.error('请上传图片');
+        return false
+      }
+      if (isLt1M) {
+        startUpload()
+        return true
+      } else {
+        ElMessage.error('上传图片大小不能超过 30 K !');
+        return false
+      }
+    }
+    const videoUpload = (file: File) => {
+      const isVideo = videoTypeList.includes(file.type)
+      const isLt200M = file.size / 1024 / 1024 <= 100;
+      if (!isVideo) {
+        ElMessage.error('请上传视频文件');
+        return false
+      }
+      if (isLt200M) {
+        startUpload()
+        return true
+      } else {
+        ElMessage.error('上传视频大小不能超过 100 M !');
+        return false
+      }
+    }
+    const compressSuccess = (compressUrl: string) => {
+      emit('update:modelValue', compressUrl);
+    }
+    const compressFail = (err: any) => {
+      // eslint-disable-next-line
+      console.log(err);
+    }
+    const uploadError = () => {
+      // console.log(err);
+      resetUpload()
+      ElMessageBox.alert('网络繁忙，请稍后重试');
+    }
+    const beforeAvatarUpload = (file: File) => {
+      if (props.type === TYPE_IMG) return imgUpload(file)
+      if (props.type === TYPE_VIDEO) return videoUpload(file)
+      return false
+    }
+
+    return {
+      uploadData, uploading, uploadPercentage, upload, drawer,
+      showImg, showVideo, showImgCompressor,
+      removeFile, cancelUpload, beforeAvatarUpload,
+      handleProgress, handleAvatarSuccess, uploadError,
+      compressSuccess, compressFail
+    }
   }
 })
-
-const emit = defineEmits(['update:modelValue'])
-// setup(props, { emit }) {
-const drawer = ref(false)
-const uploading = ref(false)
-const uploadPercentage = ref(0)
-const upload = ref()
-const uploadData = reactive({
-  yourData: "yunyi"
-})
-const showImgCompressor = computed(() => props.type === TYPE_IMG)
-const showImg = computed(() => props.modelValue && props.type === TYPE_IMG)
-const showVideo = computed(() => props.modelValue && props.type === TYPE_VIDEO)
-
-const removeFile = () => {
-  emit('update:modelValue', '');
-}
-const resetUpload = () => {
-  uploading.value = false;
-  uploadPercentage.value = 0;
-}
-const startUpload = () => {
-  uploading.value = true;
-}
-const cancelUpload = () => {
-  if (!uploading.value) return;
-  upload.value.abort();
-  ElMessage({
-    message: '已取消上传',
-    type: 'warning'
-  });
-  return resetUpload();
-}
-const handleAvatarSuccess = (res: any, file: any) => {
-  emit('update:modelValue', URL.createObjectURL(file.raw));
-  if (uploadPercentage.value !== 100) uploadPercentage.value = 100;
-  setTimeout(() => {
-    resetUpload()
-  }, 500);
-}
-const handleProgress = (event: Event, file: any) => {
-  uploadPercentage.value = parseInt(file.percentage, 10);
-}
-const imgUpload = (file: File) => {
-  const isImg = imgTypeList.includes(file.type)
-  const isLt1M = file.size / 1024 <= 50;
-  if (!isImg) {
-    ElMessage.error('请上传图片');
-    return false
-  }
-  if (isLt1M) {
-    startUpload()
-    return true
-  } else {
-    ElMessage.error('上传图片大小不能超过 30 K !');
-    return false
-  }
-}
-const videoUpload = (file: File) => {
-  const isVideo = videoTypeList.includes(file.type)
-  const isLt200M = file.size / 1024 / 1024 <= 100;
-  if (!isVideo) {
-    ElMessage.error('请上传视频文件');
-    return false
-  }
-  if (isLt200M) {
-    startUpload()
-    return true
-  } else {
-    ElMessage.error('上传视频大小不能超过 100 M !');
-    return false
-  }
-}
-const compressSuccess = (compressUrl: string) => {
-  emit('update:modelValue', compressUrl);
-}
-const compressFail = (err: any) => {
-  // eslint-disable-next-line
-  console.log(err);
-}
-const uploadError = () => {
-  // console.log(err);
-  resetUpload()
-  ElMessageBox.alert('网络繁忙，请稍后重试');
-}
-const beforeAvatarUpload = (file: File) => {
-  if (props.type === TYPE_IMG) return imgUpload(file)
-  if (props.type === TYPE_VIDEO) return videoUpload(file)
-  return false
-}
-
-//     return {
-//       uploadData, uploading, uploadPercentage, upload, drawer,
-//       showImg, showVideo, showImgCompressor,
-//       removeFile, resetUpload, startUpload, cancelUpload, beforeAvatarUpload,
-//       handleProgress, imgUpload, videoUpload, handleAvatarSuccess, uploadError,
-//       compressSuccess, compressFail
-//     }
-//   }
-// })
 </script>
 
 <style lang="stylus">
