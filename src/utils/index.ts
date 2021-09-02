@@ -8,8 +8,16 @@ type UrlParamBack = null | string | StringObj
  * @return {Boolean} 是否存在标识
  */
 export function hasKey(obj: any, key: string): boolean {
-  if(!obj) return false
+  if (!obj) return false
   return Object.prototype.hasOwnProperty.call(obj, key)
+}
+
+/**
+ * 生成唯一id
+ */
+export function getUuid() {
+  const randomNum = Number(Math.random().toString().slice(2, -1)) + Date.now()
+  return randomNum.toString(36)
 }
 
 /**
