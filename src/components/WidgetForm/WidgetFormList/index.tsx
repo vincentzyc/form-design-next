@@ -1,6 +1,7 @@
 import { defineComponent, computed, nextTick, resolveComponent } from "vue";
 import { useStore } from 'vuex';
 import { deepClone } from '@/utils/deep-clone';
+import { getUuid } from "@/utils";
 
 import WgStaticText from './WgStaticText'
 import WgButton from './WgButton'
@@ -110,7 +111,8 @@ export default defineComponent({
     async function handleWidgetClone(event) {
       event.stopPropagation();
       const cloneData = deepClone(props.data[props.index] as Record<string, any>[])
-      cloneData.key = cloneData.type + '_' + Date.now() + '_' + Math.ceil(Math.random() * 1000000)
+      // cloneData.key = cloneData.type + '_' + Date.now() + '_' + Math.ceil(Math.random() * 1000000)
+      cloneData.key = cloneData.type + '_' + getUuid()
       await nextTick()
       const newData = props.data
       newData.splice(props.index, 0, cloneData)
