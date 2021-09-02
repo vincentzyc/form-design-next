@@ -44,7 +44,7 @@
 import { ref, computed } from "vue";
 import Draggable from 'vuedraggable'
 import { useStore } from "vuex";
-import { hasKey } from "@/utils/index"
+import { getUuid, hasKey } from "@/utils/index"
 import { deepClone } from "@/utils/deep-clone"
 import widgetLevel1 from '@/assets/js/widget'
 
@@ -77,9 +77,9 @@ function disFormList(wgItem: Record<string, unknown>) {
 }
 
 function cloneData(obj: Record<string, unknown>) {
-  const elKey = Date.now() + '_' + Math.ceil(Math.random() * 1000000);
+  // const elKey = Date.now() + '_' + Math.ceil(Math.random() * 1000000);
   const newObj = deepClone(obj);
-  newObj.key = newObj.type + '_' + elKey;
+  newObj.key = newObj.type + '_' + getUuid()
   store.commit('setDragWg', newObj)
   return newObj;
 }
