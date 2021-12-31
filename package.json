@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "element-plus": "^1.0.2-beta.70",
     "mitt": "^2.1.0",
+    "pinia": "^2.0.9",
     "vue": "^3.2.2",
     "vuedraggable": "4.0.3",
     "vuex": "^4.0.2"
