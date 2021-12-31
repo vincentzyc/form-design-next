@@ -26,8 +26,8 @@ import { useMainStore } from '@/pinia'
 import { storeToRefs } from 'pinia'
 
 const main = useMainStore()
-const { counter } = storeToRefs(main)
-console.log(counter.value);
+const { counter, doubleCount } = storeToRefs(main)
+console.log(counter.value, doubleCount.value);
 
 import { computed, getCurrentInstance } from "vue";
 import ComponentsList from "./ComponentsList/index.vue"
