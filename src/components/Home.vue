@@ -22,6 +22,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useMainStore } from '@/pinia'
+
+const main = useMainStore()
+console.log(main);
+
 import { computed, getCurrentInstance } from "vue";
 import ComponentsList from "./ComponentsList/index.vue"
 import WidgetForm from './WidgetForm/index.vue'
