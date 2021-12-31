@@ -23,9 +23,11 @@
 
 <script lang="ts" setup>
 import { useMainStore } from '@/pinia'
+import { storeToRefs } from 'pinia'
 
 const main = useMainStore()
-console.log(main);
+const { counter } = storeToRefs(main)
+console.log(counter.value);
 
 import { computed, getCurrentInstance } from "vue";
 import ComponentsList from "./ComponentsList/index.vue"
