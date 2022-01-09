@@ -12,6 +12,7 @@ import '@/assets/css/config.styl';
 import '@/assets/css/themes.styl';
 
 const app = createApp(App)
+app.use(createPinia())
 
 const emitter = mitt();
 
@@ -19,4 +20,4 @@ app.config.globalProperties.$bus = emitter
 
 app.config.globalProperties.BASE_URL = process.env.BASE_URL
 
-app.use(createPinia()).use(store).use(Element).mount('#app')
+app.use(store).use(Element).mount('#app')
