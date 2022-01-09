@@ -7,6 +7,7 @@ export const useMainStore = defineStore('main', {
   state: () => ({
     counter: 0,
     name: 'Eduardo',
+    predefineColors: ['#000000', '#666666', '#cccccc', '#ffffff', 'rgba(255, 255, 255, 0)', '#ff0000', '#ff4500', '#ff8c00', '#ffd700', '#90ee90', '#00ced1', '#1e90ff', '#c71585']
   }),
   // optional getters
   getters: {
