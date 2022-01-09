@@ -1,7 +1,7 @@
-import { onMounted, onBeforeUnmount, ref, watch, computed } from 'vue';
-import { useStore } from "vuex";
+import { onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import ColorPicker from "./font-color"
 import { fontSizes, changeFontSize } from "./font-size"
+import { useMainStore } from '@/pinia'
 
 export default {
   name: 'wangEditor',
@@ -9,12 +9,10 @@ export default {
     modelValue: String
   },
   setup(props, { emit }) {
+    const mainStore = useMainStore()
     const editor = ref();
 
     let instance, colorPicker, curContent;
-
-    const store = useStore()
-    const predefineColors = computed(() => store.state.predefineColors)
 
     function htmlChange(newHtml) {
       curContent = newHtml
@@ -87,7 +85,7 @@ export default {
 
     return () => (
       <div class="wangEditor">
-        <el-color-picker predefine={predefineColors.value} show-alpha onActiveChange={pickerColor} class="color-picker" popper-class="editor-color-picker" />
+        <el-color-picker predefine={mainStore.predefineColors} show-alpha onActiveChange={pickerColor} class="color-picker" popper-class="editor-color-picker" />
         <div ref={editor}></div>
       </div>
     );
