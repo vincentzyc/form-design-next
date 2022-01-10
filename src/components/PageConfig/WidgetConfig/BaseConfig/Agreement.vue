@@ -54,15 +54,19 @@ import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import Draggable from 'vuedraggable'
 import { deepClone } from "@/utils/deep-clone";
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from 'pinia'
+
 export default defineComponent({
   name: "AgreementConfig",
   components: {
     Draggable
   },
   setup() {
+    const mainStore = useMainStore()
     const store = useStore()
     const selectWg = computed(() => store.state.selectWg)
-    const predefineColors = computed(() => store.state.predefineColors)
+    const { predefineColors } = storeToRefs(mainStore)
     const handleRemove = (index: number) => {
       selectWg.value.titleTexts.splice(index, 1)
     }
