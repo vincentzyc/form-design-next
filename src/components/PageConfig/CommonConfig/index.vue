@@ -47,13 +47,17 @@ import pageConfigData from '@/assets/js/page-config'
 import { deepClone } from '@/utils/deep-clone';
 import { isLink } from '@/utils/validate/link';
 import { ElMessage } from "element-plus";
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from 'pinia'
 
 // const vm: any = getCurrentInstance()?.proxy
 // vm.$message.error('xxx')
+
+const mainStore = useMainStore()
 const store = useStore()
 const themes = reactive(pageConfigData.themes)
 const pageData = computed(() => store.state.pageData)
-const predefineColors = computed(() => store.state.predefineColors)
+const { predefineColors } = storeToRefs(mainStore)
 
 function setTheme(val: string) {
   const i = themes.findIndex(item => item.value === val);
