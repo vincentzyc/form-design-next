@@ -37,12 +37,15 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 import FileUpload from '@/components/base/FileUpload.vue'
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from 'pinia'
 
 import Styles from "./Styles.vue"
 
 const store = useStore()
+const mainStore = useMainStore()
 
 const selectWg = computed(() => store.state.selectWg)
-const predefineColors = computed(() => store.state.predefineColors)
+const { predefineColors } = storeToRefs(mainStore)
 
 </script>
