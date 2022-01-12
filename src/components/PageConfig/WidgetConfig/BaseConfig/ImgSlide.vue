@@ -1,14 +1,14 @@
 <template>
   <el-form-item label="轮播图片设置">
     <Draggable
-      :group="{ name:'slideList'}"
+      :group="{ name: 'slideList' }"
       ghostClass="ghost"
       handle=".move-icon"
       itemKey="index"
       tag="ul"
       v-model="selectWg.value"
     >
-      <template #item="{element}">
+      <template #item="{ element, index }">
         <li style="border:1px dashed #999">
           <div class="pd10">
             <div class="relative flex flex-center">
@@ -44,14 +44,7 @@
         <i class="el-icon-info fs12 mg-l10"></i>
       </el-tooltip>
     </template>
-    <el-input-number
-      :max="10000"
-      :min="1000"
-      :step="500"
-      size="small"
-      step-strictly
-      v-model="selectWg.interval"
-    />
+    <el-input-number :max="10000" :min="1000" :step="500" size="small" step-strictly v-model="selectWg.interval" />
   </el-form-item>
 </template>
 
