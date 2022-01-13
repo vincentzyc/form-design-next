@@ -10,14 +10,14 @@
 
     <el-form-item label="协议列表">
       <Draggable
-        :group="{ name:'options'}"
+        :group="{ name: 'options' }"
         ghostClass="ghost"
         handle=".move-icon"
         item-key="index"
         tag="ul"
         v-model="selectWg.titleTexts"
       >
-        <template #item="{element,index}">
+        <template #item="{ element, index }">
           <li>
             <div class="col-itemlist">
               <i class="el-icon-menu move-icon"></i>
@@ -28,7 +28,7 @@
               </el-form-item>
               <el-form-item label="协议内容（支持链接页面）">
                 <el-input
-                  :autosize="{ minRows: 2, maxRows: 16}"
+                  :autosize="{ minRows: 2, maxRows: 16 }"
                   placeholder="请输入协议内容"
                   type="textarea"
                   v-model="element.text"
@@ -49,41 +49,30 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script lang="ts" setup>
+import { computed } from "vue";
 import { useStore } from "vuex";
 import Draggable from 'vuedraggable'
 import { deepClone } from "@/utils/deep-clone";
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from 'pinia'
 
-export default defineComponent({
-  name: "AgreementConfig",
-  components: {
-    Draggable
-  },
-  setup() {
-    const mainStore = useMainStore()
-    const store = useStore()
-    const selectWg = computed(() => store.state.selectWg)
-    const { predefineColors } = storeToRefs(mainStore)
-    const handleRemove = (index: number) => {
-      selectWg.value.titleTexts.splice(index, 1)
-    }
-    const handleAdd = () => {
-      let newItem =
-        selectWg.value.titleTexts.length > 0
-          ? deepClone(selectWg.value.titleTexts[selectWg.value.titleTexts.length - 1])
-          : {
-            title: "《协议名称》",
-            text: ""
-          }
-      selectWg.value.titleTexts.push(newItem)
-    }
-    return {
-      selectWg, predefineColors,
-      handleRemove, handleAdd
-    }
-  }
-})
+const mainStore = useMainStore()
+const store = useStore()
+const selectWg = computed(() => store.state.selectWg)
+const { predefineColors } = storeToRefs(mainStore)
+const handleRemove = (index: number) => {
+  selectWg.value.titleTexts.splice(index, 1)
+}
+const handleAdd = () => {
+  let newItem =
+    selectWg.value.titleTexts.length > 0
+      ? deepClone(selectWg.value.titleTexts[selectWg.value.titleTexts.length - 1])
+      : {
+        title: "《协议名称》",
+        text: ""
+      }
+  selectWg.value.titleTexts.push(newItem)
+}
+
 </script>
