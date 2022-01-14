@@ -5,8 +5,8 @@
   <BuilderPopup @close="closePopup" v-model="showPopup">
     <Draggable
       :animation="100"
-      :class="{'widget-empty': popupWg.length === 0}"
-      :group="{ name:'widget',put:!hasKey(dragWg,'list')}"
+      :class="{ 'widget-empty': popupWg.length === 0 }"
+      :group="{ name: 'widget', put: !hasKey(dragWg, 'list') }"
       :swapThreshold="0.7"
       @add="handleWidgetAdd"
       class="widget-form-list wg-padding"
@@ -14,14 +14,8 @@
       item-key="key"
       v-model="popupWg"
     >
-      <template #item="{element,index}">
-        <WidgetFormList
-          :index="index"
-          :isPopup="true"
-          :item="element"
-          @emptied="closePopup"
-          v-model:data="popupWg"
-        />
+      <template #item="{ element, index }">
+        <WidgetFormList :index="index" :isPopup="true" :item="element" @emptied="closePopup" v-model:data="popupWg" />
       </template>
     </Draggable>
   </BuilderPopup>
@@ -34,6 +28,8 @@ import { hasKey } from "@/utils"
 import Draggable from 'vuedraggable'
 import WidgetFormList from '@/components/WidgetForm/WidgetFormList'
 import BuilderPopup from '@/components/base/BuilderPopup'
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from 'pinia'
 
 export default defineComponent({
   components: {
@@ -48,10 +44,11 @@ export default defineComponent({
     const wgId = ref(null)
     const popupWg = ref([])
 
+    const mainStore = useMainStore()
     const store = useStore()
     const selectWg = computed(() => store.state.selectWg)
     const pageData = computed(() => store.state.pageData)
-    const dragWg = computed(() => store.state.dragWg)
+    const { dragWg } = storeToRefs(mainStore)
 
     const showConfigBtn = computed(() => {
       if (showPopup.value) return false
