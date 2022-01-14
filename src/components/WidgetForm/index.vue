@@ -1,21 +1,18 @@
 <template>
   <div class="widget-form-wrapper" id="widget-form-wrapper">
     <div
-      :style="{...pageData.style,backgroundImage:`url(${pageData.style.backgroundImage})`}"
+      :style="{ ...pageData.style, backgroundImage: `url(${pageData.style.backgroundImage})` }"
       class="widget-form-container"
       id="widget-form-container"
     >
-      <div :class="'template-'+pageData.theme">
-        <div class="wg-fixed-top" v-if="Array.isArray(pageData.fixedTop)&&pageData.fixedTop.length>0">
+      <div :class="'template-' + pageData.theme">
+        <div class="wg-fixed-top" v-if="Array.isArray(pageData.fixedTop) && pageData.fixedTop.length > 0">
           <!-- 可支持多个组件悬浮，目前未开放，限制一个-->
           <template :key="item.key" v-for="(item,index) in pageData.fixedTop">
             <WidgetFormList v-model:data="pageData.fixedTop" :index="index" :item="item" />
           </template>
         </div>
-        <div
-          class="wg-fixed-custom"
-          v-if="Array.isArray(pageData.fixedCustom)&&pageData.fixedCustom.length>0"
-        >
+        <div class="wg-fixed-custom" v-if="Array.isArray(pageData.fixedCustom) && pageData.fixedCustom.length > 0">
           <!-- 可支持多个组件悬浮，目前未开放，限制一个 -->
           <template :key="item.key" v-for="(item,index) in pageData.fixedCustom">
             <WidgetFormList
@@ -29,8 +26,8 @@
         </div>
         <Draggable
           :animation="100"
-          :class="{'widget-empty': pageData.list.length === 0&&!pageData.style.backgroundImage}"
-          :group="{ name:'widget',put:true}"
+          :class="{ 'widget-empty': pageData.list.length === 0 && !pageData.style.backgroundImage }"
+          :group="{ name: 'widget', put: true }"
           :swapThreshold="0.7"
           @add="handleWidgetAdd"
           @end="dragEnd"
@@ -41,15 +38,12 @@
           item-key="key"
           v-model="pageData.list"
         >
-          <template #item="{element,index}">
+          <template #item="{ element, index }">
             <WidgetFormList v-model:data="pageData.list" :index="index" :item="element" />
           </template>
         </Draggable>
 
-        <div
-          class="wg-fixed-bottom"
-          v-if="Array.isArray(pageData.fixedBottom)&&pageData.fixedBottom.length>0"
-        >
+        <div class="wg-fixed-bottom" v-if="Array.isArray(pageData.fixedBottom) && pageData.fixedBottom.length > 0">
           <!-- 可支持多个组件悬浮，目前未开放，限制一个-->
           <template :key="item.key" v-for="(item,index) in pageData.fixedBottom">
             <WidgetFormList v-model:data="pageData.fixedBottom" :index="index" :item="item" />
@@ -65,6 +59,7 @@ import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import Draggable from 'vuedraggable'
 import WidgetFormList from './WidgetFormList'
+import { useMainStore } from '@/pinia'
 
 export default defineComponent({
   name: "WidgetForm",
@@ -72,6 +67,7 @@ export default defineComponent({
     WidgetFormList, Draggable
   },
   setup() {
+    const mainStore = useMainStore()
     const store = useStore()
     const pageData = computed(() => store.state.pageData)
 
@@ -84,11 +80,13 @@ export default defineComponent({
         }
       }
     }
-    function dragStart(evt) {
-      store.commit('setDragWg', pageData.value.list[evt.oldIndex])
+    function dragStart(evt: any) {
+      mainStore.setDragWg(pageData.value.list[evt.oldIndex])
+      // store.commit('setDragWg', pageData.value.list[evt.oldIndex])
     }
     function dragEnd() {
-      store.commit('setDragWg', '')
+      mainStore.setDragWg(null)
+      // store.commit('setDragWg', '')
     }
     function handleWidgetAdd(evt) {
       const newIndex = evt.newIndex;
