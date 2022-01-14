@@ -20,7 +20,7 @@ export default createStore({
         alertLink: ''
       }
     },
-    dragWg: {},
+    // dragWg: {},
     selectWg: {},
     selectWgIndex: null,
     selectWginList: [],
@@ -28,9 +28,9 @@ export default createStore({
     wgCollapse: "base"
   },
   mutations: {
-    setDragWg(state, payload) {
-      state.dragWg = payload;
-    },
+    // setDragWg(state, payload) {
+    //   state.dragWg = payload;
+    // },
     setPageData(state, payload) {
       state.pageData = payload;
     },
