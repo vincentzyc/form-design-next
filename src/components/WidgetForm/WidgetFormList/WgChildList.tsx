@@ -1,8 +1,10 @@
-import { computed, defineComponent, reactive } from "vue";
+import { defineComponent, reactive } from "vue";
 import { useStore } from 'vuex';
 import WidgetFormList from './index';
 import Draggable from 'vuedraggable'
 import { hasKey } from "@/utils";
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from 'pinia'
 
 export default defineComponent({
   name: "WgChildList",
@@ -14,8 +16,10 @@ export default defineComponent({
   },
   setup(props) {
     const { item } = reactive(props)
+    const mainStore = useMainStore()
     const store = useStore()
-    const dragWg = computed(() => store.state.dragWg)
+    const { dragWg } = storeToRefs(mainStore)
+    // const dragWg = computed(() => store.state.dragWg)
     const handleWidgetAdd = (evt: any) => {
       const newIndex = evt.newIndex;
       store.commit('setSelectWg', item.list[newIndex])
