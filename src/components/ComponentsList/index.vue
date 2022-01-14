@@ -47,11 +47,13 @@ import { useStore } from "vuex";
 import { getUuid, hasKey } from "@/utils/index"
 import { deepClone } from "@/utils/deep-clone"
 import widgetLevel1 from '@/assets/js/widget'
+import { useMainStore } from '@/pinia'
 
 // export default defineComponent({
 //   name: 'ComponentsList',
 //   components: { Draggable },
 //   setup() {
+const mainStore = useMainStore()
 const store = useStore()
 
 const pageData = computed(() => store.state.pageData)
@@ -62,7 +64,8 @@ function handleWidget(item: any) {
   widgetLevel2.value = item;
 }
 function dragEnd() {
-  store.commit('setDragWg', null)
+  mainStore.setDragWg(null)
+  // store.commit('setDragWg', null)
 }
 
 function disFormList(wgItem: Record<string, unknown>) {
@@ -80,7 +83,8 @@ function cloneData(obj: Record<string, unknown>) {
   // const elKey = Date.now() + '_' + Math.ceil(Math.random() * 1000000);
   const newObj = deepClone(obj);
   newObj.key = newObj.type + '_' + getUuid()
-  store.commit('setDragWg', newObj)
+  mainStore.setDragWg(newObj)
+  // store.commit('setDragWg', newObj)
   return newObj;
 }
 
