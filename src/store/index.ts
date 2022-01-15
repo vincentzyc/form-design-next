@@ -24,8 +24,7 @@ export default createStore({
     selectWg: {},
     selectWgIndex: null,
     selectWginList: [],
-    configTab: 'page',
-    wgCollapse: "base"
+    configTab: 'page'
   },
   mutations: {
     // setDragWg(state, payload) {
@@ -39,9 +38,6 @@ export default createStore({
     },
     setConfigTab(state, payload) {
       state.configTab = payload;
-    },
-    setWgCollapse(state, payload) {
-      state.wgCollapse = payload;
     }
   }
   // actions: {
