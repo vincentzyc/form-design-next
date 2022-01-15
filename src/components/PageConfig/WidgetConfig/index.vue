@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import BaseConfig from "./BaseConfig/index.vue"
 import TagConfig from "./TagConfig.vue"
@@ -31,9 +31,6 @@ import StyleConfig from "./StyleConfig/index.vue"
 import AnimationConfig from "./AnimationConfig.vue"
 
 const store = useStore()
-const wgCollapse = computed({
-  get: () => store.state.wgCollapse,
-  set: val => store.commit('setWgCollapse', val)
-})
+const wgCollapse = ref('base')
 const selectWg = computed(() => store.state.selectWg)
 </script>
