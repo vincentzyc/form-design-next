@@ -17,7 +17,7 @@
     <el-switch v-model="selectWg.isRequired"></el-switch>
   </el-form-item>
   <el-form-item label="是否显示标签" v-if="hasKey(selectWg, 'showLabel')">
-    <el-switch @change="selectWg.showLabel ? store.commit('setWgCollapse', 'tag') : ''" v-model="selectWg.showLabel"></el-switch>
+    <el-switch v-model="selectWg.showLabel"></el-switch>
   </el-form-item>
   <el-form-item label="是否发送验证码" v-if="hasKey(selectWg, 'showCode')">
     <el-switch v-model="selectWg.showCode"></el-switch>
