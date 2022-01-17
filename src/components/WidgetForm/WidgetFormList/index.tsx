@@ -1,5 +1,6 @@
 import { defineComponent, computed, nextTick, resolveComponent } from "vue";
 import { useStore } from 'vuex';
+import { useMainStore } from '@/pinia'
 import { deepClone } from '@/utils/deep-clone';
 import { getUuid } from "@/utils";
 
@@ -71,6 +72,7 @@ export default defineComponent({
   },
   emits: ['update:data', 'emptied'],
   setup(props, { emit }) {
+    const mainStore = useMainStore()
     const store = useStore()
     const selectWg = computed(() => store.state.selectWg)
     const clonebtn = computed(() => {
@@ -90,7 +92,8 @@ export default defineComponent({
     function handleSelectWidget(event) {
       event.stopPropagation();
       store.commit('setSelectWg', props.data[props.index]);
-      store.commit('setConfigTab', "widget");
+      // store.commit('setConfigTab', "widget");
+      mainStore.setConfigTab("widget")
     }
     async function handleWidgetDelete(event) {
       event.stopPropagation();
