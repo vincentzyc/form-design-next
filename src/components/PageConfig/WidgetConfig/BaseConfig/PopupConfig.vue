@@ -74,7 +74,8 @@ export default defineComponent({
       const newWgData = setWgPopupList(pageData.value.list)
       if (newWgData && wgId.value !== selectWg.value.key) {
         store.commit('setSelectWg', newWgData)
-        store.commit('setConfigTab', "widget");
+        mainStore.setConfigTab("widget")
+        // store.commit('setConfigTab', "widget");
         if (showPopup.value === false) wgId.value = null
       }
     }
@@ -87,7 +88,8 @@ export default defineComponent({
     const handleWidgetAdd = (evt: any) => {
       const newIndex = evt.newIndex;
       store.commit('setSelectWg', popupWg.value[newIndex])
-      store.commit('setConfigTab', "widget");
+      // store.commit('setConfigTab', "widget");
+      mainStore.setConfigTab("widget")
     }
 
     return {
