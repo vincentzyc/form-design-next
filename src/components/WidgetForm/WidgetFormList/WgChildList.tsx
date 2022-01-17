@@ -23,7 +23,8 @@ export default defineComponent({
     const handleWidgetAdd = (evt: any) => {
       const newIndex = evt.newIndex;
       store.commit('setSelectWg', item.list[newIndex])
-      store.commit('setConfigTab', "widget");
+      // store.commit('setConfigTab', "widget");
+      mainStore.setConfigTab("widget")
     }
     return () => (
       <Draggable
