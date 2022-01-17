@@ -25,8 +25,8 @@ export const useMainStore = defineStore('main', {
     setDragWg(payload: Record<string, any> | null) {
       this.dragWg = payload;
     },
-    setConfigTab(state, payload) {
-      state.configTab = payload;
+    setConfigTab(payload: string) {
+      this.configTab = payload;
     },
     reset() {
       // `this` is the store instance
