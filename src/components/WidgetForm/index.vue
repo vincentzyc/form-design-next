@@ -91,7 +91,8 @@ export default defineComponent({
     function handleWidgetAdd(evt) {
       const newIndex = evt.newIndex;
       store.commit('setSelectWg', pageData.value.list[newIndex]);
-      store.commit('setConfigTab', "widget");
+      // store.commit('setConfigTab', "widget");
+      mainStore.setConfigTab("widget")
     }
     return {
       pageData,
