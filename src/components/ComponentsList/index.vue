@@ -40,6 +40,14 @@
   </div>
 </template>
 
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: 'ComponentsList'
+})
+</script>
+
+
 <script lang="ts" setup>
 import { ref, computed } from "vue";
 import Draggable from 'vuedraggable'
@@ -49,10 +57,6 @@ import { deepClone } from "@/utils/deep-clone"
 import widgetLevel1 from '@/assets/js/widget'
 import { useMainStore } from '@/pinia'
 
-// export default defineComponent({
-//   name: 'ComponentsList',
-//   components: { Draggable },
-//   setup() {
 const mainStore = useMainStore()
 const store = useStore()
 
@@ -87,15 +91,4 @@ function cloneData(obj: Record<string, unknown>) {
   // store.commit('setDragWg', newObj)
   return newObj;
 }
-
-//     return {
-//       widgetLevel1,
-//       widgetLevel2,
-//       handleWidget,
-//       dragEnd,
-//       disFormList,
-//       cloneData
-//     }
-//   }
-// })
 </script>
