@@ -20,11 +20,9 @@ export default createStore({
         alertLink: ''
       }
     },
-    // dragWg: {},
     selectWg: {},
-    selectWgIndex: null,
-    selectWginList: [],
-    configTab: 'page'
+    // dragWg: {},
+    // configTab: 'page'
   },
   mutations: {
     // setDragWg(state, payload) {
@@ -35,10 +33,10 @@ export default createStore({
     },
     setSelectWg(state, payload) {
       state.selectWg = payload;
-    },
-    setConfigTab(state, payload) {
-      state.configTab = payload;
     }
+    // setConfigTab(state, payload) {
+    //   state.configTab = payload;
+    // }
   }
   // actions: {
   // },
