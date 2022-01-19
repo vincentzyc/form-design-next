@@ -23,12 +23,6 @@
 
 <script lang="ts" setup>
 import { useMainStore } from '@/pinia'
-import { storeToRefs } from 'pinia'
-
-const main = useMainStore()
-const { counter, doubleCount } = storeToRefs(main)
-console.log(counter.value, doubleCount.value);
-
 import { computed, getCurrentInstance } from "vue";
 import ComponentsList from "./ComponentsList/index.vue"
 import WidgetForm from './WidgetForm/index.vue'
@@ -41,10 +35,11 @@ import { previewUrl, previewOrigin } from "@/api"
 
 const vm: any = getCurrentInstance()?.proxy
 const store = useStore()
+const mainStore = useMainStore()
 const pageData = computed(() => store.state.pageData)
 
 const handleReset = () => {
-  store.commit('setSelectWg', {});
+  mainStore.setSelectWg({})
   store.commit('setPageData', deepClone(pageConfigData.pageConfig));
 }
 const handleSave = () => {
