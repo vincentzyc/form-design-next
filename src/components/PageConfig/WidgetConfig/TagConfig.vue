@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="selectWg">
     <el-form-item label="标签名称" v-if="selectWg.label.hasOwnProperty('labelTitle')">
       <el-input v-model="selectWg.label.labelTitle"></el-input>
     </el-form-item>
@@ -7,7 +7,7 @@
       <el-input-number
         :max="300"
         :min="30"
-        @change="val => selectWg.label.labelWidth = `${val}px`"
+        @change="(val: number) => selectWg ? selectWg.label.labelWidth = `${val}px` : null"
         size="small"
         v-model="selectWg.label.labelwidth"
       />
@@ -22,10 +22,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from "pinia";
 
-const store = useStore()
-const selectWg = computed(() => store.state.selectWg)
+const mainStore = useMainStore()
+const { selectWg } = storeToRefs(mainStore)
 
 </script>
