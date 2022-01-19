@@ -71,7 +71,7 @@ export default defineComponent({
     const store = useStore()
     const pageData = computed(() => store.state.pageData)
 
-    function fixedCustomStyle(item) {
+    function fixedCustomStyle(item: Record<string, any>) {
       if (item.position) {
         return {
           width: item.style.width,
@@ -82,16 +82,13 @@ export default defineComponent({
     }
     function dragStart(evt: any) {
       mainStore.setDragWg(pageData.value.list[evt.oldIndex])
-      // store.commit('setDragWg', pageData.value.list[evt.oldIndex])
     }
     function dragEnd() {
       mainStore.setDragWg(null)
-      // store.commit('setDragWg', '')
     }
-    function handleWidgetAdd(evt) {
+    function handleWidgetAdd(evt: any) {
       const newIndex = evt.newIndex;
-      store.commit('setSelectWg', pageData.value.list[newIndex]);
-      // store.commit('setConfigTab', "widget");
+      mainStore.setSelectWg(pageData.value.list[newIndex])
       mainStore.setConfigTab("widget")
     }
     return {
