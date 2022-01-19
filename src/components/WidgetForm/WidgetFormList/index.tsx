@@ -1,6 +1,6 @@
 import { defineComponent, computed, nextTick, resolveComponent } from "vue";
-import { useStore } from 'vuex';
 import { useMainStore } from '@/pinia'
+import { storeToRefs } from "pinia";
 import { deepClone } from '@/utils/deep-clone';
 import { getUuid } from "@/utils";
 
@@ -73,13 +73,13 @@ export default defineComponent({
   emits: ['update:data', 'emptied'],
   setup(props, { emit }) {
     const mainStore = useMainStore()
-    const store = useStore()
-    const selectWg = computed(() => store.state.selectWg)
+    const { selectWg } = storeToRefs(mainStore)
+
     const clonebtn = computed(() => {
-      if (selectWg.value.positionFixed && selectWg.value.positionFixed !== 'auto') return false;
-      if (selectWg.value.fixedBottom) return false;
-      if (Array.isArray(selectWg.value.list)) return false;
-      if (selectWg.value.key === props.item.key) return true;
+      if (selectWg.value?.positionFixed && selectWg.value?.positionFixed !== 'auto') return false;
+      if (selectWg.value?.fixedBottom) return false;
+      if (Array.isArray(selectWg.value?.list)) return false;
+      if (selectWg.value?.key === props.item.key) return true;
       return false;
     })
     const wgViewStyle = computed(() => {
@@ -87,24 +87,23 @@ export default defineComponent({
       return {}
     })
     const wgViewClass = computed(() =>
-      [props.item.wgClassName ? props.item.wgClassName : 'widget-view', { active: selectWg.value.key === props.item.key }]
+      [props.item.wgClassName ? props.item.wgClassName : 'widget-view', { active: selectWg.value?.key === props.item.key }]
     )
-    function handleSelectWidget(event) {
+    function handleSelectWidget(event: any) {
       event.stopPropagation();
-      store.commit('setSelectWg', props.data[props.index]);
-      // store.commit('setConfigTab', "widget");
+      mainStore.setSelectWg(props.data[props.index] as Record<string, any>)
       mainStore.setConfigTab("widget")
     }
     async function handleWidgetDelete(event) {
       event.stopPropagation();
       if (props.data.length - 1 === props.index) {
         if (props.index === 0) {
-          props.isPopup ? emit('emptied') : store.commit('setSelectWg', {})
+          props.isPopup ? emit('emptied') : mainStore.setSelectWg({})
         } else {
-          store.commit('setSelectWg', props.data[props.index - 1])
+          mainStore.setSelectWg(props.data[props.index - 1] as Record<string, any>)
         }
       } else {
-        store.commit('setSelectWg', props.data[props.index + 1])
+        mainStore.setSelectWg(props.data[props.index + 1] as Record<string, any>)
       }
       await nextTick()
       const newData = props.data
@@ -120,12 +119,12 @@ export default defineComponent({
       const newData = props.data
       newData.splice(props.index, 0, cloneData)
       emit('update:data', newData)
-      store.commit('setSelectWg', props.data[props.index + 1])
+      mainStore.setSelectWg(props.data[props.index + 1] as Record<string, any>)
     }
 
     const renderDragIcon = () => Array.isArray(props.item.list) && <i class="el-icon-rank"></i>
 
-    const renderDeleteIcon = () => selectWg.value.key === props.item.key && (
+    const renderDeleteIcon = () => selectWg.value?.key === props.item.key && (
       <span
         onClick={handleWidgetDelete}
         class="widget-action-btn widget-action-delete el-icon-delete"
