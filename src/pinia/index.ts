@@ -8,6 +8,7 @@ export const useMainStore = defineStore('main', {
     counter: 0,
     name: 'Eduardo',
     configTab: 'page',
+    selectWg: {},
     dragWg: null as Record<string, any> | null,
     predefineColors: ['#000000', '#666666', '#cccccc', '#ffffff', 'rgba(255, 255, 255, 0)', '#ff0000', '#ff4500', '#ff8c00', '#ffd700', '#90ee90', '#00ced1', '#1e90ff', '#c71585']
   }),
@@ -27,6 +28,9 @@ export const useMainStore = defineStore('main', {
     },
     setConfigTab(payload: string) {
       this.configTab = payload;
+    },
+    setSelectWg(payload:Record<string, any>) {
+      this.selectWg = payload;
     },
     reset() {
       // `this` is the store instance
