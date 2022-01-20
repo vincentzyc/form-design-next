@@ -23,14 +23,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
-import { useStore } from "vuex";
+import { ref } from "vue";
 import BaseConfig from "./BaseConfig/index.vue"
 import TagConfig from "./TagConfig.vue"
 import StyleConfig from "./StyleConfig/index.vue"
 import AnimationConfig from "./AnimationConfig.vue"
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from "pinia";
 
-const store = useStore()
+const mainStore = useMainStore()
+const { selectWg } = storeToRefs(mainStore)
+
 const wgCollapse = ref('base')
-const selectWg = computed(() => store.state.selectWg)
 </script>
