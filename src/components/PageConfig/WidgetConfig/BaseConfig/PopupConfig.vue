@@ -46,9 +46,8 @@ export default defineComponent({
 
     const mainStore = useMainStore()
     const store = useStore()
-    const selectWg = computed(() => store.state.selectWg)
     const pageData = computed(() => store.state.pageData)
-    const { dragWg } = storeToRefs(mainStore)
+    const { dragWg, selectWg } = storeToRefs(mainStore)
 
     const showConfigBtn = computed(() => {
       if (showPopup.value) return false
@@ -72,23 +71,21 @@ export default defineComponent({
     }
     const closePopup = () => {
       const newWgData = setWgPopupList(pageData.value.list)
-      if (newWgData && wgId.value !== selectWg.value.key) {
-        store.commit('setSelectWg', newWgData)
+      if (newWgData && wgId.value !== selectWg.value?.key) {
+        mainStore.setSelectWg(newWgData)
         mainStore.setConfigTab("widget")
-        // store.commit('setConfigTab', "widget");
         if (showPopup.value === false) wgId.value = null
       }
     }
     const openPopup = () => {
       if (showPopup.value) return
-      if (selectWg.value.popupList.length > 0) popupWg.value = selectWg.value.popupList
-      wgId.value = selectWg.value.key
+      if (selectWg.value?.popupList.length > 0) popupWg.value = selectWg.value?.popupList
+      wgId.value = selectWg.value?.key
       showPopup.value = true;
     }
     const handleWidgetAdd = (evt: any) => {
       const newIndex = evt.newIndex;
-      store.commit('setSelectWg', popupWg.value[newIndex])
-      // store.commit('setConfigTab', "widget");
+      mainStore.setSelectWg(popupWg.value[newIndex])
       mainStore.setConfigTab("widget")
     }
 
