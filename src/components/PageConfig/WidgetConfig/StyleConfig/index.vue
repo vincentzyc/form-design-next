@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="selectWg">
     <Styles v-model:styles="selectWg.style" />
 
     <el-form-item label="背景颜色" v-if="selectWg.hasOwnProperty('backgroundColor')">
@@ -34,18 +34,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { useStore } from "vuex";
 import FileUpload from '@/components/base/FileUpload.vue'
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from 'pinia'
 
 import Styles from "./Styles.vue"
-
-const store = useStore()
 const mainStore = useMainStore()
 
-const selectWg = computed(() => store.state.selectWg)
-const { predefineColors } = storeToRefs(mainStore)
+const { predefineColors, selectWg } = storeToRefs(mainStore)
 
 </script>
