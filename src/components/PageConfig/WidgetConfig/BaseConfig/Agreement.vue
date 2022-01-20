@@ -1,5 +1,5 @@
 <template>
-  <div class="wg-col-config">
+  <div class="wg-col-config" v-if="selectWg">
     <p class="lh24 c999 fs12">请预览查看具体效果</p>
     <el-form-item label="默认选中">
       <el-switch v-model="selectWg.value"></el-switch>
@@ -50,29 +50,25 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { useStore } from "vuex";
 import Draggable from 'vuedraggable'
 import { deepClone } from "@/utils/deep-clone";
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from 'pinia'
 
 const mainStore = useMainStore()
-const store = useStore()
-const selectWg = computed(() => store.state.selectWg)
-const { predefineColors } = storeToRefs(mainStore)
+const { predefineColors, selectWg } = storeToRefs(mainStore)
 const handleRemove = (index: number) => {
-  selectWg.value.titleTexts.splice(index, 1)
+  selectWg.value?.titleTexts.splice(index, 1)
 }
 const handleAdd = () => {
   let newItem =
-    selectWg.value.titleTexts.length > 0
-      ? deepClone(selectWg.value.titleTexts[selectWg.value.titleTexts.length - 1])
+    selectWg.value?.titleTexts.length > 0
+      ? deepClone(selectWg.value?.titleTexts[selectWg.value?.titleTexts.length - 1])
       : {
         title: "《协议名称》",
         text: ""
       }
-  selectWg.value.titleTexts.push(newItem)
+  selectWg.value?.titleTexts.push(newItem)
 }
 
 </script>
