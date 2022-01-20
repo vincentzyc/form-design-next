@@ -17,15 +17,15 @@
       </ul>
     </el-form-item>
     <el-form-item label="动画速度">
-      <div class="pd-l10 pd-r10 pd-b20">
+      <div class="pd-l10 pd-r10 pd-b20" v-if="selectWg">
         <el-slider
-          :format-tooltip="val => val + '秒'"
+          :format-tooltip="(val: any) => val + '秒'"
           :marks="{ 1: '快', 2: '中等', 3: '慢' }"
           :max="3"
           :min="1"
           :show-tooltip="false"
           :step="0.1"
-          @change="v => selectWg.animation.animationDuration = v + 's'"
+          @change="(v: number) => selectWg ? selectWg.animation.animationDuration = v + 's' : ''"
           v-model="selectWg.animation.animationduration"
         ></el-slider>
       </div>
@@ -34,8 +34,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, reactive } from "vue";
-import { useStore } from "vuex";
+import { ref, reactive } from "vue";
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from "pinia";
 
 interface typeAnimation {
   name: string;
@@ -44,7 +45,6 @@ interface typeAnimation {
   className: boolean;
 }
 
-const store = useStore()
 const openAnimation = ref(true)
 const animationList = reactive<typeAnimation[]>([{
   name: "呼吸灯",
@@ -68,12 +68,15 @@ const animationList = reactive<typeAnimation[]>([{
   className: true
 }])
 
-const selectWg = computed(() => store.state.selectWg)
+const mainStore = useMainStore()
+const { selectWg } = storeToRefs(mainStore)
 
 function handleChange(bool: boolean) {
   if (bool) return
-  selectWg.value.animation.animationName = ''
-  selectWg.value.animation.className = ''
+  if (selectWg.value) {
+    selectWg.value.animation.animationName = ''
+    selectWg.value.animation.className = ''
+  }
 }
 function getBtnStyle(item: typeAnimation) {
   if (!item.animationName) return {}
@@ -89,7 +92,9 @@ function getAnimteStyle(item: typeAnimation) {
 }
 function selectAnimation(item: typeAnimation) {
   openAnimation.value = true
-  selectWg.value.animation.animationName = item.animationName ? item.value : ''
-  selectWg.value.animation.className = item.className ? item.value : ''
+  if (selectWg.value) {
+    selectWg.value.animation.animationName = item.animationName ? item.value : ''
+    selectWg.value.animation.className = item.className ? item.value : ''
+  }
 }
 </script>
