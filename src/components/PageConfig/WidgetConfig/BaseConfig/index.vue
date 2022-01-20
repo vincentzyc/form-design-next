@@ -3,13 +3,12 @@
     <PopupConfig />
     <FixedConfig />
     <Common />
-    <component :is="selectWg.type" v-if="hadComponent" />
+    <component :is="selectWg.type" v-if="selectWg && hadComponent" />
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent, computed, getCurrentInstance } from "vue";
-import { useStore } from "vuex";
 import { hasKey } from "@/utils/index";
 import Common from "./Common.vue";
 import FixedConfig from "./FixedConfig.vue"
@@ -22,6 +21,9 @@ import ImgShow from "./ImgShow.vue"
 import ImgSlide from "./ImgSlide.vue"
 import Sms from "./Sms.vue"
 import VideoPlay from "./VideoPlay.vue"
+
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from "pinia";
 
 export default defineComponent({
   components: {
@@ -41,9 +43,9 @@ export default defineComponent({
   },
   setup() {
     const vm: any = getCurrentInstance()?.proxy
-    const store = useStore()
-    const selectWg = computed(() => store.state.selectWg)
-    const hadComponent = computed(() => hasKey(vm.$options.components, selectWg.value.type))
+    const mainStore = useMainStore()
+    const { selectWg } = storeToRefs(mainStore)
+    const hadComponent = computed(() => selectWg.value ? hasKey(vm.$options.components, selectWg.value.type) : false)
     return {
       selectWg, hadComponent
     }
