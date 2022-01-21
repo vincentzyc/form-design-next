@@ -85,11 +85,10 @@ import { isLink } from '@/utils/validate/link';
 import allFieldTypes from '@/assets/js/field-types.js'
 import { ElMessage } from "element-plus";
 
-const fieldTypes = reactive(allFieldTypes)
-
-
 const mainStore = useMainStore()
 const { selectWg } = storeToRefs(mainStore)
+
+const fieldTypes = reactive(allFieldTypes)
 
 function isRadio(flag: boolean) {
   if (selectWg.value) selectWg.value.value = flag ? "" : []
