@@ -73,56 +73,45 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, reactive } from "vue";
-import { useStore } from "vuex";
+import { reactive } from "vue";
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from "pinia";
 import Draggable from 'vuedraggable'
 import Editor from "@/components/Editor";
 import { hasKey } from "@/utils/index"
 import { isLink } from '@/utils/validate/link';
 import allFieldTypes from '@/assets/js/field-types.js'
-
-// export default defineComponent({
-//   name: "CommonConfig",
-//   components: {
-//     Draggable, Editor
-//   },
-//   setup() {
-const vm: any = getCurrentInstance()?.proxy
+import { ElMessage } from "element-plus";
 
 const fieldTypes = reactive(allFieldTypes)
 
-const store = useStore()
-const selectWg = computed(() => store.state.selectWg)
 
-function isRadio(flag) {
-  selectWg.value.value = flag ? "" : []
+const mainStore = useMainStore()
+const { selectWg } = storeToRefs(mainStore)
+
+function isRadio(flag: boolean) {
+  if (selectWg.value) selectWg.value.value = flag ? "" : []
 }
 
-function checkLink(v) {
-  if (!isLink(v)) vm.$message.error('请输入正确的网址');
+function checkLink(v: string) {
+  if (!isLink(v)) ElMessage.error('请输入正确的网址');
 }
 
-function selectfield(key, types) {
-  const selectItem = types.find(item => key === item.value);
-  selectWg.value.label.labelTitle = selectItem.label;
-  selectWg.value.options ? selectWg.value.options = selectItem.options : "";
-  if (hasKey(selectWg.value, 'placeholder')) {
-    selectWg.value.placeholder = selectWg.value.type === "input" ? `请输入${selectItem.label}` : `请选择${selectItem.label}`;
+function selectfield(key: any, types: any[]) {
+  if (selectWg.value) {
+    const selectItem = types.find((item: { value: any; }) => key === item.value);
+    selectWg.value.label.labelTitle = selectItem.label;
+    selectWg.value.options ? selectWg.value.options = selectItem.options : "";
+    if (hasKey(selectWg.value, 'placeholder')) {
+      selectWg.value.placeholder = selectWg.value.type === "input" ? `请输入${selectItem.label}` : `请选择${selectItem.label}`;
+    }
   }
 }
 
-function handleOptionsRemove(index) {
-  selectWg.value.options.splice(index, 1)
+function handleOptionsRemove(index: any) {
+  if (selectWg.value) selectWg.value.options.splice(index, 1)
 }
 function handleAddOption() {
-  selectWg.value.options.push('新选项')
+  if (selectWg.value) selectWg.value.options.push('新选项')
 }
-
-//     return {
-//       fieldTypes,
-//       selectWg,
-//       hasKey, isRadio, checkLink, selectfield, handleOptionsRemove, handleAddOption
-//     }
-//   }
-// })
 </script>
