@@ -1,24 +1,20 @@
 <template>
-  <div class="wg-col-config">
+  <div class="wg-col-config" v-if="selectWg">
     <el-form-item label="显示类型">
       <el-radio-group v-model="selectWg.styleType">
-        <el-radio-button
-          :key="item.value"
-          :label="item.value"
-          v-for="item in selectWg.styleTypes"
-        >{{item.label}}</el-radio-button>
+        <el-radio-button :key="item.value" :label="item.value" v-for="item in selectWg.styleTypes">{{ item.label }}</el-radio-button>
       </el-radio-group>
     </el-form-item>
     <el-form-item label="图片列表">
       <Draggable
-        :group="{ name:'options'}"
+        :group="{ name: 'options' }"
         ghostClass="ghost"
         handle=".move-icon"
         item-key="index"
         tag="ul"
         v-model="selectWg.imglist"
       >
-        <template #item="{index}">
+        <template #item="{ index }">
           <li>
             <div class="col-itemlist">
               <i class="el-icon-menu move-icon"></i>
@@ -29,7 +25,7 @@
                 <FileUpload class="mg-t10" v-model:modelValue="selectWg.imglist[index].img" />
               </div>
               <el-form-item label="跳转地址(空或格式错误都不会跳转)">
-                <el-input @change="v=>checkLink(v)" v-model="selectWg.imglist[index].link"></el-input>
+                <el-input @change="v => checkLink(v)" v-model="selectWg.imglist[index].link"></el-input>
               </el-form-item>
             </div>
           </li>
@@ -43,35 +39,39 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent } from "vue";
 import Draggable from 'vuedraggable'
 import { deepClone } from '@/utils/deep-clone';
 import { isLink } from '@/utils/validate/link';
-import { useStore } from "vuex";
 import FileUpload from '@/components/base/FileUpload.vue'
 import { ElMessage } from "element-plus";
-
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from "pinia";
 
 export default defineComponent({
-  name:"ImgShowConfig",
+  name: "ImgShowConfig",
   components: {
     FileUpload, Draggable
   },
   setup() {
-    const store = useStore()
-    const selectWg = computed(() => store.state.selectWg)
+    const mainStore = useMainStore()
+    const { selectWg } = storeToRefs(mainStore)
+
     const handleRemove = (index: number) => {
-      selectWg.value.imglist.splice(index, 1)
+      if (selectWg.value) selectWg.value.imglist.splice(index, 1)
     }
     const handleAdd = () => {
-      const newItem =
-        selectWg.value.imglist.length > 0
-          ? deepClone(selectWg.value.imglist[selectWg.value.imglist.length - 1])
-          : {
-            link: "",
-            img: ""
-          }
-      selectWg.value.imglist.push(newItem)
+      if (selectWg.value) {
+        const newItem =
+          selectWg.value.imglist.length > 0
+            ? deepClone(selectWg.value.imglist[selectWg.value.imglist.length - 1])
+            : {
+              link: "",
+              img: ""
+            }
+        selectWg.value.imglist.push(newItem)
+      }
+
     }
     function checkLink(v: string) {
       if (!isLink(v)) ElMessage.error('请输入正确的网址');
