@@ -1,5 +1,5 @@
 <template>
-  <div class="wg-col-config">
+  <div class="wg-col-config" v-if="selectWg">
     <el-form-item label="显示类型">
       <el-radio-group v-model="selectWg.styleType">
         <el-radio-button :key="item.value" :label="item.value" v-for="item in selectWg.styleTypes">{{ item.label }}</el-radio-button>
@@ -16,7 +16,7 @@
         :max="30"
         :min="0"
         :step="1"
-        @change="v => selectWg.style.btnPadding = v + 'px'"
+        @change="(v: number) => selectWg ? selectWg.style.btnPadding = v + 'px' : null"
         size="small"
         step-strictly
         v-model="selectWg.style.pxBtnPadding"
@@ -153,36 +153,34 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
-import { useStore } from "vuex";
+import { ref } from "vue";
 import FileUpload from '@/components/base/FileUpload.vue'
 import Draggable from 'vuedraggable'
 import { deepClone } from "@/utils/deep-clone";
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from 'pinia'
 
-
 const dialogVisible = ref(false)
 
 const mainStore = useMainStore()
-const store = useStore()
-const selectWg = computed(() => store.state.selectWg)
-const { predefineColors } = storeToRefs(mainStore)
+const { predefineColors, selectWg } = storeToRefs(mainStore)
 
 const handleRemove = (index: number) => {
-  selectWg.value.smslist.splice(index, 1)
+  if (selectWg.value) selectWg.value.smslist.splice(index, 1)
 }
 const handleAdd = () => {
-  const newItem =
-    selectWg.value.smslist.length > 0
-      ? deepClone(selectWg.value.smslist[selectWg.value.smslist.length - 1])
-      : {
-        addressee: "收件人1",
-        content: "短信内容1",
-        btnText: "发送短信1",
-        img: ""
-      }
-  selectWg.value.smslist.push(newItem)
+  if (selectWg.value) {
+    const newItem =
+      selectWg.value.smslist.length > 0
+        ? deepClone(selectWg.value.smslist[selectWg.value.smslist.length - 1])
+        : {
+          addressee: "收件人1",
+          content: "短信内容1",
+          btnText: "发送短信1",
+          img: ""
+        }
+    selectWg.value.smslist.push(newItem)
+  }
 }
 
 </script>
