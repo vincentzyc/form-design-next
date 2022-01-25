@@ -4,17 +4,18 @@
       :style="{ ...pageData.style, backgroundImage: `url(${pageData.style.backgroundImage})` }"
       class="widget-form-container"
       id="widget-form-container"
+      v-if="pageData"
     >
       <div :class="'template-' + pageData.theme">
         <div class="wg-fixed-top" v-if="Array.isArray(pageData.fixedTop) && pageData.fixedTop.length > 0">
           <!-- 可支持多个组件悬浮，目前未开放，限制一个-->
-          <template :key="item.key" v-for="(item,index) in pageData.fixedTop">
+          <template :key="item.key" v-for="(item, index) in pageData.fixedTop">
             <WidgetFormList v-model:data="pageData.fixedTop" :index="index" :item="item" />
           </template>
         </div>
         <div class="wg-fixed-custom" v-if="Array.isArray(pageData.fixedCustom) && pageData.fixedCustom.length > 0">
           <!-- 可支持多个组件悬浮，目前未开放，限制一个 -->
-          <template :key="item.key" v-for="(item,index) in pageData.fixedCustom">
+          <template :key="item.key" v-for="(item, index) in pageData.fixedCustom">
             <WidgetFormList
               v-model:data="pageData.fixedCustom"
               :index="index"
@@ -45,7 +46,7 @@
 
         <div class="wg-fixed-bottom" v-if="Array.isArray(pageData.fixedBottom) && pageData.fixedBottom.length > 0">
           <!-- 可支持多个组件悬浮，目前未开放，限制一个-->
-          <template :key="item.key" v-for="(item,index) in pageData.fixedBottom">
+          <template :key="item.key" v-for="(item, index) in pageData.fixedBottom">
             <WidgetFormList v-model:data="pageData.fixedBottom" :index="index" :item="item" />
           </template>
         </div>
@@ -55,11 +56,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
-import { useStore } from "vuex";
+import { defineComponent } from "vue";
 import Draggable from 'vuedraggable'
 import WidgetFormList from './WidgetFormList'
 import { useMainStore } from '@/pinia'
+import { storeToRefs } from "pinia";
 
 export default defineComponent({
   name: "WidgetForm",
@@ -68,8 +69,7 @@ export default defineComponent({
   },
   setup() {
     const mainStore = useMainStore()
-    const store = useStore()
-    const pageData = computed(() => store.state.pageData)
+    const { pageData } = storeToRefs(mainStore)
 
     function fixedCustomStyle(item: Record<string, any>) {
       if (item.position) {
@@ -81,14 +81,14 @@ export default defineComponent({
       }
     }
     function dragStart(evt: any) {
-      mainStore.setDragWg(pageData.value.list[evt.oldIndex])
+      mainStore.setDragWg(pageData.value?.list[evt.oldIndex])
     }
     function dragEnd() {
       mainStore.setDragWg(null)
     }
     function handleWidgetAdd(evt: any) {
       const newIndex = evt.newIndex;
-      mainStore.setSelectWg(pageData.value.list[newIndex])
+      mainStore.setSelectWg(pageData.value?.list[newIndex])
       mainStore.setConfigTab("widget")
     }
     return {
