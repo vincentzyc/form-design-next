@@ -49,18 +49,16 @@ export default defineComponent({
 
 
 <script lang="ts" setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import Draggable from 'vuedraggable'
-import { useStore } from "vuex";
 import { getUuid, hasKey } from "@/utils/index"
 import { deepClone } from "@/utils/deep-clone"
 import widgetLevel1 from '@/assets/js/widget'
 import { useMainStore } from '@/pinia'
+import { storeToRefs } from "pinia";
 
 const mainStore = useMainStore()
-const store = useStore()
-
-const pageData = computed(() => store.state.pageData)
+const { pageData } = storeToRefs(mainStore)
 
 const widgetLevel2 = ref(widgetLevel1[0])
 
@@ -75,7 +73,7 @@ function dragEnd() {
 function disFormList(wgItem: Record<string, unknown>) {
   // 阻止组件嵌套
   if (!hasKey(wgItem, 'list')) return false;
-  if (pageData.value.list) {
+  if (pageData.value?.list) {
     return (pageData.value.list.some(v => {
       return v.type === wgItem.type;
     }))
