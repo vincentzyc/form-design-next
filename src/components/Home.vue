@@ -23,24 +23,23 @@
 
 <script lang="ts" setup>
 import { useMainStore } from '@/pinia'
-import { computed, getCurrentInstance } from "vue";
+import { storeToRefs } from 'pinia'
+import { getCurrentInstance } from "vue";
 import ComponentsList from "./ComponentsList/index.vue"
 import WidgetForm from './WidgetForm/index.vue'
 import PageConfig from './PageConfig/index.vue'
 import pageConfigData from '@/assets/js/page-config'
 import { getLocalStorage, setLocalStorage } from "@/utils/storage";
-import { useStore } from "vuex";
 import { deepClone } from "@/utils/deep-clone";
 import { previewUrl, previewOrigin } from "@/api"
 
 const vm: any = getCurrentInstance()?.proxy
-const store = useStore()
 const mainStore = useMainStore()
-const pageData = computed(() => store.state.pageData)
+const { pageData } = storeToRefs(mainStore)
 
 const handleReset = () => {
   mainStore.setSelectWg({})
-  store.commit('setPageData', deepClone(pageConfigData.pageConfig));
+  mainStore.setPageData(deepClone(pageConfigData.pageConfig))
 }
 const handleSave = () => {
   vm.$bus.emit("formDesign_savePage")
@@ -51,7 +50,7 @@ const handlePreview = () => {
   vm.$bus.emit("formDesign_savePage")
   let newWin = window.open(previewUrl());
   let timer = setInterval(() => {
-    newWin?.postMessage(deepClone(pageData.value), previewUrl());
+    if (newWin && pageData.value) newWin.postMessage(deepClone(pageData.value), previewUrl());
   }, 300);
   window.addEventListener('message', event => {
     if (event.origin !== previewOrigin()) return;
@@ -61,7 +60,7 @@ const handlePreview = () => {
 
 const getLocalPageData = () => {
   const localPageData = getLocalStorage('pageData');
-  if (localPageData) store.commit('setPageData', localPageData);
+  if (localPageData) mainStore.setPageData(localPageData)
 }
 getLocalPageData()
 
