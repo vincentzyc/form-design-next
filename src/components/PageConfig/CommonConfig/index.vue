@@ -1,6 +1,6 @@
 <template>
   <div class="form-config-container">
-    <el-form label-position="top" size="small">
+    <el-form label-position="top" size="small" v-if="pageData">
       <el-form-item label="页面标题">
         <el-input v-model.trim="pageData.title"></el-input>
       </el-form-item>
@@ -40,9 +40,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive } from "vue";
+import { reactive } from "vue";
 // import { computed, reactive, getCurrentInstance } from "vue";
-import { useStore } from "vuex";
 import pageConfigData from '@/assets/js/page-config'
 import { deepClone } from '@/utils/deep-clone';
 import { isLink } from '@/utils/validate/link';
@@ -54,16 +53,14 @@ import { storeToRefs } from 'pinia'
 // vm.$message.error('xxx')
 
 const mainStore = useMainStore()
-const store = useStore()
 const themes = reactive(pageConfigData.themes)
-const pageData = computed(() => store.state.pageData)
-const { predefineColors } = storeToRefs(mainStore)
+const { predefineColors, pageData } = storeToRefs(mainStore)
 
 function setTheme(val: string) {
   const i = themes.findIndex(item => item.value === val);
-  store.commit("setPageData", deepClone(themes[i].pageData));
+  mainStore.setPageData(deepClone(themes[i].pageData))
 }
 function checkLink() {
-  if (!isLink(pageData.value.hijackBack.alertLink)) ElMessage.error('请输入正确的网址');
+  if (!isLink(pageData.value?.hijackBack.alertLink)) ElMessage.error('请输入正确的网址');
 }
 </script>
