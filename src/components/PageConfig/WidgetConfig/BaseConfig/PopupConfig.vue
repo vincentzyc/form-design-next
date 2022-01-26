@@ -23,7 +23,6 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, getCurrentInstance } from "vue";
-import { useStore } from "vuex";
 import { hasKey } from "@/utils"
 import Draggable from 'vuedraggable'
 import WidgetFormList from '@/components/WidgetForm/WidgetFormList'
@@ -45,9 +44,7 @@ export default defineComponent({
     const popupWg = ref([])
 
     const mainStore = useMainStore()
-    const store = useStore()
-    const pageData = computed(() => store.state.pageData)
-    const { dragWg, selectWg } = storeToRefs(mainStore)
+    const { dragWg, selectWg, pageData } = storeToRefs(mainStore)
 
     const showConfigBtn = computed(() => {
       if (showPopup.value) return false
@@ -55,7 +52,7 @@ export default defineComponent({
     })
 
     //监听保存操作，组件赋值popupList
-    vm?.$bus.on("formDesign_savePage", () => setWgPopupList(pageData.value.list))
+    vm?.$bus.on("formDesign_savePage", () => setWgPopupList(pageData.value?.list))
 
     const setWgPopupList = (list: Record<string, any>[]) => {
       if (!Array.isArray(list) || list.length === 0) return;
@@ -70,7 +67,7 @@ export default defineComponent({
       }
     }
     const closePopup = () => {
-      const newWgData = setWgPopupList(pageData.value.list)
+      const newWgData = setWgPopupList(pageData.value?.list)
       if (newWgData && wgId.value !== selectWg.value?.key) {
         mainStore.setSelectWg(newWgData)
         mainStore.setConfigTab("widget")
