@@ -32,7 +32,6 @@
 
 <script lang="ts">
 import { defineComponent, watch, computed, ref, reactive } from "vue";
-import { useStore } from "vuex";
 import { ElMessageBox } from "element-plus";
 import { hasKey } from "@/utils"
 import { useMainStore } from '@/pinia'
@@ -60,11 +59,8 @@ export default defineComponent({
       [AUTO_NAME]: '正常'
     })
 
-    const store = useStore()
     const mainStore = useMainStore()
-    const { selectWg } = storeToRefs(mainStore)
-
-    const pageData = computed(() => store.state.pageData)
+    const { selectWg, pageData } = storeToRefs(mainStore)
 
     const fixedTypeList = computed(() => {
       if (!Array.isArray(selectWg.value?.fixedTypes)) return fixedTypes.value;
@@ -104,12 +100,14 @@ export default defineComponent({
     function setPageFixed(key: string, oldPosition: string) {
       let oldListKey = listKey[oldPosition];
       if (!oldListKey) return
-      deleteArrayEle(pageData.value[oldListKey], selectWg.value?.key);
-      pageData.value[key] = [];
-      pageData.value[key].push(selectWg.value)
+      if (pageData.value) {
+        deleteArrayEle(pageData.value[oldListKey], selectWg.value?.key);
+        pageData.value[key] = [];
+        pageData.value[key].push(selectWg.value)
+      }
     }
     function setFixedPosition(newPosition: string, oldPosition: string) {
-      if (pageData.value[listKey[newPosition]]?.length > 0) {
+      if (pageData.value && pageData.value[listKey[newPosition]]?.length > 0) {
         if (pageData.value[listKey[newPosition]].some((v: Record<string, any>) => v.key === selectWg.value?.key)) return
         // 可支持多个组件悬浮，目前未开放，限制一个 
         ElMessageBox.confirm(`当前页面已有${fixedName[newPosition]}组件，为保证视觉效果，是否替换当前组件？`, fixedName[newPosition]).then(() => {
@@ -126,7 +124,7 @@ export default defineComponent({
     function setPositionAuto(oldPosition) {
       let oldListKey = listKey[oldPosition];
       if (!oldListKey) return
-      if (pageData.value[oldListKey].some((v: Record<string, any>) => v.key === selectWg.value?.key)) {
+      if (pageData.value && pageData.value[oldListKey].some((v: Record<string, any>) => v.key === selectWg.value?.key)) {
         positionConfig(AUTO_NAME);
         pageData.value.list.push(selectWg.value)
         pageData.value[oldListKey] = []
