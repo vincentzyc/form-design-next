@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import store from './store'
 import Element from './plugins/element'
 import mitt from 'mitt';
 import { createPinia } from 'pinia'
@@ -20,4 +19,4 @@ app.config.globalProperties.$bus = emitter
 
 app.config.globalProperties.BASE_URL = process.env.BASE_URL
 
-app.use(store).use(Element).mount('#app')
+app.use(Element).mount('#app')
