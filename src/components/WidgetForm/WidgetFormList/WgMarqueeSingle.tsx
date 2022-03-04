@@ -58,9 +58,8 @@ export default defineComponent({
     ))
 
     onMounted(async () => {
-      await nextTick(() => {
-        scrollTimeId = window.setInterval(scroll, item.durationTime * 1000);
-      })
+      await nextTick()
+      scrollTimeId = window.setInterval(scroll, item.durationTime * 1000);
     })
     onBeforeUnmount(() => {
       window.clearInterval(scrollTimeId);
