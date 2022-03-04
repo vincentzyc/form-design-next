@@ -2,7 +2,7 @@ const { $, BtnMenu } = window.wangEditor
 
 // 第一，菜单 class ，Button 菜单继承 BtnMenu class
 class ColorPicker extends BtnMenu {
-  constructor(editor) {
+  constructor(editor: any) {
     const $elem = $(
       `<div class="w-e-menu">
               <i class="w-e-icon-pencil2"></i>
