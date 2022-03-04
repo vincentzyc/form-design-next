@@ -19,9 +19,11 @@ const fontSizesMap = {
   'xxx-large': '48px',
 }
 
+type TypeFontSizeKeys = keyof typeof fontSizesMap
+
 export function changeFontSize(html: string) {
   const reg = new RegExp(`font-size:\\s(${Object.keys(fontSizesMap).join('|')})`, "g");
-  const newHtml = html.replace(reg, (_a, b) => {
+  const newHtml = html.replace(reg, (_a, b: TypeFontSizeKeys) => {
     return `font-size:${fontSizesMap[b] || ''}`
   })
   return newHtml
