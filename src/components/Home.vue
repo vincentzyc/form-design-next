@@ -6,9 +6,9 @@
       </el-aside>
       <el-container class="center-container" direction="vertical">
         <el-header class="btn-bar" style="height: 45px;">
-          <el-button @click="handleReset()" class="mg-r15" icon="el-icon-refresh" size="medium" type="text">重置</el-button>
-          <el-button @click="handlePreview()" class="mg-r15" icon="el-icon-view" size="medium" type="text">预览</el-button>
-          <el-button @click="handleSave()" class="mg-r15" icon="el-icon-document" size="medium" type="text">保存</el-button>
+          <el-button @click="handleReset()" :icon="Refresh" type="text">重置</el-button>
+          <el-button @click="handlePreview()" :icon="View" type="text">预览</el-button>
+          <el-button @click="handleSave()" :icon="Document" type="text">保存</el-button>
         </el-header>
         <el-main>
           <WidgetForm />
@@ -32,6 +32,7 @@ import pageConfigData from '@/assets/js/page-config'
 import { getLocalStorage, setLocalStorage } from "@/utils/storage";
 import { deepClone } from "@/utils/deep-clone";
 import { previewUrl, previewOrigin } from "@/api"
+import { Refresh, View, Document } from '@element-plus/icons-vue'
 
 const vm: any = getCurrentInstance()?.proxy
 const mainStore = useMainStore()
