@@ -3,6 +3,8 @@ import { useMainStore } from '@/pinia'
 import { storeToRefs } from "pinia";
 import { deepClone } from '@/utils/deep-clone';
 import { getUuid } from "@/utils";
+import { Delete, DocumentCopy } from '@element-plus/icons-vue'
+
 
 import WgStaticText from './WgStaticText'
 import WgButton from './WgButton'
@@ -125,19 +127,16 @@ export default defineComponent({
     const renderDragIcon = () => Array.isArray(props.item.list) && <i class="el-icon-rank"></i>
 
     const renderDeleteIcon = () => selectWg.value?.key === props.item.key && (
-      <span
-        onClick={handleWidgetDelete}
-        class="widget-action-btn widget-action-delete el-icon-delete"
-        title="删除"
-      ></span>
+      <el-icon size={20} onClick={handleWidgetDelete} title="删除" class="widget-action-btn widget-action-delete el-icon-delete">
+        <Delete />
+      </el-icon>
     )
 
     const renderCloneIcon = () => clonebtn.value && (
-      <span
-        onClick={handleWidgetClone}
-        class="widget-action-btn widget-action-clone el-icon-document-copy"
-        title="复制"
-      ></span>
+      <el-icon size={20} onClick={handleWidgetClone} title="复制" class="widget-action-btn widget-action-clone el-icon-document-copy">
+        <DocumentCopy />
+      </el-icon>
+
     )
 
     return () => {
