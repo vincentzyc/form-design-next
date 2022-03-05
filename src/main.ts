@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import Element from './plugins/element'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import mitt from 'mitt';
 import { createPinia } from 'pinia'
 
@@ -13,10 +14,12 @@ import '@/assets/css/themes.styl';
 const app = createApp(App)
 app.use(createPinia())
 
+app.use(ElementPlus)
+
 const emitter = mitt();
 
 app.config.globalProperties.$bus = emitter
 
 app.config.globalProperties.BASE_URL = process.env.BASE_URL
 
-app.use(Element).mount('#app')
+app.mount('#app')
