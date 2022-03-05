@@ -3,7 +3,7 @@ import { useMainStore } from '@/pinia'
 import { storeToRefs } from "pinia";
 import { deepClone } from '@/utils/deep-clone';
 import { getUuid } from "@/utils";
-import { Delete, DocumentCopy } from '@element-plus/icons-vue'
+import { Delete, DocumentCopy, Rank } from '@element-plus/icons-vue'
 
 
 import WgStaticText from './WgStaticText'
@@ -124,7 +124,11 @@ export default defineComponent({
       mainStore.setSelectWg(props.data[props.index + 1] as Record<string, any>)
     }
 
-    const renderDragIcon = () => Array.isArray(props.item.list) && <i class="el-icon-rank"></i>
+    const renderDragIcon = () => Array.isArray(props.item.list) && (
+      <el-icon class="el-icon-rank">
+        <Rank />
+      </el-icon>
+    )
 
     const renderDeleteIcon = () => selectWg.value?.key === props.item.key && (
       <el-icon size={20} onClick={handleWidgetDelete} title="删除" class="widget-action-btn widget-action-delete el-icon-delete">
