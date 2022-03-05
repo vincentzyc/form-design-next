@@ -13,7 +13,7 @@
       />
     </el-form-item>
     <el-form-item label="标签对齐方式" v-if="selectWg.label.hasOwnProperty('labelPosition')">
-      <el-radio-group size="mini" v-model="selectWg.label.labelPosition">
+      <el-radio-group size="small" v-model="selectWg.label.labelPosition">
         <el-radio-button label="left">左对齐</el-radio-button>
         <el-radio-button label="top">顶部对齐</el-radio-button>
       </el-radio-group>
