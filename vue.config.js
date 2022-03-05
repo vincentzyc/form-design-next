@@ -1,4 +1,6 @@
-module.exports = {
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
+  // transpileDependencies: true,
   publicPath: "./",
   outputDir: "docs",
   productionSourceMap: false,
@@ -8,19 +10,20 @@ module.exports = {
       "vue": "Vue",
       "vuex": "Vuex",
       "vuedraggable": "vuedraggable",
-      "compressorjs": "Compressor"
+      "compressorjs": "Compressor",
+      "element-plus": "ElementPlus"
     } : {}
   },
-  chainWebpack: config => {
-    config.plugins.delete('preload')
-    config.plugins.delete('prefetch')
-    config.module
-      .rule('images')
-      .use('url-loader')
-      .loader('url-loader')
-      .tap(options => Object.assign(options, { limit: 8192 }))
-  },
+  // chainWebpack: config => {
+  //   config.plugins.delete('preload')
+  //   config.plugins.delete('prefetch')
+  //   config.module
+  //     .rule('images')
+  //     .use('url-loader')
+  //     .loader('url-loader')
+  //     .tap(options => Object.assign(options, { limit: 8192 }))
+  // },
   devServer: {
     port: 9000
   }
-};
+})
