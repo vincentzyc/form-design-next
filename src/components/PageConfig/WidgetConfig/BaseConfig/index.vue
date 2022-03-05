@@ -26,6 +26,7 @@ import { useMainStore } from '@/pinia'
 import { storeToRefs } from "pinia";
 
 export default defineComponent({
+  name: 'BaseConfig',
   components: {
     Common,
     MarqueeSingle,
