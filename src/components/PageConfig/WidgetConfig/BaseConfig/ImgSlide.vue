@@ -21,11 +21,11 @@
               </div>
               <div class="flex">
                 <span class="flex-none">图片地址：</span>
-                <el-input placeholder="请输入图片地址" size="mini" v-model="element.image"></el-input>
+                <el-input placeholder="请输入图片地址" size="small" v-model="element.image"></el-input>
               </div>
               <div class="flex">
                 <span class="flex-none">跳转地址：</span>
-                <el-input placeholder="请输入跳转地址" size="mini" v-model="element.url"></el-input>
+                <el-input placeholder="请输入跳转地址" size="small" v-model="element.url"></el-input>
               </div>
             </div>
           </li>

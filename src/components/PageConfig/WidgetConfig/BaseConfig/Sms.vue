@@ -9,7 +9,7 @@
       <el-switch v-model="selectWg.isImgBtn"></el-switch>
     </el-form-item>
     <el-form-item label="提示弹框配置" v-if="selectWg.dialog">
-      <el-button @click="dialogVisible = true" size="mini" type="primary">配置弹框</el-button>
+      <el-button @click="dialogVisible = true" size="small" type="primary">配置弹框</el-button>
     </el-form-item>
     <el-form-item label="按钮间距" v-if="selectWg.style.hasOwnProperty('pxBtnPadding')">
       <el-input-number
@@ -38,13 +38,13 @@
               <i @click="handleRemove(index)" class="el-icon-delete delect-icon"></i>
               <div class="flex pd5">
                 <span class="width70 flex-none">收件人：</span>
-                <el-input placeholder="请输入收件人" size="mini" v-model.trim.number="selectWg.smslist[index].addressee"></el-input>
+                <el-input placeholder="请输入收件人" size="small" v-model.trim.number="selectWg.smslist[index].addressee"></el-input>
               </div>
               <div class="flex pd5">
                 <span class="width70 flex-none">短信内容：</span>
                 <el-input
                   placeholder="请输入短信内容"
-                  size="mini"
+                  size="small"
                   type="textarea"
                   v-model.trim="selectWg.smslist[index].content"
                 ></el-input>
@@ -56,7 +56,7 @@
               </div>
               <div class="flex pd5" v-else>
                 <span class="width70 flex-none">按钮文字：</span>
-                <el-input placeholder="请输入按钮文字" size="mini" v-model.trim="selectWg.smslist[index].btnText"></el-input>
+                <el-input placeholder="请输入按钮文字" size="small" v-model.trim="selectWg.smslist[index].btnText"></el-input>
               </div>
             </div>
           </li>

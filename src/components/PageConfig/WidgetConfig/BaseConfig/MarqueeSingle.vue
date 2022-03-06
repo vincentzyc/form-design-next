@@ -17,7 +17,7 @@
           <li>
             <div class="flex align-middle mg-b10">
               <el-input size="small" v-model="selectWg.textList[index].text"></el-input>
-              <el-radio-group class="flex-none mg-l5" size="mini" v-model="selectWg.textList[index].sex">
+              <el-radio-group class="flex-none mg-l5" size="small" v-model="selectWg.textList[index].sex">
                 <el-radio-button label="man">男</el-radio-button>
                 <el-radio-button label="woman">女</el-radio-button>
               </el-radio-group>

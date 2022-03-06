@@ -1,7 +1,7 @@
 <template>
   <template v-if="selectWg">
     <el-form-item label="滚动方向" v-if="selectWg.hasOwnProperty('direction')">
-      <el-radio-group size="mini" v-model="selectWg.direction">
+      <el-radio-group size="small" v-model="selectWg.direction">
         <el-radio-button label="up">向上</el-radio-button>
         <el-radio-button label="left">向左</el-radio-button>
       </el-radio-group>

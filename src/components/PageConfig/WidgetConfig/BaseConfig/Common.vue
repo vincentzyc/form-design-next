@@ -60,7 +60,7 @@
         <template #item="{ index }">
           <li>
             <div class="flex align-middle">
-              <el-input size="mini" v-model="selectWg.options[index]"></el-input>
+              <el-input size="small" v-model="selectWg.options[index]"></el-input>
               <i class="el-icon-menu move-icon"></i>
               <i @click="handleOptionsRemove(index)" class="el-icon-delete delect-icon"></i>
             </div>
