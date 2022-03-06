@@ -72,7 +72,7 @@
     />
   </el-form-item>
   <el-form-item :label="getLabel('textAlign')" v-if="nStyle.hasOwnProperty('textAlign')">
-    <el-radio-group @change="(v: string) => updateStyle('textAlign', v)" size="mini" v-model="nStyle.textAlign">
+    <el-radio-group @change="(v: string) => updateStyle('textAlign', v)" size="small" v-model="nStyle.textAlign">
       <el-radio-button label="left">左</el-radio-button>
       <el-radio-button label="center">居中</el-radio-button>
       <el-radio-button label="right">右</el-radio-button>
@@ -129,7 +129,7 @@
     />
   </el-form-item>
   <el-form-item :label="getLabel('borderStyle')" v-if="nStyle.hasOwnProperty('borderStyle')">
-    <el-radio-group @change="(v: number) => updateStyle('borderStyle', v)" size="mini" v-model="nStyle.borderStyle">
+    <el-radio-group @change="(v: number) => updateStyle('borderStyle', v)" size="small" v-model="nStyle.borderStyle">
       <el-radio-button label="dotted">点线</el-radio-button>
       <el-radio-button label="dashed">虚线</el-radio-button>
       <el-radio-button label="solid">实线</el-radio-button>
