@@ -13,10 +13,14 @@
     >
       <img :src="modelValue" :style="{ height: height, width: width }" class="avatar" v-if="showImg" />
       <video :src="modelValue" :style="{ height: height, width: width }" class="avatar" v-else-if="showVideo" />
-      <i class="el-icon-plus avatar-uploader-icon" v-else></i>
-      <i @click.stop="removeFile()" class="el-icon-close avatar-close-icon" v-show="modelValue"></i>
+      <el-icon class="el-icon-plus avatar-uploader-icon" v-else>
+        <Plus />
+      </el-icon>
+      <el-icon @click.stop="removeFile()" class="el-icon-close avatar-close-icon" v-show="modelValue">
+        <Close />
+      </el-icon>
     </el-upload>
-    <el-button @click="drawer = true" type="primary" v-if="showImgCompressor">压缩上传</el-button>
+    <!-- <el-button @click="drawer = true" type="primary" v-if="showImgCompressor">压缩上传</el-button> -->
     <ImgUpload @fail="compressFail" @success="compressSuccess" v-model:modelValue="drawer" />
     <transition name="el-fade-in-linear" v-if="uploading">
       <div class="flex flex-column flex-center uploader-progress">
@@ -31,6 +35,7 @@
 import ImgUpload from './ImgUpload/index.vue'
 import { defineComponent, computed, ref, reactive } from "vue";
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { Plus, Close } from '@element-plus/icons-vue'
 
 const TYPE_IMG = 'img', TYPE_VIDEO = 'video';
 
@@ -40,7 +45,7 @@ const imgTypeList = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
 export default defineComponent({
   name: "FileUpload",
   components: {
-    ImgUpload
+    ImgUpload, Plus, Close
   },
   props: {
     modelValue: {
@@ -179,7 +184,7 @@ export default defineComponent({
     border-color: #409eff;
 
     .avatar-close-icon {
-      display: block;
+      display: flex;
     }
   }
 
