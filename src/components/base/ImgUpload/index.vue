@@ -14,7 +14,9 @@
         drag
         ref="elUpload"
       >
-        <i class="el-icon-upload"></i>
+        <el-icon class="el-icon-upload">
+          <Upload />
+        </el-icon>
         <div class="el-upload__text">
           将图片拖到此处，或
           <em>点击上传</em>
@@ -42,7 +44,9 @@
         <div v-if="state.file">
           <p>
             压缩后
-            <i class="el-icon-bottom"></i>
+            <el-icon class="el-icon-bottom">
+              <Bottom />
+            </el-icon>
           </p>
           <el-image
             :preview-src-list="state.srcList"
@@ -53,7 +57,7 @@
           <hr />
           <p>
             源文件
-            <i class="el-icon-bottom"></i>
+            <el-icon class="el-icon-bottom"></el-icon>
           </p>
           <el-image
             :preview-src-list="state.srcList"
@@ -81,6 +85,7 @@
 <script lang="ts" setup>
 import Compressor from 'compressorjs';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { Upload, Bottom } from '@element-plus/icons-vue';
 import { computed, ref, reactive } from "vue";
 
 const imgTypeList = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
@@ -198,13 +203,13 @@ const cancelUpload = () => {
   });
   return resetUpload();
 }
-const compressorFile = (v: number) => {
+const compressorFile = (v: unknown) => {
   if (!state.file) return
   state.srcList = []
   state.fileSize.before = Math.round(state.file.size / 1024 * 10) / 10 + 'KB';
   state.sourceUrl = URL.createObjectURL(state.file.raw);
   new Compressor(state.file.raw, {
-    quality: v / 100,
+    quality: v as number / 100,
     convertSize: 51200,  // png图片超过50KB时启用压缩，压缩后会转成jpg图片，失去透明度
     success: res => {
       state.compressFile = res
