@@ -13,12 +13,17 @@
         item-key="index"
         tag="ul"
         v-model="selectWg.imglist"
+        class="row"
       >
         <template #item="{ index }">
           <li>
             <div class="col-itemlist">
-              <i class="el-icon-menu move-icon"></i>
-              <i @click="handleRemove(index)" class="el-icon-delete delect-icon"></i>
+              <el-icon @click="handleRemove(index)" class="el-icon-menu move-icon">
+                <Menu />
+              </el-icon>
+              <el-icon @click="handleRemove(index)" class="el-icon-delete delect-icon">
+                <Delete />
+              </el-icon>
 
               <div class="flex pd5">
                 <span class="width70 flex-none">上传图片：</span>
@@ -47,11 +52,12 @@ import FileUpload from '@/components/base/FileUpload.vue'
 import { ElMessage } from "element-plus";
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from "pinia";
+import { Delete, Menu } from '@element-plus/icons-vue'
 
 export default defineComponent({
   name: "ImgShowConfig",
   components: {
-    FileUpload, Draggable
+    FileUpload, Draggable, Delete, Menu
   },
   setup() {
     const mainStore = useMainStore()
@@ -73,8 +79,8 @@ export default defineComponent({
       }
 
     }
-    function checkLink(v: string) {
-      if (!isLink(v)) ElMessage.error('请输入正确的网址');
+    function checkLink(v: unknown) {
+      if (!isLink(v as string)) ElMessage.error('请输入正确的网址');
     }
     return {
       selectWg,
