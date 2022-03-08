@@ -32,6 +32,7 @@
         item-key="index"
         tag="ul"
         v-model="selectWg.textList"
+        class="row"
       >
         <template #item="{ index }">
           <li>
