@@ -16,12 +16,17 @@
         item-key="index"
         tag="ul"
         v-model="selectWg.titleTexts"
+        class="row"
       >
         <template #item="{ element, index }">
           <li>
             <div class="col-itemlist">
-              <i class="el-icon-menu move-icon"></i>
-              <i @click="handleRemove(index)" class="el-icon-delete delect-icon"></i>
+              <el-icon @click="handleRemove(index)" class="el-icon-menu move-icon">
+                <Menu />
+              </el-icon>
+              <el-icon @click="handleRemove(index)" class="el-icon-delete delect-icon">
+                <Delete />
+              </el-icon>
 
               <el-form-item label="协议名称">
                 <el-input placeholder="请输入协议名称" v-model="element.title"></el-input>
@@ -54,6 +59,7 @@ import Draggable from 'vuedraggable'
 import { deepClone } from "@/utils/deep-clone";
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from 'pinia'
+import { Delete, Menu } from '@element-plus/icons-vue'
 
 const mainStore = useMainStore()
 const { predefineColors, selectWg } = storeToRefs(mainStore)
