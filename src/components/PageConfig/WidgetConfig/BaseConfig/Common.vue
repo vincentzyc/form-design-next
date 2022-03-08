@@ -56,6 +56,7 @@
         item-key="index"
         tag="ul"
         v-model="selectWg.options"
+        class="row"
       >
         <template #item="{ index }">
           <li>
