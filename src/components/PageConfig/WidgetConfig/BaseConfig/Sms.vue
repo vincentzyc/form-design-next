@@ -30,6 +30,7 @@
         item-key="index"
         tag="ul"
         v-model="selectWg.smslist"
+        class="row"
       >
         <template #item="{ index }">
           <li>
