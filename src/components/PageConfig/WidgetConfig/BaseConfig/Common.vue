@@ -62,8 +62,12 @@
           <li>
             <div class="flex align-middle">
               <el-input size="small" v-model="selectWg.options[index]"></el-input>
-              <i class="el-icon-menu move-icon"></i>
-              <i @click="handleOptionsRemove(index)" class="el-icon-delete delect-icon"></i>
+              <el-icon class="el-icon-menu move-icon">
+                <Menu />
+              </el-icon>
+              <el-icon @click="handleOptionsRemove(index)" class="el-icon-delete delect-icon">
+                <Delete />
+              </el-icon>
             </div>
           </li>
         </template>
@@ -85,18 +89,19 @@ import { hasKey } from "@/utils/index"
 import { isLink } from '@/utils/validate/link';
 import allFieldTypes from '@/assets/js/field-types.js'
 import { ElMessage } from "element-plus";
+import { Delete, Menu } from '@element-plus/icons-vue'
 
 const mainStore = useMainStore()
 const { selectWg } = storeToRefs(mainStore)
 
 const fieldTypes = reactive(allFieldTypes)
 
-function isRadio(flag: boolean) {
+function isRadio(flag: unknown) {
   if (selectWg.value) selectWg.value.value = flag ? "" : []
 }
 
-function checkLink(v: string) {
-  if (!isLink(v)) ElMessage.error('请输入正确的网址');
+function checkLink(v: unknown) {
+  if (!isLink(v as string)) ElMessage.error('请输入正确的网址');
 }
 
 function selectfield(key: any, types: any[]) {
