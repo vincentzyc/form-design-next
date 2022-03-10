@@ -56,8 +56,8 @@ const mainStore = useMainStore()
 const themes = reactive(pageConfigData.themes)
 const { predefineColors, pageData } = storeToRefs(mainStore)
 
-function setTheme(val: string) {
-  const i = themes.findIndex(item => item.value === val);
+function setTheme(val: unknown) {
+  const i = themes.findIndex(item => item.value === val as string);
   mainStore.setPageData(deepClone(themes[i].pageData))
 }
 function checkLink() {
