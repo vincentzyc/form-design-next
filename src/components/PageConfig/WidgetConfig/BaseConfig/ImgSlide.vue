@@ -8,6 +8,7 @@
         itemKey="index"
         tag="ul"
         v-model="selectWg.value"
+        class="row"
       >
         <template #item="{ element, index }">
           <li style="border:1px dashed #999">
@@ -15,8 +16,12 @@
               <div class="relative flex flex-center">
                 <FileUpload v-model:modelValue="element.image" />
                 <div class="absolute-top-right">
-                  <i class="el-icon-menu move-icon"></i>
-                  <i @click="handleSlideRemove(index)" class="el-icon-delete delect-icon"></i>
+                  <el-icon class="el-icon-menu move-icon">
+                    <Menu />
+                  </el-icon>
+                  <el-icon @click="handleSlideRemove(index)" class="el-icon-delete delect-icon">
+                    <Delete />
+                  </el-icon>
                 </div>
               </div>
               <div class="flex">
@@ -42,7 +47,9 @@
       <template #label>
         <span>播放间隔(ms)</span>
         <el-tooltip content="本页面无法看到实时效果，请点击预览查看" effect="dark" placement="top">
-          <i class="el-icon-info fs12 mg-l10"></i>
+          <el-icon class="el-icon-info fs12 mg-l10">
+            <InfoFilled />
+          </el-icon>
         </el-tooltip>
       </template>
       <el-input-number :max="10000" :min="1000" :step="500" size="small" step-strictly v-model="selectWg.interval" />
@@ -56,11 +63,12 @@ import Draggable from 'vuedraggable'
 import FileUpload from '@/components/base/FileUpload.vue'
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from "pinia";
+import { Delete, Menu, InfoFilled } from '@element-plus/icons-vue'
 
 export default defineComponent({
   name: "ImgSlideConfig",
   components: {
-    FileUpload, Draggable
+    FileUpload, Draggable, Delete, Menu, InfoFilled
   },
   setup() {
     const mainStore = useMainStore()
