@@ -21,8 +21,12 @@
                 <el-radio-button label="man">男</el-radio-button>
                 <el-radio-button label="woman">女</el-radio-button>
               </el-radio-group>
-              <i class="el-icon-menu move-icon"></i>
-              <i @click="handleOptionsRemove(index)" class="el-icon-delete delect-icon"></i>
+              <el-icon class="el-icon-menu move-icon">
+                <Menu />
+              </el-icon>
+              <el-icon @click="handleOptionsRemove(index)" class="el-icon-delete delect-icon">
+                <Delete />
+              </el-icon>
             </div>
           </li>
         </template>
@@ -40,11 +44,12 @@ import Draggable from 'vuedraggable'
 import { deepClone } from "@/utils/deep-clone";
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from "pinia";
+import { Delete, Menu } from '@element-plus/icons-vue'
 
 export default defineComponent({
   name: "MarqueeSingleConfig",
   components: {
-    Draggable
+    Draggable, Delete, Menu
   },
   setup() {
     const mainStore = useMainStore()

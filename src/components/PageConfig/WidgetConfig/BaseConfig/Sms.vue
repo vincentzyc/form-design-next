@@ -16,7 +16,7 @@
         :max="30"
         :min="0"
         :step="1"
-        @change="(v: number) => selectWg ? selectWg.style.btnPadding = v + 'px' : null"
+        @change="(v: unknown) => selectWg ? selectWg.style.btnPadding = v as number + 'px' : null"
         size="small"
         step-strictly
         v-model="selectWg.style.pxBtnPadding"
@@ -35,8 +35,12 @@
         <template #item="{ index }">
           <li>
             <div class="col-itemlist">
-              <i class="el-icon-menu move-icon"></i>
-              <i @click="handleRemove(index)" class="el-icon-delete delect-icon"></i>
+              <el-icon class="el-icon-menu move-icon">
+                <Menu />
+              </el-icon>
+              <el-icon @click="handleRemove(index)" class="el-icon-delete delect-icon">
+                <Delete />
+              </el-icon>
               <div class="flex pd5">
                 <span class="width70 flex-none">收件人：</span>
                 <el-input placeholder="请输入收件人" size="small" v-model.trim.number="selectWg.smslist[index].addressee"></el-input>
@@ -160,6 +164,7 @@ import Draggable from 'vuedraggable'
 import { deepClone } from "@/utils/deep-clone";
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from 'pinia'
+import { Delete, Menu } from '@element-plus/icons-vue'
 
 const dialogVisible = ref(false)
 
