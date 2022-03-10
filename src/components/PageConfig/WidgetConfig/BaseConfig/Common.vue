@@ -97,7 +97,7 @@ const { selectWg } = storeToRefs(mainStore)
 const fieldTypes = reactive(allFieldTypes)
 
 function isRadio(flag: unknown) {
-  if (selectWg.value) selectWg.value.value = flag ? "" : []
+  if (selectWg.value) selectWg.value.value = flag as boolean ? "" : []
 }
 
 function checkLink(v: unknown) {
