@@ -115,7 +115,7 @@ function selectfield(key: any, types: any[]) {
   }
 }
 
-function handleOptionsRemove(index: any) {
+function handleOptionsRemove(index: number) {
   if (selectWg.value) selectWg.value.options.splice(index, 1)
 }
 function handleAddOption() {
