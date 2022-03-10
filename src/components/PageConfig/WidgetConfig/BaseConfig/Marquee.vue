@@ -13,7 +13,7 @@
       <el-input-number
         :max="200"
         :min="10"
-        @change="(v: number) => selectWg ? selectWg.style.height = v + 'px' : null"
+        @change="(v: unknown) => selectWg ? selectWg.style.height = v as number + 'px' : null"
         size="small"
         v-model="selectWg.style.Height"
       />
@@ -38,8 +38,12 @@
           <li>
             <div class="flex align-middle mg-b10">
               <el-input size="small" v-model="selectWg.textList[index]"></el-input>
-              <i class="el-icon-menu move-icon"></i>
-              <i @click="handleOptionsRemove(index)" class="el-icon-delete delect-icon"></i>
+              <el-icon class="el-icon-menu move-icon">
+                <Menu />
+              </el-icon>
+              <el-icon @click="handleOptionsRemove(index)" class="el-icon-delete delect-icon">
+                <Delete />
+              </el-icon>
             </div>
           </li>
         </template>
@@ -57,11 +61,12 @@ import { defineComponent } from "vue";
 import Draggable from 'vuedraggable'
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from "pinia";
+import { Delete, Menu } from '@element-plus/icons-vue'
 
 export default defineComponent({
   name: "MarqueeConfig",
   components: {
-    FileUpload, Draggable
+    FileUpload, Draggable, Delete, Menu
   },
   setup() {
     const mainStore = useMainStore()
