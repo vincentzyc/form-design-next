@@ -2,7 +2,7 @@
   <el-form-item :label="getLabel('percentWidth')" v-if="nStyle.hasOwnProperty('percentWidth')">
     <!--   :format-tooltip="formatTooltip" -->
     <el-slider
-      @input="(val: number) => updateStyle('width', `${val}%`)"
+      @input="(val: unknown) => updateStyle('width', `${val as number}%`)"
       class="pd-l10 pd-r10"
       v-model="nStyle.percentWidth"
     ></el-slider>
@@ -13,7 +13,7 @@
       :min="0"
       :precision="0"
       :step="5"
-      @change="(val: number) => updateStyle('width', `${val}px`)"
+      @change="(val: unknown) => updateStyle('width', `${val as number}px`)"
       size="small"
       step-strictly
       v-model="nStyle.pxWidth"
@@ -24,7 +24,7 @@
       :min="0"
       :precision="0"
       :step="5"
-      @change="(v: number) => updateStyle('height', v + 'px')"
+      @change="(v: unknown) => updateStyle('height', (v as number) + 'px')"
       size="small"
       v-model="nStyle.pxHeight"
     />
@@ -33,7 +33,7 @@
     <el-input-number
       :min="0"
       :step="1"
-      @change="(val: number) => updateStyle('marginLeft', `${val}px`)"
+      @change="(val: unknown) => updateStyle('marginLeft', `${val as number}px`)"
       size="small"
       step-strictly
       v-model="nStyle.marginleft"
@@ -43,7 +43,7 @@
     <el-input-number
       :min="0"
       :step="1"
-      @change="(val: number) => updateStyle('marginTop', `${val}px`)"
+      @change="(val: unknown) => updateStyle('marginTop', `${val as number}px`)"
       size="small"
       step-strictly
       v-model="nStyle.margintop"
@@ -58,7 +58,7 @@
   <el-form-item :label="getLabel('backgroundColor')" v-if="nStyle.hasOwnProperty('backgroundColor')">
     <el-color-picker
       :predefine="predefineColors"
-      @change="(v: string) => updateStyle('backgroundColor', v)"
+      @change="(v: unknown) => updateStyle('backgroundColor', v as string)"
       show-alpha
       v-model="nStyle.backgroundColor"
     />
@@ -66,13 +66,17 @@
   <el-form-item :label="getLabel('color')" v-if="nStyle.hasOwnProperty('color')">
     <el-color-picker
       :predefine="predefineColors"
-      @change="(v: string) => updateStyle('color', v)"
+      @change="(v: unknown) => updateStyle('color', v as string)"
       show-alpha
       v-model="nStyle.color"
     />
   </el-form-item>
   <el-form-item :label="getLabel('textAlign')" v-if="nStyle.hasOwnProperty('textAlign')">
-    <el-radio-group @change="(v: string) => updateStyle('textAlign', v)" size="small" v-model="nStyle.textAlign">
+    <el-radio-group
+      @change="(v: unknown) => updateStyle('textAlign', v as string)"
+      size="small"
+      v-model="nStyle.textAlign"
+    >
       <el-radio-button label="left">左</el-radio-button>
       <el-radio-button label="center">居中</el-radio-button>
       <el-radio-button label="right">右</el-radio-button>
@@ -82,7 +86,7 @@
     <el-input-number
       :max="200"
       :min="10"
-      @change="(v: number) => updateStyle('lineHeight', v + 'px')"
+      @change="(v: unknown) => updateStyle('lineHeight', (v as number) + 'px')"
       size="small"
       v-model="nStyle.lineheight"
     />
@@ -92,7 +96,7 @@
       :max="50"
       :min="10"
       :step="1"
-      @change="(v: number) => updateStyle('fontSize', v + 'px')"
+      @change="(v: unknown) => updateStyle('fontSize', (v as number) + 'px')"
       size="small"
       step-strictly
       v-model="nStyle.fontsize"
@@ -101,7 +105,7 @@
   <el-form-item :label="getLabel('borderColor')" v-if="nStyle.hasOwnProperty('borderColor')">
     <el-color-picker
       :predefine="predefineColors"
-      @change="(v: string) => updateStyle('borderColor', v)"
+      @change="(v: unknown) => updateStyle('borderColor', v as string)"
       show-alpha
       v-model="nStyle.borderColor"
     />
@@ -111,7 +115,7 @@
       :max="30"
       :min="0"
       :step="1"
-      @change="(v: number) => updateStyle('borderRadius', v + 'px')"
+      @change="(v: unknown) => updateStyle('borderRadius', (v as number) + 'px')"
       size="small"
       step-strictly
       v-model="nStyle.borderradius"
@@ -122,18 +126,22 @@
       :max="15"
       :min="0"
       :step="1"
-      @change="(v: number) => updateStyle('borderWidth', v + 'px')"
+      @change="(v: unknown) => updateStyle('borderWidth', (v as number) + 'px')"
       size="small"
       step-strictly
       v-model="nStyle.borderwidth"
     />
   </el-form-item>
   <el-form-item :label="getLabel('borderStyle')" v-if="nStyle.hasOwnProperty('borderStyle')">
-    <el-radio-group @change="(v: number) => updateStyle('borderStyle', v)" size="small" v-model="nStyle.borderStyle">
+    <el-radio-group
+      @change="(v: unknown) => updateStyle('borderStyle', v as number)"
+      size="small"
+      v-model="nStyle.borderStyle"
+    >
       <el-radio-button label="dotted">点线</el-radio-button>
       <el-radio-button label="dashed">虚线</el-radio-button>
       <el-radio-button label="solid">实线</el-radio-button>
-      <el-radio-button label="double">双实线</el-radio-button>
+      <!-- <el-radio-button label="double">双实线</el-radio-button> -->
     </el-radio-group>
   </el-form-item>
 </template>
