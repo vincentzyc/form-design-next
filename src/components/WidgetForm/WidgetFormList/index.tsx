@@ -5,7 +5,6 @@ import { deepClone } from '@/utils/deep-clone';
 import { getUuid } from "@/utils";
 import { Delete, DocumentCopy, Rank } from '@element-plus/icons-vue'
 
-
 import WgStaticText from './WgStaticText'
 import WgButton from './WgButton'
 import WgVideoPlay from './WgVideoPlay'
@@ -91,12 +90,12 @@ export default defineComponent({
     const wgViewClass = computed(() =>
       [props.item.wgClassName ? props.item.wgClassName : 'widget-view', { active: selectWg.value?.key === props.item.key }]
     )
-    function handleSelectWidget(event: any) {
+    function handleSelectWidget(event: Event) {
       event.stopPropagation();
       mainStore.setSelectWg(props.data[props.index] as Record<string, any>)
       mainStore.setConfigTab("widget")
     }
-    async function handleWidgetDelete(event) {
+    async function handleWidgetDelete(event: Event) {
       event.stopPropagation();
       if (props.data.length - 1 === props.index) {
         if (props.index === 0) {
@@ -112,7 +111,7 @@ export default defineComponent({
       newData.splice(props.index, 1)
       emit('update:data', newData)
     }
-    async function handleWidgetClone(event) {
+    async function handleWidgetClone(event: Event) {
       event.stopPropagation();
       const cloneData = deepClone(props.data[props.index] as Record<string, any>[])
       // cloneData.key = cloneData.type + '_' + Date.now() + '_' + Math.ceil(Math.random() * 1000000)
