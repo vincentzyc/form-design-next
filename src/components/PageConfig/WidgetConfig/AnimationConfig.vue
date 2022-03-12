@@ -25,7 +25,7 @@
           :min="1"
           :show-tooltip="false"
           :step="0.1"
-          @change="(v: number) => selectWg ? selectWg.animation.animationDuration = v + 's' : ''"
+          @change="(v: unknown) => selectWg ? selectWg.animation.animationDuration = (v as number) + 's' : ''"
           v-model="selectWg.animation.animationduration"
         ></el-slider>
       </div>
@@ -71,8 +71,8 @@ const animationList = reactive<typeAnimation[]>([{
 const mainStore = useMainStore()
 const { selectWg } = storeToRefs(mainStore)
 
-function handleChange(bool: boolean) {
-  if (bool) return
+function handleChange(bool: unknown) {
+  if (bool as boolean) return
   if (selectWg.value) {
     selectWg.value.animation.animationName = ''
     selectWg.value.animation.className = ''
