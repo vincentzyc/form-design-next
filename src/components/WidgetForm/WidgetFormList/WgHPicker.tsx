@@ -15,10 +15,10 @@ export default defineComponent({
       <div class={wrapClass.value} style={item.style}>
         <div class="wg-title" style={{ width: item.label.labelWidth }}>{item.label.labelTitle}</div>
         <div class="wg-horizontal-picker" style={{ width: item.itemWidth * item.showNumber + 'px' }}>
-          {item.options.map((optionsItem, key) => (
+          {item.options.map((optionsItem: string, key: number) => (
             <div
               class="picker-item"
-              key={optionsItem + key}
+              key={optionsItem}
               style={key === 0 ? { ...item.pickerStyle, width: item.itemWidth + 'px' } : { width: item.itemWidth + 'px' }}
             >{optionsItem}</div>
           ))}
