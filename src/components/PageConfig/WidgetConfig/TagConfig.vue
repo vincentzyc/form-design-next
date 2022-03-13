@@ -7,7 +7,7 @@
       <el-input-number
         :max="300"
         :min="30"
-        @change="(val: number) => selectWg ? selectWg.label.labelWidth = `${val}px` : null"
+        @change="(val: unknown) => selectWg ? selectWg.label.labelWidth = `${val as number}px` : null"
         size="small"
         v-model="selectWg.label.labelwidth"
       />
@@ -27,5 +27,4 @@ import { storeToRefs } from "pinia";
 
 const mainStore = useMainStore()
 const { selectWg } = storeToRefs(mainStore)
-
 </script>
