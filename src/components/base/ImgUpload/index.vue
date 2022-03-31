@@ -12,7 +12,7 @@
         :show-file-list="false"
         action="https://jsonplaceholder.typicode.com/posts/"
         drag
-        ref="elUpload"
+        ref="refUpload"
       >
         <el-icon class="el-icon-upload">
           <Upload />
@@ -84,7 +84,7 @@
 
 <script lang="ts" setup>
 import Compressor from 'compressorjs';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { ElMessage, ElMessageBox, ElUpload, UploadProps } from 'element-plus';
 import { Upload, Bottom } from '@element-plus/icons-vue';
 import { computed, ref, reactive } from "vue";
 
@@ -111,14 +111,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'success', 'fail'])
-
-// export default defineComponent({
-// props: {
-//   modelValue: Boolean
-// },
-// emits: ['update:modelValue', 'success', 'fail'],
-// setup(props, { emit }) {
-const elUpload = ref()
+const refUpload = ref<InstanceType<typeof ElUpload> | null>(null)
 const getInitalState: () => StateType = () => {
   return {
     uploading: false,
@@ -150,7 +143,7 @@ const state = reactive(getInitalState())
 const resetState = () => Object.assign(state, getInitalState())
 
 const resetUpload = () => {
-  elUpload.value.clearFiles();
+  refUpload.value?.clearFiles();
   setTimeout(() => {
     resetState()
   }, 300);
@@ -170,18 +163,21 @@ const submitUpload = (uploadSource: boolean) => {
     return false
   }
   if (isLimit) {
-    elUpload.value.submit();
+    refUpload.value?.submit();
   } else {
     ElMessage.error('上传图片大小不能超过 30 K !');
     return false
   }
 }
-const changeFile = (nfile: any) => {
-  state.file = nfile
-  compressorFile(state.quality)
+
+const changeFile: UploadProps['onChange'] = (uploadFile) => {
+  if (uploadFile.raw) {
+    state.file = uploadFile
+    compressorFile(state.quality)
+  }
 }
+
 const uploadError = () => {
-  // console.log(err);
   resetUpload()
   ElMessageBox.alert('网络繁忙，请稍后重试');
 }
@@ -196,7 +192,7 @@ const handleSuccess = () => {
 }
 const cancelUpload = () => {
   if (!state.uploading) return;
-  elUpload.value.abort();
+  refUpload.value?.abort(state.file);
   ElMessage({
     message: '已取消上传',
     type: 'warning'
@@ -226,21 +222,16 @@ const compressorFile = (v: unknown) => {
     },
   });
 }
-const beforeUpload = () => {
-  if (!state.file) return
-  if (!state.compressFile) return
+
+const beforeUpload: UploadProps['beforeUpload'] = () => {
+  if (!state.file) return false
+  if (!state.compressFile) return false
   const realFile = state.isUploadSource ? state.file.raw : state.compressFile
   startUpload()
   return new Promise(resolve => {
     resolve(realFile)
   })
 }
-//     return {
-//       elUpload, model, state,
-//       submitUpload, beforeUpload, compressorFile, cancelUpload, handleSuccess, handleProgress, uploadError, changeFile
-//     }
-//   }
-// })
 </script>
 
 <style scoped>
