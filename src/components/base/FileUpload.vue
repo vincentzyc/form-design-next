@@ -1,5 +1,5 @@
 <template>
-  <div class="file-upload-wrapper">
+  <div class="file-upload-wrapper flex flex-column">
     <el-upload
       :before-upload="beforeAvatarUpload"
       :data="uploadData"
@@ -20,8 +20,8 @@
         <Close />
       </el-icon>
     </el-upload>
-    <!-- <el-button @click="drawer = true" type="primary" v-if="showImgCompressor">压缩上传</el-button> -->
-    <ImgUpload @fail="compressFail" @success="compressSuccess" v-model:modelValue="drawer" />
+    <el-button @click="drawer = true" type="primary" v-if="showImgCompressor">压缩上传</el-button>
+    <ImgUpload v-model:modelValue="drawer" />
     <transition name="el-fade-in-linear" v-if="uploading">
       <div class="flex flex-column flex-center uploader-progress">
         <el-progress :percentage="uploadPercentage" :width="100" class="progress" type="circle"></el-progress>
