@@ -14,7 +14,7 @@
         drag
         ref="refUpload"
       >
-        <el-icon class="el-icon-upload">
+        <el-icon class="el-icon-upload" size="36px" color="#666">
           <Upload />
         </el-icon>
         <div class="el-upload__text">
@@ -241,6 +241,10 @@ const beforeUpload: UploadProps['beforeUpload'] = () => {
 }
 .drawer-content:deep(.el-upload.el-upload--text),
 .drawer-content:deep(.el-upload-dragger) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 120px;
 }
