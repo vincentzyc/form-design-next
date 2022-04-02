@@ -114,6 +114,17 @@ $primary-background-color = #d8e8fa;
     right: 40px;
   }
 
+  .widget-active {
+    &:hover {
+      box-shadow: 0px 1px 10px 1px #90c7ff inset;
+    }
+
+    &.active {
+      box-shadow: 0px 1px 10px 1px #90c7ff;
+      z-index: 1111;
+    }
+  }
+
   .widget-view {
     margin: 0;
     padding: 0px;
@@ -133,15 +144,6 @@ $primary-background-color = #d8e8fa;
     input::-webkit-input-placeholder {
       color: #666;
       opacity: 1;
-    }
-
-    &:hover {
-      box-shadow: 0px 1px 10px 1px #90c7ff inset;
-    }
-
-    &.active {
-      box-shadow: 0px 1px 10px 1px #90c7ff;
-      z-index: 1111;
     }
 
     .wg-padding {
@@ -488,6 +490,12 @@ $primary-background-color = #d8e8fa;
         background-image: url('~@/assets/img/womanhead.png');
       }
     }
+  }
+
+  .wg-tabslist {
+    position: relative;
+    transition: 0.2s;
+    padding: 10px;
   }
 
   .wg-tabs {
