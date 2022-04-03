@@ -24,6 +24,7 @@ import WgChildList from './WgChildList'
 import WgMarquee from './WgMarquee'
 import WgMarqueeSingle from './WgMarqueeSingle'
 import WgHPicker from './WgHPicker'
+import WgTabs from './WgTabs'
 
 export default defineComponent({
   name: "WidgetFormList",
@@ -47,7 +48,8 @@ export default defineComponent({
     WgChildList,
     WgMarquee,
     WgMarqueeSingle,
-    WgHPicker
+    WgHPicker,
+    WgTabs
 
     //下面是按需加载，组件多的话可选择此方式
     // WgStaticText: () => import('./WgStaticText'),
@@ -88,7 +90,7 @@ export default defineComponent({
       return {}
     })
     const wgViewClass = computed(() =>
-      [props.item.wgClassName ? props.item.wgClassName : 'widget-view', { active: selectWg.value?.key === props.item.key }]
+      [props.item.wgClassName ? props.item.wgClassName : 'widget-view widget-active', { active: selectWg.value?.key === props.item.key }]
     )
     function handleSelectWidget(event: Event) {
       event.stopPropagation();
