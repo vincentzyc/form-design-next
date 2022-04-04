@@ -13,6 +13,6 @@ export default [{
     list: []
   }],
   style: {
-    margin: "0px 20px 0px 20px"
+    margin: "0px 0px 0px 0px"
   }
 }]
