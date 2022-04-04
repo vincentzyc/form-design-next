@@ -5,6 +5,12 @@ import { hasKey } from "@/utils";
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from 'pinia'
 
+interface TypeTabsItem {
+  title: string,
+  name: string,
+  list: Record<any, any>[]
+}
+
 export default defineComponent({
   name: "WgTabs",
   props: {
@@ -28,8 +34,8 @@ export default defineComponent({
     return () => (
       <div class="wg-tabs clearfix" style={item.style}>
         <ul class="flex tab-bar-wrap">
-          {item.tabsList.map((tab, key) => (
-            <li class={['tab-bar flex-auto text-center', { 'active': key === 0 }]}>{tab.title}</li>
+          {item.tabsList.map((tab: TypeTabsItem, key: number) => (
+            <li class={['tab-bar flex-auto text-center', { 'active': key === item.value }]}>{tab.title}</li>
           ))}
         </ul>
         <Draggable
