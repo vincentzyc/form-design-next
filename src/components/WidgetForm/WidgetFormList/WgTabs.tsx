@@ -22,11 +22,11 @@ export default defineComponent({
       mainStore.setSelectWg(item.tabsList[0].list[newIndex])
       mainStore.setConfigTab("widget")
     }
-    const wrapStyle = computed(() => {
-      return { backgroundColor: item.backgroundColor, backgroundImage: `url(${item.backgroundImage || ''})` }
-    })
+    // const wrapStyle = computed(() => {
+    //   return { backgroundColor: item.backgroundColor, backgroundImage: `url(${item.backgroundImage || ''})` }
+    // })
     return () => (
-      <div class="wg-tabs clearfix" style={wrapStyle.value}>
+      <div class="wg-tabs clearfix" style={item.style}>
         <ul class="flex tab-bar-wrap">
           {item.tabsList.map((tab, key) => (
             <li class={['tab-bar flex-auto text-center', { 'active': key === 0 }]}>{tab.title}</li>
