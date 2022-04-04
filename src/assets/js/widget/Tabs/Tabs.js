@@ -1,7 +1,7 @@
 export default [{
   type: "Tabs",
   name: "Tabs标签",
-  value: "0",
+  value: 0,
   wgClassName: "wg-formlist widget-active",
   tabsList: [{
     title: "标签一",
