@@ -13,12 +13,6 @@ export default [{
     list: []
   }],
   style: {
-    margin: "0px 20px 0px 20px",
-    borderradius: 10,
-    borderRadius: '10px',
-    borderColor: "#409eff",
-    borderwidth: 3,
-    borderWidth: '3px',
-    borderStyle: "solid"
+    margin: "0px 20px 0px 20px"
   }
 }]
