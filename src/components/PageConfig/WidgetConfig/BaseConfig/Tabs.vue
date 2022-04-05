@@ -44,7 +44,7 @@
         </template>
       </Draggable>
       <div style="margin-left: 22px;">
-        <el-button @click="handleAdd()" type="text">添加选项</el-button>
+        <el-button @click="handleAdd()" type="text">添加Tabs</el-button>
       </div>
     </el-form-item>
 

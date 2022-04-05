@@ -21,6 +21,7 @@ import ImgShow from "./ImgShow.vue"
 import ImgSlide from "./ImgSlide.vue"
 import Sms from "./Sms.vue"
 import VideoPlay from "./VideoPlay.vue"
+import Tabs from "./Tabs.vue"
 
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from "pinia";
@@ -39,6 +40,7 @@ export default defineComponent({
     ImgSlide,
     Sms,
     VideoPlay,
+    Tabs,
     //按需加载
     Wechat: defineAsyncComponent(() => import('./Wechat.vue'))
   },
