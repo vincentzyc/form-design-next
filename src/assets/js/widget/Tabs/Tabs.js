@@ -5,11 +5,9 @@ export default [{
   wgClassName: "wg-formlist widget-active",
   tabsList: [{
     title: "标签一",
-    name: "标签内容区",
     list: []
   }, {
     title: "标签二",
-    name: "标签内容区",
     list: []
   }],
   style: {
