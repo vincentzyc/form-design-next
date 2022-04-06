@@ -39,16 +39,16 @@ export default defineComponent({
           ))}
         </ul>
         <Draggable
-          v-model={item.tabsList[0].list}
+          v-model={item.tabsList[item.value].list}
           group={{ name: 'widget', put: !hasKey(dragWg.value, 'list') }}
           ghostClass="ghost"
           swapThreshold={0.6}
           animation={100}
           item-key="key"
           onAdd={handleWidgetAdd}
-          class={['widget-form-list wg-padding', { 'widget-empty': item.tabsList[0].list.length === 0 }]}
+          class={['widget-form-list wg-padding', { 'widget-empty': item.tabsList[item.value].list.length === 0 }]}
           v-slots={{
-            item: ({ element, index }) => <WidgetFormList v-model={[item.tabsList[0].list, 'data']} data={item.tabsList[0].list} index={index} item={element} />
+            item: ({ element, index }) => <WidgetFormList v-model={[item.tabsList[item.value].list, 'data']} data={item.tabsList[item.value].list} index={index} item={element} />
           }}
         >
         </Draggable>
