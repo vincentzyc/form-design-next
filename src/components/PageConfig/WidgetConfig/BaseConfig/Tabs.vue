@@ -29,16 +29,16 @@
               </el-icon>
 
               <div class="flex mg-t5">
-                <span class="flex-none item-label">Tabs名称：</span>
+                <span class="flex-none item-label">Tab名称：</span>
                 <el-input placeholder="请输入Tabs名称" v-model="element.title"></el-input>
-                <!-- <el-button type="text" class="mg-l5">配置内容</el-button> -->
+                <el-button type="text" class="mg-l5" @click="tabConfig(index)">配置内容</el-button>
               </div>
             </div>
           </li>
         </template>
       </Draggable>
-      <div style="margin-left: 22px;">
-        <el-button @click="handleAdd()" type="text">添加Tabs</el-button>
+      <div class="flex row justify-end">
+        <el-button @click="handleAdd()" type="text">添加Tab</el-button>
       </div>
     </el-form-item>
 
@@ -59,6 +59,7 @@ const mainStore = useMainStore()
 // const { predefineColors, selectWg } = storeToRefs(mainStore)
 const { selectWg } = storeToRefs(mainStore)
 const handleRemove = (index: number) => {
+  if (selectWg.value?.value) selectWg.value.value = 0
   selectWg.value?.tabsList.splice(index, 1)
 }
 const handleAdd = () => {
@@ -72,4 +73,7 @@ const handleAdd = () => {
   selectWg.value?.tabsList.push(newItem)
 }
 
+const tabConfig = (index: number) => {
+  if (selectWg.value) selectWg.value.value = index
+}
 </script>
