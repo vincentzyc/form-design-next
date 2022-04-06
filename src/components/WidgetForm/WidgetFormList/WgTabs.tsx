@@ -1,4 +1,4 @@
-import { computed, defineComponent, reactive } from "vue";
+import { defineComponent, reactive } from "vue";
 import WidgetFormList from './index';
 import Draggable from 'vuedraggable'
 import { hasKey } from "@/utils";
