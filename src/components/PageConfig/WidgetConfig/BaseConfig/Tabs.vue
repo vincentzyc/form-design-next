@@ -6,7 +6,7 @@
     </el-form-item>
     <el-form-item label="文字描述">
       <el-input placeholder="请输入文字描述" v-model="selectWg.tipText"></el-input>
-    </el-form-item> -->
+    </el-form-item>-->
 
     <el-form-item label="Tabs列表">
       <Draggable
@@ -28,17 +28,11 @@
                 <Delete />
               </el-icon>
 
-              <el-form-item label="Tabs名称">
+              <div class="flex mg-t5">
+                <span class="flex-none item-label">Tabs名称：</span>
                 <el-input placeholder="请输入Tabs名称" v-model="element.title"></el-input>
-              </el-form-item>
-              <!-- <el-form-item label="Tabs内容（支持链接页面）">
-                <el-input
-                  :autosize="{ minRows: 2, maxRows: 16 }"
-                  placeholder="请输入Tabs内容"
-                  type="textarea"
-                  v-model="element.text"
-                ></el-input>
-              </el-form-item> -->
+                <!-- <el-button type="text" class="mg-l5">配置内容</el-button> -->
+              </div>
             </div>
           </li>
         </template>
@@ -50,7 +44,7 @@
 
     <!-- <el-form-item label="协议文字颜色">
       <el-color-picker :predefine="predefineColors" show-alpha v-model="selectWg.agreementColor" />
-    </el-form-item> -->
+    </el-form-item>-->
   </div>
 </template>
 
