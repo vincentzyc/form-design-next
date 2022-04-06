@@ -25,8 +25,12 @@ export default defineComponent({
     const { dragWg } = storeToRefs(mainStore)
     const handleWidgetAdd = (evt: any) => {
       const newIndex = evt.newIndex;
-      mainStore.setSelectWg(item.tabsList[0].list[newIndex])
+      mainStore.setSelectWg(item.tabsList[item.value].list[newIndex])
       mainStore.setConfigTab("widget")
+    }
+    const changeTab = (key: number) => {
+      console.log(key);
+      item.value = key
     }
     // const wrapStyle = computed(() => {
     //   return { backgroundColor: item.backgroundColor, backgroundImage: `url(${item.backgroundImage || ''})` }
@@ -35,7 +39,7 @@ export default defineComponent({
       <div class="wg-tabs clearfix" style={item.style}>
         <ul class="flex tab-bar-wrap">
           {item.tabsList.map((tab: TypeTabsItem, key: number) => (
-            <li class={['tab-bar flex-auto text-center', { 'active': key === item.value }]}>{tab.title}</li>
+            <li class={['tab-bar flex-auto text-center', { 'active': key === item.value }]} onClick={() => changeTab(key)}>{tab.title}</li>
           ))}
         </ul>
         <Draggable
