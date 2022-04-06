@@ -31,7 +31,7 @@
               <div class="flex mg-t5">
                 <span class="flex-none item-label">Tab名称：</span>
                 <el-input placeholder="请输入Tabs名称" v-model="element.title"></el-input>
-                <el-button type="text" class="mg-l5" @click="tabConfig(index)">配置内容</el-button>
+                <el-button type="text" class="mg-l5" @click="tabConfig(index)" v-show="selectWg.value !== index">配置内容</el-button>
               </div>
             </div>
           </li>
