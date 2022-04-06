@@ -29,7 +29,6 @@ export default defineComponent({
       mainStore.setConfigTab("widget")
     }
     const changeTab = (key: number) => {
-      console.log(key);
       item.value = key
     }
     // const wrapStyle = computed(() => {
