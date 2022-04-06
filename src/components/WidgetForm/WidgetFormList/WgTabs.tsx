@@ -25,7 +25,7 @@ export default defineComponent({
     const { dragWg } = storeToRefs(mainStore)
     const handleWidgetAdd = (evt: any) => {
       const newIndex = evt.newIndex;
-      mainStore.setSelectWg(item.tabsList[item.value].list[newIndex])
+      mainStore.setSelectWg(item.list[item.value].list[newIndex])
       mainStore.setConfigTab("widget")
     }
     const changeTab = (key: number) => {
@@ -37,21 +37,21 @@ export default defineComponent({
     return () => (
       <div class="wg-tabs clearfix" style={item.style}>
         <ul class="flex tab-bar-wrap">
-          {item.tabsList.map((tab: TypeTabsItem, key: number) => (
+          {item.list.map((tab: TypeTabsItem, key: number) => (
             <li class={['tab-bar flex-auto text-center', { 'active': key === item.value }]} onClick={() => changeTab(key)}>{tab.title}</li>
           ))}
         </ul>
         <Draggable
-          v-model={item.tabsList[item.value].list}
+          v-model={item.list[item.value].list}
           group={{ name: 'widget', put: !hasKey(dragWg.value, 'list') }}
           ghostClass="ghost"
           swapThreshold={0.6}
           animation={100}
           item-key="key"
           onAdd={handleWidgetAdd}
-          class={['widget-form-list wg-padding', { 'widget-empty': item.tabsList[item.value].list.length === 0 }]}
+          class={['widget-form-list wg-padding', { 'widget-empty': item.list[item.value].list.length === 0 }]}
           v-slots={{
-            item: ({ element, index }) => <WidgetFormList v-model={[item.tabsList[item.value].list, 'data']} data={item.tabsList[item.value].list} index={index} item={element} />
+            item: ({ element, index }) => <WidgetFormList v-model={[item.list[item.value].list, 'data']} data={item.list[item.value].list} index={index} item={element} />
           }}
         >
         </Draggable>
