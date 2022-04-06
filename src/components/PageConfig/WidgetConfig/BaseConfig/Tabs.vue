@@ -6,7 +6,14 @@
     </el-form-item>
     <el-form-item label="文字描述">
       <el-input placeholder="请输入文字描述" v-model="selectWg.tipText"></el-input>
-    </el-form-item>-->
+    </el-form-item>
+    <el-select v-model="selectWg.activeTab" placeholder="请选择默认Tab" size="small">
+      <el-option v-for="(tabItem,key) in selectWg.list" :key="key" :label="tabItem.title" :value="key" />
+    </el-select> 
+    <el-form-item label="协议文字颜色">
+      <el-color-picker :predefine="predefineColors" show-alpha v-model="selectWg.agreementColor" />
+    </el-form-item>
+    -->
 
     <el-form-item label="Tabs列表">
       <Draggable
@@ -15,7 +22,7 @@
         handle=".move-icon"
         item-key="index"
         tag="ul"
-        v-model="selectWg.tabsList"
+        v-model="selectWg.list"
         class="row"
       >
         <template #item="{ element, index }">
@@ -41,10 +48,6 @@
         <el-button @click="handleAdd()" type="text">添加Tab</el-button>
       </div>
     </el-form-item>
-
-    <!-- <el-form-item label="协议文字颜色">
-      <el-color-picker :predefine="predefineColors" show-alpha v-model="selectWg.agreementColor" />
-    </el-form-item>-->
   </div>
 </template>
 
@@ -60,17 +63,17 @@ const mainStore = useMainStore()
 const { selectWg } = storeToRefs(mainStore)
 const handleRemove = (index: number) => {
   if (selectWg.value?.value) selectWg.value.value = 0
-  selectWg.value?.tabsList.splice(index, 1)
+  selectWg.value?.list.splice(index, 1)
 }
 const handleAdd = () => {
   let newItem =
-    selectWg.value?.tabsList.length > 0
-      ? deepClone(selectWg.value?.tabsList[selectWg.value?.tabsList.length - 1])
+    selectWg.value?.list.length > 0
+      ? deepClone(selectWg.value?.list[selectWg.value?.list.length - 1])
       : {
         title: "《Tabs名称》",
         list: []
       }
-  selectWg.value?.tabsList.push(newItem)
+  selectWg.value?.list.push(newItem)
 }
 
 const tabConfig = (index: number) => {
