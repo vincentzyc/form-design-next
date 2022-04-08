@@ -31,7 +31,7 @@
               <el-icon @click="handleRemove(index)" class="el-icon-menu move-icon">
                 <Menu />
               </el-icon>
-              <el-icon @click="handleRemove(index)" class="el-icon-delete delect-icon">
+              <el-icon @click="handleRemove(index)" class="el-icon-delete delect-icon" v-show="selectWg.list.length > 2">
                 <Delete />
               </el-icon>
 
@@ -70,7 +70,7 @@ const handleAdd = () => {
     selectWg.value?.list.length > 0
       ? deepClone(selectWg.value?.list[selectWg.value?.list.length - 1])
       : {
-        title: "《Tabs名称》",
+        title: "Tabs名称",
         list: []
       }
   selectWg.value?.list.push(newItem)
