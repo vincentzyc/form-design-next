@@ -8,7 +8,7 @@ import StaticText from "./StaticText"
 import Wechat from "./Wechat"
 import Video from "./Video"
 import Sms from "./Sms"
-// import Tabs from "./Tabs"
+import Tabs from "./Tabs"
 
 // 组件的type字段对应示意图片文件名 （大驼峰命名）
 
@@ -49,11 +49,11 @@ export default [{
   value: 'Marquee',
   data: Marquee
 }, 
-// {
-//   name: "Tabs标签",
-//   value: "Tabs",
-//   data: Tabs
-// }, 
+{
+  name: "Tabs标签",
+  value: "Tabs",
+  data: Tabs
+}, 
 {
   name: '辅助类',
   value: 'Assist',
