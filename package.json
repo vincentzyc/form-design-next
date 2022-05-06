@@ -13,7 +13,7 @@
     "core-js": "^3.8.3",
     "element-plus": "^2.1.7",
     "mitt": "^3.0.0",
-    "npm": "^8.5.5",
+    "nanoid": "^3.3.4",
     "pinia": "^2.0.12",
     "vue": "^3.2.31",
     "vuedraggable": "4.0.3"
