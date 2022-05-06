@@ -2,7 +2,7 @@ import { defineComponent, computed, nextTick, resolveComponent } from "vue";
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from "pinia";
 import { deepClone } from '@/utils/deep-clone';
-import { getUuid } from "@/utils";
+import { getNanoid } from "@/utils";
 import { Delete, DocumentCopy, Rank } from '@element-plus/icons-vue'
 
 import WgStaticText from './WgStaticText'
@@ -117,7 +117,7 @@ export default defineComponent({
       event.stopPropagation();
       const cloneData = deepClone(props.data[props.index] as Record<string, any>[])
       // cloneData.key = cloneData.type + '_' + Date.now() + '_' + Math.ceil(Math.random() * 1000000)
-      cloneData.key = cloneData.type + '_' + getUuid()
+      cloneData.key = cloneData.type + '_' + getNanoid()
       await nextTick()
       const newData = props.data
       newData.splice(props.index, 0, cloneData)
