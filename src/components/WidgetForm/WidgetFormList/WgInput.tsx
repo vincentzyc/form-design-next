@@ -19,7 +19,10 @@ export default defineComponent({
           v-show={item.showLabel}
         >{item.label.labelTitle}</div>
         <div class="flex-auto">
-          <input placeholder={item.placeholder} v-model={item.value} class="wg-input" />
+          {item.isTextarea ?
+            <textarea placeholder={item.placeholder} v-model={item.value} class="wg-input" /> :
+            <input placeholder={item.placeholder} v-model={item.value} class="wg-input" />
+          }
         </div>
       </div>
     )
