@@ -2,6 +2,7 @@ export default [{
   type: "Input",
   name: "输入框",
   placeholder: "请输入姓名",
+  isTextarea: false,
   showLabel: false,
   label: {
     labelTitle: "姓名",
