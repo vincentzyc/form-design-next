@@ -23,6 +23,9 @@
     <el-form-item label="是否发送验证码" v-if="hasKey(selectWg, 'showCode')">
       <el-switch v-model="selectWg.showCode"></el-switch>
     </el-form-item>
+    <el-form-item label="设为文本域" v-if="hasKey(selectWg, 'isTextarea')">
+      <el-switch v-model="selectWg.isTextarea"></el-switch>
+    </el-form-item>
     <el-form-item label="提示内容" v-if="hasKey(selectWg, 'placeholder')">
       <el-input v-model="selectWg.placeholder"></el-input>
     </el-form-item>
@@ -43,7 +46,12 @@
     </el-form-item>
     <el-form-item label="按钮类型" v-if="hasKey(selectWg, 'btnType')">
       <el-select filterable placeholder="请选择" v-model="selectWg.btnType">
-        <el-option :key="item.value" :label="item.label" :value="item.value" v-for="item in selectWg.btnTypes"></el-option>
+        <el-option
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+          v-for="item in selectWg.btnTypes"
+        ></el-option>
       </el-select>
     </el-form-item>
 
@@ -72,7 +80,7 @@
           </li>
         </template>
       </Draggable>
-      <div style="margin-left: 22px;">
+      <div style="margin-left: 22px">
         <el-button @click="handleAddOption()" type="text">添加选项</el-button>
       </div>
     </el-form-item>
@@ -81,44 +89,45 @@
 
 <script lang="ts" setup>
 import { reactive } from "vue";
-import { useMainStore } from '@/pinia'
+import { useMainStore } from "@/pinia";
 import { storeToRefs } from "pinia";
-import Draggable from 'vuedraggable'
+import Draggable from "vuedraggable";
 import Editor from "@/components/Editor";
-import { hasKey } from "@/utils/index"
-import { isLink } from '@/utils/validate/link';
-import allFieldTypes from '@/assets/js/field-types.js'
+import { hasKey } from "@/utils/index";
+import { isLink } from "@/utils/validate/link";
+import allFieldTypes from "@/assets/js/field-types.js";
 import { ElMessage } from "element-plus";
-import { Delete, Menu } from '@element-plus/icons-vue'
+import { Delete, Menu } from "@element-plus/icons-vue";
 
-const mainStore = useMainStore()
-const { selectWg } = storeToRefs(mainStore)
+const mainStore = useMainStore();
+const { selectWg } = storeToRefs(mainStore);
 
-const fieldTypes = reactive(allFieldTypes)
+const fieldTypes = reactive(allFieldTypes);
 
 function isRadio(flag: unknown) {
-  if (selectWg.value) selectWg.value.value = flag as boolean ? "" : []
+  if (selectWg.value) selectWg.value.value = (flag as boolean) ? "" : [];
 }
 
 function checkLink(v: unknown) {
-  if (!isLink(v as string)) ElMessage.error('请输入正确的网址');
+  if (!isLink(v as string)) ElMessage.error("请输入正确的网址");
 }
 
 function selectfield(key: any, types: any[]) {
   if (selectWg.value) {
-    const selectItem = types.find((item: { value: any; }) => key === item.value);
+    const selectItem = types.find((item: { value: any }) => key === item.value);
     selectWg.value.label.labelTitle = selectItem.label;
-    selectWg.value.options ? selectWg.value.options = selectItem.options : "";
-    if (hasKey(selectWg.value, 'placeholder')) {
-      selectWg.value.placeholder = selectWg.value.type === "input" ? `请输入${selectItem.label}` : `请选择${selectItem.label}`;
+    selectWg.value.options ? (selectWg.value.options = selectItem.options) : "";
+    if (hasKey(selectWg.value, "placeholder")) {
+      selectWg.value.placeholder =
+        selectWg.value.type === "input" ? `请输入${selectItem.label}` : `请选择${selectItem.label}`;
     }
   }
 }
 
 function handleOptionsRemove(index: number) {
-  if (selectWg.value) selectWg.value.options.splice(index, 1)
+  if (selectWg.value) selectWg.value.options.splice(index, 1);
 }
 function handleAddOption() {
-  if (selectWg.value) selectWg.value.options.push('新选项')
+  if (selectWg.value) selectWg.value.options.push("新选项");
 }
 </script>
