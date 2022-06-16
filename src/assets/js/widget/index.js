@@ -9,6 +9,7 @@ import Wechat from "./Wechat"
 import Video from "./Video"
 import Sms from "./Sms"
 import Tabs from "./Tabs"
+import CountDown from "./CountDown"
 
 // 组件的type字段对应示意图片文件名 （大驼峰命名）
 
@@ -48,12 +49,17 @@ export default [{
   name: '跑马灯',
   value: 'Marquee',
   data: Marquee
-}, 
+},
 {
   name: "Tabs标签",
   value: "Tabs",
   data: Tabs
-}, 
+},
+{
+  name: '倒计时',
+  value: 'CountDown',
+  data: CountDown
+},
 {
   name: '辅助类',
   value: 'Assist',
