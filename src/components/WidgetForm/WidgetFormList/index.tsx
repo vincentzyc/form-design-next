@@ -25,6 +25,7 @@ import WgMarquee from './WgMarquee'
 import WgMarqueeSingle from './WgMarqueeSingle'
 import WgHPicker from './WgHPicker'
 import WgTabs from './WgTabs'
+import WgCountDown from './WgCountDown'
 
 export default defineComponent({
   name: "WidgetFormList",
@@ -49,7 +50,8 @@ export default defineComponent({
     WgMarquee,
     WgMarqueeSingle,
     WgHPicker,
-    WgTabs
+    WgTabs,
+    WgCountDown
 
     //下面是按需加载，组件多的话可选择此方式
     // WgStaticText: () => import('./WgStaticText'),
