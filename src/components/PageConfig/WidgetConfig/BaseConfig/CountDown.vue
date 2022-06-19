@@ -16,7 +16,6 @@
         placeholder="选择结束时间"
         type="datetime"
         v-model="selectWg.endTime"
-        value-format="timestamp"
       ></el-date-picker>
     </el-form-item>
   </div>
@@ -33,6 +32,6 @@ const { selectWg } = storeToRefs(mainStore);
 const pickerOptions = {
   disabledDate(time: Date) {
     return time.getTime() < Date.now() - 3600 * 1000 * 24;
-  },
+  }
 };
 </script>
