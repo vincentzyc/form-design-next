@@ -1,6 +1,7 @@
 import { defineComponent, reactive, ref, watch } from "vue";
 
 import { CountDownTypes } from "@/assets/js/widget/CountDown/CountDown"
+import { isDate } from "@/utils/validate/date";
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 const HOUR = 60 * MINUTE;
@@ -14,32 +15,6 @@ export default defineComponent({
       required: true
     }
   },
-  // data() {
-  //   return {
-  //     timer: 0,
-  //     isFinished: true,
-  //     parseTime: {
-  //       days: 0,
-  //       hours: 0,
-  //       minutes: 0,
-  //       seconds: 0
-  //     }
-  //   }
-  // },
-  // watch: {
-  //   'item.countDownType'(nval) {
-  //     if (nval) {
-  //       clearInterval(this.timer)
-  //       this.initCountDown()
-  //     }
-  //   },
-  //   'item.endTime'(nTime) {
-  //     if (nTime) {
-  //       clearInterval(this.timer)
-  //       this.initCountDown()
-  //     }
-  //   }
-  // },
   setup(props) {
     const { item } = reactive(props)
 
@@ -80,12 +55,13 @@ export default defineComponent({
       };
     }
     function initEndTimeCountDown() {
-      isFinished.value = item.endTime < Date.now()
+      if (!isDate(item.endTime)) return
+      isFinished.value = item.endTime.getTime() < Date.now()
       if (isFinished.value) return ``
-      parseTime.value = getTime(item.endTime - Date.now())
+      parseTime.value = getTime(item.endTime.getTime() - Date.now())
       timer.value = setInterval(() => {
         isFinished.value = item.endTime < Date.now()
-        parseTime.value = getTime(item.endTime - Date.now())
+        parseTime.value = getTime(item.endTime.getTime() - Date.now())
       }, 1000);
     }
     function initDayLoopCountDown() {
@@ -126,7 +102,6 @@ export default defineComponent({
                   parseTime.value.days > 0 || parseTime.value.hours > 0 ? <span
                     style={item.timeStyle}
                     class="countdown-timeblock"
-                    v-if="parseTime.days>0||parseTime.hours>0"
                   >{parseTime.value.hours > 9 ? parseTime.value.hours : '0' + parseTime.value.hours}</span> : null
                 }
                 {parseTime.value.days > 0 || parseTime.value.hours > 0 ? <span style={item.unitStyle} class="countdown-colon">时</span> : null}
