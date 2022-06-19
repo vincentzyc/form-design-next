@@ -1,6 +1,6 @@
 import { defineComponent, reactive, ref, watch } from "vue";
 
-import { CountDownTypes } from "@/assets/js/widget/CountDown/CountDown.js"
+import { CountDownTypes } from "@/assets/js/widget/CountDown/CountDown"
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 const HOUR = 60 * MINUTE;
@@ -119,35 +119,39 @@ export default defineComponent({
           {
             isFinished.value ?
               <span class="cred">请选择倒计时结束时间</span> :
-              <span class="cred">倒计时</span>
-            // <div>
-            //   <span style={item.timeStyle} class="countdown-timeblock" v-if="parseTime.days>0">{{ parseTime.days }}</span>
-            //   <span style={item.unitStyle} class="countdown-colon" v-if="parseTime.days>0">天</span>
-            //   <span
-            //     style={item.timeStyle}
-            //     class="countdown-timeblock"
-            //     v-if="parseTime.days>0||parseTime.hours>0"
-            //   >{{ parseTime.hours > 9 ? parseTime.hours : '0' + parseTime.hours }}</span>
-            //   <span style={item.unitStyle} class="countdown-colon" v-if="parseTime.days>0||parseTime.hours>0">时</span>
-            //   <span
-            //     style={item.timeStyle}
-            //     class="countdown-timeblock"
-            //     v-if="parseTime.days>0||parseTime.hours>0||parseTime.minutes>0"
-            //   >{{ parseTime.minutes > 9 ? parseTime.minutes : '0' + parseTime.minutes }}</span>
-            //   <span
-            //     style={item.unitStyle}
-            //     class="countdown-colon"
-            //     v-if="parseTime.days>0||parseTime.hours>0||parseTime.minutes>0"
-            //   >分</span>
-            //   <span
-            //     style={item.timeStyle}
-            //     class="countdown-timeblock"
-            //   >{{ parseTime.seconds > 9 ? parseTime.seconds : '0' + parseTime.seconds }}</span>
-            //   <span style={item.unitStyle} class="countdown-colon">秒</span>
-            // </div>
+              <div>
+                {parseTime.value.days > 0 ? <span style={item.timeStyle} class="countdown-timeblock">{parseTime.value.days}</span> : null}
+                {parseTime.value.days > 0 ? <span style={item.unitStyle} class="countdown-colon">天</span> : null}
+                {
+                  parseTime.value.days > 0 || parseTime.value.hours > 0 ? <span
+                    style={item.timeStyle}
+                    class="countdown-timeblock"
+                    v-if="parseTime.days>0||parseTime.hours>0"
+                  >{parseTime.value.hours > 9 ? parseTime.value.hours : '0' + parseTime.value.hours}</span> : null
+                }
+                {parseTime.value.days > 0 || parseTime.value.hours > 0 ? <span style={item.unitStyle} class="countdown-colon">时</span> : null}
+                {
+                  parseTime.value.days > 0 || parseTime.value.hours > 0 || parseTime.value.minutes > 0 ?
+                    <span
+                      style={item.timeStyle}
+                      class="countdown-timeblock"
+                    >{parseTime.value.minutes > 9 ? parseTime.value.minutes : '0' + parseTime.value.minutes}</span> : null
+                }
+                {
+                  parseTime.value.days > 0 || parseTime.value.hours > 0 || parseTime.value.minutes > 0 ? <span
+                    style={item.unitStyle}
+                    class="countdown-colon"
+                  >分</span> : null
+                }
+                <span
+                  style={item.timeStyle}
+                  class="countdown-timeblock"
+                >{parseTime.value.seconds > 9 ? parseTime.value.seconds : '0' + parseTime.value.seconds}</span>
+                <span style={item.unitStyle} class="countdown-colon">秒</span>
+              </div>
           }
         </p>
-      </div >
+      </div>
     )
   }
 })
