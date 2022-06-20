@@ -1,6 +1,7 @@
 <template>
   <section v-if="selectWg">
     <Styles v-model:styles="selectWg.style" />
+    <Styles labelPrefix="时间" v-model:styles="selectWg.timeStyle" />
 
     <el-form-item label="背景颜色" v-if="selectWg.hasOwnProperty('backgroundColor')">
       <el-color-picker :predefine="predefineColors" show-alpha v-model="selectWg.backgroundColor" />
@@ -34,13 +35,12 @@
 </template>
 
 <script lang="ts" setup>
-import FileUpload from '@/components/base/FileUpload.vue'
-import { useMainStore } from '@/pinia'
-import { storeToRefs } from 'pinia'
+import FileUpload from "@/components/base/FileUpload.vue";
+import { useMainStore } from "@/pinia";
+import { storeToRefs } from "pinia";
 
-import Styles from "./Styles.vue"
-const mainStore = useMainStore()
+import Styles from "./Styles.vue";
+const mainStore = useMainStore();
 
-const { predefineColors, selectWg } = storeToRefs(mainStore)
-
+const { predefineColors, selectWg } = storeToRefs(mainStore);
 </script>
