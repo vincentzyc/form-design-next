@@ -10,7 +10,6 @@
         <el-option :value="CountDownTypes.dayLoop" label="自动天循环"></el-option>
       </el-select>
     </el-form-item>
-    {{ selectWg.endTime }}
     <el-form-item label="倒计时结束时间" v-if="selectWg.countDownType === 'endTime'">
       <el-date-picker
         :picker-options="pickerOptions"
