@@ -10,12 +10,14 @@
         <el-option :value="CountDownTypes.dayLoop" label="自动天循环"></el-option>
       </el-select>
     </el-form-item>
+    {{ selectWg.endTime }}
     <el-form-item label="倒计时结束时间" v-if="selectWg.countDownType === 'endTime'">
       <el-date-picker
         :picker-options="pickerOptions"
         placeholder="选择结束时间"
         type="datetime"
-        v-model="selectWg.endTime"
+        v-model="selectWg.endtime"
+        @change="getTimestamp"
       ></el-date-picker>
     </el-form-item>
   </div>
@@ -32,6 +34,9 @@ const { selectWg } = storeToRefs(mainStore);
 const pickerOptions = {
   disabledDate(time: Date) {
     return time.getTime() < Date.now() - 3600 * 1000 * 24;
-  }
+  },
 };
+function getTimestamp(v: Date) {
+  if (selectWg.value) selectWg.value.endTime = v.getTime();
+}
 </script>
