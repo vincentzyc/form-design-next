@@ -94,7 +94,7 @@ export default defineComponent({
           <span class="countdown-title">{item.title}</span>
           {
             isFinished.value ?
-              <span class="cred">请选择倒计时结束时间</span> :
+              <span class="empty-time">请选择倒计时结束时间</span> :
               <div>
                 {parseTime.value.days > 0 ? <span style={item.timeStyle} class="countdown-timeblock">{parseTime.value.days}</span> : null}
                 {parseTime.value.days > 0 ? <span style={item.unitStyle} class="countdown-colon">天</span> : null}
