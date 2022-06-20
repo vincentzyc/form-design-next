@@ -7,7 +7,8 @@ export default [{
   type: "CountDown",
   name: "倒计时",
   positionFixed: 'auto', // auto--正常  top--顶部悬浮  custom--自定义位置悬浮  bottom--底部悬浮  sticky--吸顶悬浮
-  endTime: '', //倒计时结束时间
+  endTime: '', //倒计时结束时间 -- 时间戳
+  endtime: '', //倒计时结束时间 -- Date类型字符串
   title: '距离活动结束还剩：',
   countDownType: CountDownTypes.endTime,
   timeStyle: {
