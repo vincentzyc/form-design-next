@@ -1,7 +1,7 @@
 import { defineComponent, reactive, ref, watch } from "vue";
 
 import { CountDownTypes } from "@/assets/js/widget/CountDown/CountDown"
-import { isDate } from "@/utils/validate/date";
+import { isNumeric } from "@/utils/validate/number";
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 const HOUR = 60 * MINUTE;
@@ -55,13 +55,13 @@ export default defineComponent({
       };
     }
     function initEndTimeCountDown() {
-      if (!isDate(item.endTime)) return
-      isFinished.value = item.endTime.getTime() < Date.now()
+      if (!isNumeric(item.endTime)) return
+      isFinished.value = item.endTime < Date.now()
       if (isFinished.value) return ``
-      parseTime.value = getTime(item.endTime.getTime() - Date.now())
+      parseTime.value = getTime(item.endTime - Date.now())
       timer.value = setInterval(() => {
         isFinished.value = item.endTime < Date.now()
-        parseTime.value = getTime(item.endTime.getTime() - Date.now())
+        parseTime.value = getTime(item.endTime - Date.now())
       }, 1000);
     }
     function initDayLoopCountDown() {
