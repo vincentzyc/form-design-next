@@ -1,7 +1,7 @@
 <template>
   <section v-if="selectWg">
     <Styles v-model:styles="selectWg.style" />
-    <Styles labelPrefix="时间" v-model:styles="selectWg.timeStyle" />
+    <Styles v-if="selectWg.timeStyle" labelPrefix="时间" v-model:styles="selectWg.timeStyle" />
 
     <el-form-item label="背景颜色" v-if="selectWg.hasOwnProperty('backgroundColor')">
       <el-color-picker :predefine="predefineColors" show-alpha v-model="selectWg.backgroundColor" />
