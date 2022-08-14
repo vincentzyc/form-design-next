@@ -74,3 +74,6 @@ export function getUrlParam(name = ''): UrlParamBack {
   if (name) return obj[name]
   return obj
 }
+export function sum(a: number, b: number) {
+  return a + b;
+}
