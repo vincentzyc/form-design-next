@@ -17,13 +17,6 @@ export function hasKey(obj: any, key: string): boolean {
 /**
  * 生成唯一id
  */
-export function getUuid() {
-  const randomNum = Number(Math.random().toString().slice(2, -1)) + Date.now()
-  return randomNum.toString(36)
-}
-/**
- * 生成唯一id
- */
 export function getNanoid() {
   return nanoid() //=> "nyO3cyhqEjQ3vzCLdfAjb"
 }
