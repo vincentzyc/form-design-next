@@ -1,5 +1,13 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import HelloWorld from '@/components/HelloWorld.vue'
+import ComponentTest from '@/components/base/ComponentTest.vue'
+
+
+export function later(delay = 0): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+}
 
 describe('HelloWorld.vue', () => {
   it('renders props.msg when passed', () => {
@@ -9,4 +17,16 @@ describe('HelloWorld.vue', () => {
     })
     expect(wrapper.text()).toMatch(msg)
   })
+})
+
+test('ComponentTest.vue', async () => {
+  const wrapper = mount(ComponentTest)
+  expect(wrapper.html()).toContain('Count: 0')
+  expect(wrapper.html()).not.toContain('hello')
+
+  wrapper.setData({ count: 1, show: true })
+  await later();
+
+  expect(wrapper.html()).toContain('Count: 1')
+  expect(wrapper.find('.my-test').exists()).toBe(true)
 })
