@@ -1,8 +1,5 @@
 import * as util from '../index'
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(util.sum(10, 2)).toBe(12);
-});
 test('hasKey', () => {
   const obj = {
     aa: 33,
