@@ -1,13 +1,16 @@
 <template>
+  <header>
+    <slot name="header" />
+  </header>
   <div id="count">Count: {{ count }}</div>
   <button @click="show = !show">Toggle</button>
-
+  <slot />
   <transition name="fade">
     <p v-if="show" class="my-test">hello</p>
   </transition>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   data() {
     return {

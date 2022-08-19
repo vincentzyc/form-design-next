@@ -20,7 +20,14 @@ describe('HelloWorld.vue', () => {
 })
 
 test('ComponentTest.vue', async () => {
-  const wrapper = mount(ComponentTest)
+  const wrapper = mount(ComponentTest,{
+    slots: {
+      header: '<div>Header</div>',
+      default: 'Main Content'
+    }
+  })
+  expect(wrapper.html()).toContain('<div>Header</div>')
+  expect(wrapper.html()).toContain('Main Content')
   expect(wrapper.html()).toContain('Count: 0')
   expect(wrapper.html()).not.toContain('hello')
 
