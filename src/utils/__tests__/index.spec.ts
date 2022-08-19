@@ -1,5 +1,12 @@
 import * as util from '../index'
 
+// promisify setTimeout
+export function later(delay = 0): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+}
+
 test('hasKey', () => {
   const obj = {
     aa: 33,
