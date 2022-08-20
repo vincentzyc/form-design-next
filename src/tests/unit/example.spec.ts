@@ -1,6 +1,7 @@
 import { shallowMount, mount } from '@vue/test-utils'
 import HelloWorld from '@/components/HelloWorld.vue'
 import ComponentTest from '@/components/base/ComponentTest.vue'
+import BuilderPopup from '@/components/base/BuilderPopup'
 
 
 export function later(delay = 0): Promise<void> {
@@ -19,8 +20,22 @@ describe('HelloWorld.vue', () => {
   })
 })
 
+test('BuilderPopup.tsx', async () => {
+  const wrapper = mount(BuilderPopup, {
+    props: { modelValue: true },
+    slots: {
+      default: 'Main Content'
+    }
+  })
+  expect(wrapper.html()).toContain('Main Content')
+
+  // wrapper.setData({ modelValue: false })
+  // await later();
+  // expect(wrapper.html()).not.toContain('Main Content')
+})
+
 test('ComponentTest.vue', async () => {
-  const wrapper = mount(ComponentTest,{
+  const wrapper = mount(ComponentTest, {
     slots: {
       header: '<div>Header</div>',
       default: 'Main Content'
