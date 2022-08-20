@@ -21,17 +21,15 @@ describe('HelloWorld.vue', () => {
 })
 
 test('BuilderPopup.tsx', async () => {
-  const wrapper = mount(BuilderPopup, {
-    props: { modelValue: true },
+  const wrapper1 = mount(BuilderPopup)
+  expect(wrapper1.html()).not.toContain('Main Content')
+
+  const wrapper2 = mount(BuilderPopup, {
     slots: {
       default: 'Main Content'
     }
   })
-  expect(wrapper.html()).toContain('Main Content')
-
-  // wrapper.setData({ modelValue: false })
-  // await later();
-  // expect(wrapper.html()).not.toContain('Main Content')
+  expect(wrapper2.html()).toContain('Main Content')
 })
 
 test('ComponentTest.vue', async () => {
