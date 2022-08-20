@@ -1,6 +1,6 @@
 import { shallowMount, mount } from '@vue/test-utils'
 import HelloWorld from '@/components/HelloWorld.vue'
-import ComponentTest from '@/components/base/ComponentTest.vue'
+import ComponentTest from '@/components/ComponentTest.vue'
 import BuilderPopup from '@/components/base/BuilderPopup'
 
 
