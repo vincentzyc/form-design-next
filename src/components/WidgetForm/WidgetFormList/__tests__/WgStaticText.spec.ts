@@ -26,9 +26,9 @@ test('WgStaticText.vue', async () => {
     props: { item }
   })
   expect(wrapper.html()).toContain('这是一段文本')
-  // expect(wrapper.html()).not.toContain('hello')
+  expect(wrapper.html()).toContain('margin: 0px 0px 0px 0px;');
 
   // await later();
 
-  // expect(wrapper.find('.my-test').exists()).toBe(true)
+  // expect(wrapper.find('p').get(0).props.style).toHaveStyle('margin')
 })
