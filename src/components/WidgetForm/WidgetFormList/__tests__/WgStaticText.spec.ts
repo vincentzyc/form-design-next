@@ -1,12 +1,6 @@
 import { mount } from '@vue/test-utils'
 import WgStaticText from '../WgStaticText'
 
-export function later(delay = 0): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
-
 const item = {
   type: "StaticText",
   name: "文本描述",
@@ -27,8 +21,4 @@ test('WgStaticText.vue', async () => {
   })
   expect(wrapper.html()).toContain('这是一段文本')
   expect(wrapper.html()).toContain('margin: 0px 0px 0px 0px;');
-
-  // await later();
-
-  // expect(wrapper.find('p').get(0).props.style).toHaveStyle('margin')
 })
