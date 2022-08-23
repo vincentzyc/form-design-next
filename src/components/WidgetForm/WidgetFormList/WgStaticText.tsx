@@ -1,4 +1,4 @@
-import { defineComponent, reactive, computed } from "vue";
+import { defineComponent, computed } from "vue";
 
 export default defineComponent({
   name: "WgStaticText",
@@ -9,13 +9,12 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { item } = reactive(props)
     const wrapStyle = computed(() => {
-      return { backgroundColor: item.backgroundColor, backgroundImage: `url(${item.backgroundImage || ''})` }
+      return { backgroundColor: props.item.backgroundColor, backgroundImage: `url(${props.item.backgroundImage || ''})` }
     })
     return () => (
       <div class="wg-staticText clearfix" style={wrapStyle.value}>
-        <p style={item.style} v-html={item.value}></p>
+        <p style={props.item.style} v-html={props.item.value}></p>
       </div>
     )
   }

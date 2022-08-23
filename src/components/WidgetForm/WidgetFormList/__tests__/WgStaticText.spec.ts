@@ -21,4 +21,9 @@ test('WgStaticText.vue', async () => {
   })
   expect(wrapper.html()).toContain('这是一段文本')
   expect(wrapper.html()).toContain('margin: 0px 0px 0px 0px;');
+  
+  item.value = '这是测试修改文本'
+  await wrapper.setProps({ item });
+
+  expect(wrapper.html()).toContain('这是测试修改文本')
 })
