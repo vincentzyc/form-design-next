@@ -29,6 +29,8 @@ test('WgVideoPlay.vue', async () => {
   const wrapper = mount(WgVideoPlay, {
     props: { item }
   })
+
+  expect(wrapper.find('video').exists()).toBe(true)
   expect(wrapper.html()).toContain('src="https://www.runoob.com/try/demo_source/movie.mp4"')
   expect(wrapper.html()).toContain('margin: 0px 0px 0px 0px;');
 
