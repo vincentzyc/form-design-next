@@ -1,12 +1,6 @@
 import { mount } from '@vue/test-utils'
 import WgSplitLine from '../WgSplitLine'
 
-// export function later(delay = 0): Promise<void> {
-//   return new Promise((resolve) => {
-//     setTimeout(resolve, delay);
-//   });
-// }
-
 const item = {
   type: "SplitLine",
   name: "分割线",
