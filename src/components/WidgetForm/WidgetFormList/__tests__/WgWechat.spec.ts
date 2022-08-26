@@ -1,12 +1,6 @@
 import { mount } from '@vue/test-utils'
 import WgWechat from '../WgWechat'
 
-// export function later(delay = 0): Promise<void> {
-//   return new Promise((resolve) => {
-//     setTimeout(resolve, delay);
-//   });
-// }
-
 const item = {
   type: "Wechat",
   name: "微信关注",
@@ -45,8 +39,4 @@ test('WgVideoPlay.vue', async () => {
 
   expect(wrapper.find('.wechat-avatar').exists()).toBe(true)
   expect(wrapper.html()).toContain('微信账号')
-
-  // await later();
-
-  // expect(wrapper.find('p').get(0).props.style).toHaveStyle('margin')
 })
