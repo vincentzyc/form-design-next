@@ -24,8 +24,8 @@ export default defineComponent({
       <div class="wg-imgshow" style={props.item.style}>
         <ul class="flex flex-wrap">
           {renderImgList()}
-        </ul >
-      </div >
+        </ul>
+      </div>
     )
   }
 })
