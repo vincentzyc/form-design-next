@@ -18,7 +18,7 @@ const item = {
   imglist: [{
     img: "",
     link: ""
-  },{
+  }, {
     img: "",
     link: ""
   }],
@@ -35,4 +35,7 @@ test('WgImgShow.vue', async () => {
   expect(wrapper.find('img').exists()).toBe(true)
   expect(wrapper.find('.col-12').exists()).toBe(true)
   expect(wrapper.findAll('li')).toHaveLength(2)
+  await wrapper.setProps({ item: { ...item, styleType: "col2" } });
+  expect(wrapper.find('.col-12').exists()).toBe(false)
+  expect(wrapper.find('.col-6').exists()).toBe(true)
 })
