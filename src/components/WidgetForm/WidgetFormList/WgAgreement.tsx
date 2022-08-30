@@ -16,7 +16,7 @@ export default defineComponent({
           <p style={{ color: item.style.color }}>
             <span>{item.tipText}</span>
             {item.titleTexts.map((titleText, key) => (
-              <span key={key}>
+              <span key={key} class="agreement-item">
                 {key > 0 && <span>和</span>}
                 {titleText.title && <span style={{ color: item.agreementColor }}>{titleText.title}</span>}
               </span>
