@@ -32,7 +32,6 @@ test('WgImgShow.vue', async () => {
   expect(wrapper.html()).toContain(item.tipText)
   expect(wrapper.find('p').attributes('style')).toContain('color: rgb(51, 51, 51)')
   expect(wrapper.findAll('.agreement-item')).toHaveLength(item.titleTexts.length)
-  // await wrapper.setProps({ item: { ...item, styleType: "col2" } });
-  // expect(wrapper.find('.col-12').exists()).toBe(false)
-  // expect(wrapper.find('.col-6').exists()).toBe(true)
+  await wrapper.setProps({ item: { ...item, tipText: "点击提交表示同意" } });
+  expect(wrapper.html()).toContain(item.tipText)
 })
