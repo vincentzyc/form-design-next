@@ -44,7 +44,6 @@ test('WgImgShow.vue', async () => {
   expect(wrapper.html()).toContain(item.btnText)
   expect(wrapper.find('.wg-button').attributes('style')).toContain('color: rgb(255, 255, 255)')
   expect(wrapper.find('img').exists()).toBeFalsy()
-  // expect(wrapper.findAll('.agreement-item')).toHaveLength(item.titleTexts.length)
-  // await wrapper.setProps({ item: { ...item, tipText: "点击提交表示同意" } });
-  // expect(wrapper.html()).toContain(item.tipText)
+  await wrapper.setProps({ item: { ...item, btnText: "点击提交" } });
+  expect(wrapper.html()).toContain(item.btnText)
 })
