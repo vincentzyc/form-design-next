@@ -16,7 +16,7 @@ export default defineComponent({
         <div class={wrapClass.value}>
           <div class="wg-title" style={{ width: item.label.labelWidth }} v-show={item.showLabel}>{item.label.labelTitle}</div>
           <div class="flex flex-auto align-middle">
-            <input class="wg-input" v-model={item.value} placeholder={item.placeholder} />
+            <input class="wg-input" v-model={props.item.value} placeholder={item.placeholder} />
             <button class="random-code flex-none" style={item.style.btnStyle}>AaZ1</button>
           </div>
         </div>
