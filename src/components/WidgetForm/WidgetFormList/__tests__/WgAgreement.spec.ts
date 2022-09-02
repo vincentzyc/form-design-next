@@ -24,7 +24,7 @@ const item = {
   agreementColor: '#3b9cfd'
 }
 
-test('WgImgShow.vue', async () => {
+test('WgAgreement.vue', async () => {
   const wrapper = mount(WgAgreement, {
     props: { item }
   })
