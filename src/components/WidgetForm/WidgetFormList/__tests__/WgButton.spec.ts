@@ -36,7 +36,7 @@ const item = {
   }
 }
 
-test('WgImgShow.vue', async () => {
+test('WgButton.vue', async () => {
   const wrapper = mount(WgButton, {
     props: { item }
   })
