@@ -30,7 +30,7 @@ const item = {
 
 const newOptions = ["北京", "三亚"]
 
-test('WgImgShow.vue', async () => {
+test('WgCheckbox.vue', async () => {
   const wrapper = mount(WgCheckbox, {
     props: { item }
   })
