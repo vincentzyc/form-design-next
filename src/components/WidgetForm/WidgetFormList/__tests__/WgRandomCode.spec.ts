@@ -29,8 +29,6 @@ const item = {
   }
 }
 
-// const newOptions = ["北京", "三亚"]
-
 test('WgRandomCode.vue', async () => {
   const wrapper = mount(WgRandomCode, {
     props: { item }
