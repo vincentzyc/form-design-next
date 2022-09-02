@@ -32,7 +32,7 @@ const item = {
   }
 }
 
-test('WgVideoPlay.vue', async () => {
+test('WgWechat.vue', async () => {
   const wrapper = mount(WgWechat, {
     props: { item }
   })
