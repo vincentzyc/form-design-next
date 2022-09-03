@@ -35,6 +35,7 @@ test('WgHPicker.vue', async () => {
 
   expect(wrapper.html()).toContain(item.label.labelTitle)
   expect(wrapper.find('.wg-item').attributes('style')).toContain('margin: 0px 0px 0px 0px')
+  expect(wrapper.find('.wg-horizontal-picker').attributes('style')).toContain('width: ' + item.itemWidth * item.showNumber + 'px')
   expect(wrapper.findAll('.picker-item')).toHaveLength(item.options.length)
   await wrapper.setProps({ item: { ...item, options: newOptions } });
   expect(wrapper.findAll('.picker-item')).toHaveLength(item.options.length)
