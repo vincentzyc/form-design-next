@@ -38,4 +38,5 @@ test('WgHPicker.vue', async () => {
   expect(wrapper.findAll('.picker-item')).toHaveLength(item.options.length)
   await wrapper.setProps({ item: { ...item, options: newOptions } });
   expect(wrapper.findAll('.picker-item')).toHaveLength(item.options.length)
+  expect(wrapper.findAll('.picker-item')[0].attributes('style')).toContain('font-size: 18px')
 })
