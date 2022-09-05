@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { later } from '.'
 import WgMarquee from '../WgMarquee'
 
 const item = {
