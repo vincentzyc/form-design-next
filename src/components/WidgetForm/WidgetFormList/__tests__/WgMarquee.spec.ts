@@ -38,4 +38,6 @@ test('WgMarquee.vue', async () => {
   expect(wrapper.find('.wg-marquee').exists()).toBeTruthy()
   expect(wrapper.find('.wg-marquee').attributes('style')).toContain('font-size: 14px; line-height: 28px; margin: 0px 0px 0px 0px')
   expect(wrapper.html()).toContain(`animation: marquee-${item.direction} ${item.durationTime}s linear infinite`)
+  await wrapper.setProps({ item: { ...item, direction: "left" } });
+  expect(wrapper.find('.wg-marquee').classes()).toContain('align-middle')
 })
