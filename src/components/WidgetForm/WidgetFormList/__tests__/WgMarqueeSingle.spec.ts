@@ -39,7 +39,4 @@ test('WgMarqueeSingle.vue', async () => {
   expect(wrapper.find('.wg-marquee-single').exists()).toBeTruthy()
   expect(wrapper.findAll('.scroll-item')).toHaveLength(item.textList.length)
   expect(wrapper.find('ul').attributes('style')).toContain('width: 200px; height: 40px')
-  // expect(wrapper.html()).toContain(`animation: marquee-${item.direction} ${item.durationTime}s linear infinite`)
-  // await wrapper.setProps({ item: { ...item, direction: "left" } });
-  // expect(wrapper.find('.wg-marquee').classes()).toContain('align-middle')
 })
