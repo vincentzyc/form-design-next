@@ -32,11 +32,21 @@ const item = {
   }
 }
 
+const newTextList = [{
+  text: '李**34秒前已报名',
+  sex: 'man'
+}, {
+  text: '张**1分钟前已报名',
+  sex: 'woman'
+}]
+
 test('WgMarqueeSingle.vue', async () => {
   const wrapper = mount(WgMarqueeSingle, {
     props: { item }
   })
   expect(wrapper.find('.wg-marquee-single').exists()).toBeTruthy()
-  expect(wrapper.findAll('.scroll-item')).toHaveLength(item.textList.length)
   expect(wrapper.find('ul').attributes('style')).toContain('width: 200px; height: 40px')
+  expect(wrapper.findAll('.scroll-item')).toHaveLength(item.textList.length)
+  await wrapper.setProps({ item: { ...item, textList: newTextList } });
+  expect(wrapper.findAll('.scroll-item')).toHaveLength(item.textList.length)
 })
