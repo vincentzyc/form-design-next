@@ -44,7 +44,5 @@ test('WgCountDown.vue', async () => {
   })
   expect(wrapper.find('.wg-countdown').exists()).toBeTruthy()
   expect(wrapper.find('.wg-countdown').attributes('style')).toContain('margin: 10px 0px 10px 0px')
-  // expect(wrapper.findAll('.scroll-item')).toHaveLength(item.textList.length)
-  // await wrapper.setProps({ item: { ...item, textList: newTextList } });
-  // expect(wrapper.findAll('.scroll-item')).toHaveLength(item.textList.length)
+  // expect(wrapper.find('.countdown-timeblock').exists()).toBeTruthy()
 })
