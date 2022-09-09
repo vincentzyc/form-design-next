@@ -38,14 +38,6 @@ const item = {
   }
 }
 
-const newTextList = [{
-  text: '李**34秒前已报名',
-  sex: 'man'
-}, {
-  text: '张**1分钟前已报名',
-  sex: 'woman'
-}]
-
 test('WgCountDown.vue', async () => {
   const wrapper = mount(WgCountDown, {
     props: { item }
