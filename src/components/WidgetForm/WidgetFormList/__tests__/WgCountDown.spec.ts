@@ -44,5 +44,7 @@ test('WgCountDown.vue', async () => {
   })
   expect(wrapper.find('.wg-countdown').exists()).toBeTruthy()
   expect(wrapper.find('.wg-countdown').attributes('style')).toContain('margin: 10px 0px 10px 0px')
+  await wrapper.setProps({ item: { ...item, countDownType: CountDownTypes.dayLoop } })
+  console.log(wrapper.html());
   // expect(wrapper.find('.countdown-timeblock').exists()).toBeTruthy()
 })
