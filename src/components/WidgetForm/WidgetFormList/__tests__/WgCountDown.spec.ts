@@ -13,7 +13,7 @@ const item = {
   endTime: '', //倒计时结束时间 -- 时间戳
   endtime: '', //倒计时结束时间 -- Date类型字符串
   title: '距离活动结束还剩：',
-  countDownType: CountDownTypes.endTime,
+  countDownType: CountDownTypes.dayLoop,
   timeStyle: {
     backgroundColor: '#e6e6e6',
     fontSize: '16px',
@@ -44,7 +44,5 @@ test('WgCountDown.vue', async () => {
   })
   expect(wrapper.find('.wg-countdown').exists()).toBeTruthy()
   expect(wrapper.find('.wg-countdown').attributes('style')).toContain('margin: 10px 0px 10px 0px')
-  await wrapper.setProps({ item: { ...item, countDownType: CountDownTypes.dayLoop } })
-  console.log(wrapper.html());
-  // expect(wrapper.find('.countdown-timeblock').exists()).toBeTruthy()
+  expect(wrapper.find('.countdown-timeblock').exists()).toBeTruthy()
 })
