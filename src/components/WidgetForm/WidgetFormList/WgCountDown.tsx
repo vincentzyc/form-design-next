@@ -65,7 +65,6 @@ export default defineComponent({
       }, 1000);
     }
     function initDayLoopCountDown() {
-      console.log(123123);
       isFinished.value = false
       const today = new Date().toLocaleDateString()
       const todayTimeStamp = new Date(today).getTime()
