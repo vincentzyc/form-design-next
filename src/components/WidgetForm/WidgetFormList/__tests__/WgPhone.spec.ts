@@ -34,7 +34,8 @@ test('WgPhone.vue', async () => {
     props: { item }
   })
   expect(wrapper.find('.wg-phone').exists()).toBe(true)
-  // expect(wrapper.find('.wg-phone').text()).toBe(item.label.labelTitle)
-  // await wrapper.setProps({ item: { ...item, showLabel: false } });
-  // expect(wrapper.find('.wg-title').attributes('style')).toContain('display: none')
+  expect(wrapper.find('.wg-item').exists()).toBe(true)
+  expect(wrapper.find('.getVerCode-btn').exists()).toBeTruthy()
+  await wrapper.setProps({ item: { ...item, showCode: false } });
+  expect(wrapper.find('.getVerCode-btn').exists()).toBeFalsy()
 })
