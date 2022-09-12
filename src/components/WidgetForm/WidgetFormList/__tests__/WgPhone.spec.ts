@@ -36,6 +36,7 @@ test('WgPhone.vue', async () => {
   expect(wrapper.find('.wg-phone').exists()).toBe(true)
   expect(wrapper.find('.wg-item').exists()).toBe(true)
   expect(wrapper.find('.getVerCode-btn').exists()).toBeTruthy()
+  expect(wrapper.find('.getVerCode-btn').attributes('style')).toContain('color: rgb(255, 255, 255)')
   await wrapper.setProps({ item: { ...item, showCode: false } });
   expect(wrapper.find('.getVerCode-btn').exists()).toBeFalsy()
 })
