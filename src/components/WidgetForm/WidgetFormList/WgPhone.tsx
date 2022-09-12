@@ -13,12 +13,12 @@ export default defineComponent({
 
     const wrapClass = computed(() => ['wg-item', item.label.labelPosition === 'top' ? 'flex-column' : 'align-middle'])
 
-    const rendeVerCode = () => item.showCode && (
+    const rendeVerCode = () => props.item.showCode && (
       <div class={wrapClass.value}>
-        <div v-show={item.showLabel} style={{ width: item.label.labelWidth }} class="wg-title flex-none" >验证码</div>
+        <div v-show={props.item.showLabel} style={{ width: props.item.label.labelWidth }} class="wg-title flex-none">验证码</div>
         <div class="flex flex-auto">
           <input class="wg-input" placeholder="验证码" />
-          <button style={item.style.btnStyle} class="getVerCode-btn">获取验证码</button>
+          <button style={props.item.style.btnStyle} class="getVerCode-btn">获取验证码</button>
         </div>
       </div>
     )
