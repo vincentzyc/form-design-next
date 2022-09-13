@@ -57,10 +57,6 @@ test('WgSms.vue', async () => {
   const wrapper = mount(WgSms, {
     props: { item }
   })
-  // expect(wrapper.find('.flex .flex-wrap').text()).toBe(item.label.labelTitle)
   expect(wrapper.find('.flex.flex-wrap').exists()).toBe(true)
   expect(wrapper.findAll('.col-12')).toHaveLength(item.smslist.length)
-
-  // await wrapper.setProps({ item: { ...item, showLabel: false } });
-  // expect(wrapper.find('.wg-title').attributes('style')).toContain('display: none')
 })
