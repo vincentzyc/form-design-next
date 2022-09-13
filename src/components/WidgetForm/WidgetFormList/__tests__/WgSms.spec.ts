@@ -42,8 +42,8 @@ const item = {
   }],
   style: {
     margin: "0px 0px 0px 0px",
-    btnPadding:"5px",
-    pxBtnPadding:5,
+    btnPadding: "5px",
+    pxBtnPadding: 5,
     btnStyle: {
       borderRadius: '20px',
       borderradius: 20,
@@ -59,6 +59,8 @@ test('WgSms.vue', async () => {
   })
   // expect(wrapper.find('.flex .flex-wrap').text()).toBe(item.label.labelTitle)
   expect(wrapper.find('.flex.flex-wrap').exists()).toBe(true)
+  expect(wrapper.findAll('.col-12')).toHaveLength(item.smslist.length)
+
   // await wrapper.setProps({ item: { ...item, showLabel: false } });
   // expect(wrapper.find('.wg-title').attributes('style')).toContain('display: none')
 })
