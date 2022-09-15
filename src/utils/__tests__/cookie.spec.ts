@@ -1,5 +1,5 @@
+import { later } from "@/test";
 import { setCookie, getCookie, delCookie } from "../cookie";
-import { later } from "./index.spec";
 
 test("setCookie getCookie", () => {
   const mockId = "cookie";
