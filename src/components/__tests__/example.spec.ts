@@ -2,13 +2,7 @@ import { shallowMount, mount } from '@vue/test-utils'
 import HelloWorld from '@/components/HelloWorld.vue'
 import ComponentTest from '@/components/ComponentTest.vue'
 import BuilderPopup from '@/components/base/BuilderPopup'
-
-
-export function later(delay = 0): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
+import { later } from '@/test'
 
 describe('HelloWorld.vue', () => {
   it('renders props.msg when passed', () => {
