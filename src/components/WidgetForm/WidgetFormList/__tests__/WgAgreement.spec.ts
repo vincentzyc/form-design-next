@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import WgAgreement from '../WgAgreement'
+import ElementPlus from 'element-plus'
 
 const item = {
   type: "Agreement",
@@ -26,7 +27,10 @@ const item = {
 
 test('WgAgreement.vue', async () => {
   const wrapper = mount(WgAgreement, {
-    props: { item }
+    props: { item },
+    global: {
+      plugins: [ElementPlus]
+    }
   })
 
   expect(wrapper.html()).toContain(item.tipText)
