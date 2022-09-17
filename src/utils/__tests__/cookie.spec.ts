@@ -1,4 +1,4 @@
-import { later } from "@/test";
+import { later } from "@/tests";
 import { setCookie, getCookie, delCookie } from "../cookie";
 
 test("setCookie getCookie", () => {
