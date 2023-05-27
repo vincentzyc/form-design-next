@@ -67,7 +67,6 @@ function handleWidget(item: any) {
 }
 function dragEnd() {
   mainStore.setDragWg(null)
-  // store.commit('setDragWg', null)
 }
 
 function disFormList(wgItem: Record<string, unknown>) {
@@ -82,11 +81,9 @@ function disFormList(wgItem: Record<string, unknown>) {
 }
 
 function cloneData(obj: Record<string, unknown>) {
-  // const elKey = Date.now() + '_' + Math.ceil(Math.random() * 1000000);
   const newObj = deepClone(obj);
   newObj.key = newObj.type + '_' + getNanoid()
   mainStore.setDragWg(newObj)
-  // store.commit('setDragWg', newObj)
   return newObj;
 }
 </script>
