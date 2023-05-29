@@ -16,7 +16,7 @@
 <script lang="ts" setup>
 import { getLocalStorage, setLocalStorage } from '@/utils/storage';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { computed } from 'vue';
+import { getCurrentInstance, computed } from 'vue';
 
 type TypeCustomWidgetItem = {
   name: string;
@@ -24,6 +24,9 @@ type TypeCustomWidgetItem = {
 };
 
 const CustomWidgetsKey = 'CustomWidgets';
+
+const vm = getCurrentInstance()?.proxy
+
 const props = defineProps({
   pageData: {
     required: true,
@@ -49,6 +52,7 @@ const disabledBtn = computed(() => {
 
 function handleCustomWidget() {
   // this.$root.$emit('createh5_savePage');
+  vm?.$bus.emit("formDesign_savePage")
   if (Array.isArray(props.pageData.list) && props.pageData.list.length > 0) {
     ElMessageBox.prompt('请输入自定义组件名称', '提示', {
       inputPlaceholder: '支持输入中文、英文、数字、横杠和下划线,长度不超过20',
