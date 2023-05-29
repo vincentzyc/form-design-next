@@ -51,7 +51,6 @@ const disabledBtn = computed(() => {
 });
 
 function handleCustomWidget() {
-  // this.$root.$emit('createh5_savePage');
   vm?.$bus.emit("formDesign_savePage")
   if (Array.isArray(props.pageData.list) && props.pageData.list.length > 0) {
     ElMessageBox.prompt('请输入自定义组件名称', '提示', {
