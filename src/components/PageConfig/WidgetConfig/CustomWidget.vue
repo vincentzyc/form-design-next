@@ -74,19 +74,17 @@ function handleCustomWidget() {
 }
 function saveCustomWidget(name: string) {
   if (!props.pageData) return;
-  // const industry = props.pageData.industry;
   const customWidgetItem: TypeCustomWidgetItem = {
     name: name,
     customList: props.pageData.list,
   };
   save2Local(customWidgetItem);
 }
-function deleteLocalWg(industry: string, index: number) {
+function deleteLocalWg(index: number) {
   let customWidgets = getLocalStorage(CustomWidgetsKey);
   if (customWidgets) {
-    const industryCustomWidgets = customWidgets[industry];
-    if (Array.isArray(industryCustomWidgets) && industryCustomWidgets.length > 0) {
-      industryCustomWidgets.splice(index, 1);
+    if (Array.isArray(customWidgets) && customWidgets.length > 0) {
+      customWidgets.splice(index, 1);
       setLocalStorage(CustomWidgetsKey, customWidgets);
       return true;
     } else {
