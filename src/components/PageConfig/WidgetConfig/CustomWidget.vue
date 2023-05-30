@@ -5,8 +5,8 @@
     placement="top"
     :disabled="!disabledBtn"
   >
-    <span>
-      <el-button @click="handleCustomWidget()" icon="el-icon-star-off" size="medium" type="text" :disabled="disabledBtn"
+    <span style="margin-right: 12px">
+      <el-button @click="handleCustomWidget()" :icon="Star" type="text" :disabled="disabledBtn"
         >保存为自定义组件</el-button
       >
     </span>
@@ -16,30 +16,32 @@
 <script lang="ts" setup>
 import { getLocalStorage, setLocalStorage } from '@/utils/storage';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { Star } from '@element-plus/icons-vue';
 import { getCurrentInstance, computed } from 'vue';
 
-type TypeCustomWidgetItem = {
+interface TypeCustomWidgetItem {
   name: string;
   customList: Record<string, any>;
-};
+}
+
+interface Props {
+  pageData: Record<string, any> | null;
+}
 
 const CustomWidgetsKey = 'CustomWidgets';
 
-const vm = getCurrentInstance()?.proxy
+const vm = getCurrentInstance()?.proxy;
 
-const props = defineProps({
-  pageData: {
-    required: true,
-    type: Object,
-    default: () => ({}),
-  },
+const props = withDefaults(defineProps<Props>(), {
+  pageData: () => ({}),
 });
+
 const emit = defineEmits(['success']);
 
 defineExpose({ deleteLocalWg });
 
 const disabledBtn = computed(() => {
-  if (Array.isArray(props.pageData.list) && props.pageData.list.length > 0) {
+  if (props.pageData && Array.isArray(props.pageData.list) && props.pageData.list.length > 0) {
     const hadSticky = props.pageData.list.some(v => v.positionSticky);
     if (hadSticky) return true;
     if (Array.isArray(props.pageData.fixedBottom) && props.pageData.fixedBottom.length > 0) return true;
@@ -51,8 +53,8 @@ const disabledBtn = computed(() => {
 });
 
 function handleCustomWidget() {
-  vm?.$bus.emit("formDesign_savePage")
-  if (Array.isArray(props.pageData.list) && props.pageData.list.length > 0) {
+  vm?.$bus.emit('formDesign_savePage');
+  if (props.pageData && Array.isArray(props.pageData.list) && props.pageData.list.length > 0) {
     ElMessageBox.prompt('请输入自定义组件名称', '提示', {
       inputPlaceholder: '支持输入中文、英文、数字、横杠和下划线,长度不超过20',
       showClose: false,
@@ -62,7 +64,7 @@ function handleCustomWidget() {
       .then(({ value }) => {
         saveCustomWidget(value);
       })
-      .catch();
+      .catch(() => null);
   } else {
     ElMessage({
       type: 'error',
@@ -71,12 +73,13 @@ function handleCustomWidget() {
   }
 }
 function saveCustomWidget(name: string) {
-  const industry = props.pageData.industry;
+  if (!props.pageData) return;
+  // const industry = props.pageData.industry;
   const customWidgetItem: TypeCustomWidgetItem = {
     name: name,
     customList: props.pageData.list,
   };
-  save2Local(customWidgetItem, industry);
+  save2Local(customWidgetItem);
 }
 function deleteLocalWg(industry: string, index: number) {
   let customWidgets = getLocalStorage(CustomWidgetsKey);
@@ -92,24 +95,21 @@ function deleteLocalWg(industry: string, index: number) {
   }
   return false;
 }
-async function save2Local(customWidgetItem: TypeCustomWidgetItem, industry: string) {
-  let customWidgets = getLocalStorage(CustomWidgetsKey);
+async function save2Local(customWidgetItem: TypeCustomWidgetItem) {
+  let customWidgets: TypeCustomWidgetItem[] = getLocalStorage(CustomWidgetsKey);
   if (customWidgets) {
-    const industryCustomWidgets: TypeCustomWidgetItem[] = customWidgets[industry];
-    if (Array.isArray(industryCustomWidgets) && industryCustomWidgets.length > 0) {
-      const newWgs = await uniWidgets(industryCustomWidgets, customWidgetItem);
+    if (Array.isArray(customWidgets) && customWidgets.length > 0) {
+      const newWgs = await uniWidgets(customWidgets, customWidgetItem);
       if (newWgs) {
-        customWidgets[industry] = newWgs;
+        customWidgets = newWgs;
       } else {
         return;
       }
     } else {
-      customWidgets[industry] = [customWidgetItem];
+      customWidgets = [customWidgetItem];
     }
   } else {
-    customWidgets = {
-      [industry]: [customWidgetItem],
-    };
+    customWidgets = [customWidgetItem];
   }
   setLocalStorage(CustomWidgetsKey, customWidgets);
   ElMessage({
@@ -118,22 +118,25 @@ async function save2Local(customWidgetItem: TypeCustomWidgetItem, industry: stri
   });
   emit('success');
 }
-function uniWidgets(industryCustomWidgets: TypeCustomWidgetItem[], customWidgetItem: TypeCustomWidgetItem) {
-  const wgsIndex = industryCustomWidgets.findIndex(v => v.name === customWidgetItem.name);
+function uniWidgets(
+  customWidgets: TypeCustomWidgetItem[],
+  customWidgetItem: TypeCustomWidgetItem
+): TypeCustomWidgetItem[] | Promise<TypeCustomWidgetItem[] | false> {
+  const wgsIndex = customWidgets.findIndex(v => v.name === customWidgetItem.name);
   if (wgsIndex > -1) {
     return new Promise(resolve => {
       ElMessageBox.confirm('已存在相同名称的自定义组件, 是否覆盖?', '提示', {
         type: 'warning',
       })
         .then(() => {
-          industryCustomWidgets[wgsIndex] = customWidgetItem;
-          resolve(industryCustomWidgets);
+          customWidgets[wgsIndex] = customWidgetItem;
+          resolve(customWidgets);
         })
         .catch(() => resolve(false));
     });
   } else {
-    industryCustomWidgets.push(customWidgetItem);
-    return industryCustomWidgets;
+    customWidgets.push(customWidgetItem);
+    return customWidgets;
   }
 }
 </script>
