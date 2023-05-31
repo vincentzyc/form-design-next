@@ -75,7 +75,7 @@ export function setValueByKey(obj, objKey, value) {
   const keyList = objKey.split('.');
   const lastKey = keyList.pop();
   const targetObj = keyList.reduce((pre, item) => pre[item], obj);
-  if (!Object.hasOwn(targetObj, lastKey)) {
+  if (!Object.prototype.hasOwnProperty.call(targetObj, lastKey)) {
     return false;
   }
   targetObj[lastKey] = value;
