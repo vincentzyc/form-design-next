@@ -18,6 +18,7 @@ import { getLocalStorage, setLocalStorage } from '@/utils/storage';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Star } from '@element-plus/icons-vue';
 import { getCurrentInstance, computed } from 'vue';
+import { emitCustomWidgetsSave } from '@/bus';
 
 interface TypeCustomWidgetItem {
   name: string;
@@ -114,6 +115,7 @@ async function save2Local(customWidgetItem: TypeCustomWidgetItem) {
     type: 'success',
     message: '保存成功!',
   });
+  emitCustomWidgetsSave('haha')
   emit('success');
 }
 function uniWidgets(
