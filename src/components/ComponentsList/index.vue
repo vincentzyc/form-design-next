@@ -66,14 +66,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { customWidgetsCloneData } from '@/assets/js/pageDataUtil';
+import { getLocalStorage } from '@/utils/storage';
+import { onCustomWidgetsSave } from '@/bus';
 export default defineComponent({
   name: 'ComponentsList',
 });
 </script>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import Draggable from 'vuedraggable';
 import { getNanoid, hasKey } from '@/utils/index';
 import { deepClone } from '@/utils/deep-clone';
@@ -81,6 +82,9 @@ import widgetLevel1 from '@/assets/js/widget';
 import { useMainStore } from '@/pinia';
 import { storeToRefs } from 'pinia';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { customWidgetsCloneData } from '@/assets/js/pageDataUtil';
+
+const CustomWidgetsKey = 'CustomWidgets';
 
 const mainStore = useMainStore();
 const { pageData } = storeToRefs(mainStore);
@@ -119,6 +123,13 @@ function deleteCustomWg(index: number, name: string) {
     .catch(() => null);
 }
 
+function getLocalCustomWidgets() {
+  let customWidgets = getLocalStorage(CustomWidgetsKey);
+  if (customWidgets) {
+    customWidgets.value = customWidgets;
+  }
+}
+
 function handleWidget(item: any) {
   widgetLevel2.value = item;
 }
@@ -143,4 +154,11 @@ function cloneData(obj: Record<string, unknown>) {
   mainStore.setDragWg(newObj);
   return newObj;
 }
+
+onMounted(() => {
+  onCustomWidgetsSave(message => {
+    console.log(message);
+    getLocalCustomWidgets()
+  });
+});
 </script>
