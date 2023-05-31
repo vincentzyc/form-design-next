@@ -80,6 +80,7 @@ import { deepClone } from '@/utils/deep-clone';
 import widgetLevel1 from '@/assets/js/widget';
 import { useMainStore } from '@/pinia';
 import { storeToRefs } from 'pinia';
+import { ElMessage, ElMessageBox } from 'element-plus';
 
 const mainStore = useMainStore();
 const { pageData } = storeToRefs(mainStore);
@@ -92,6 +93,30 @@ function customWidgetsClone(obj: Record<string, unknown>) {
   const newObj = customWidgetsCloneData(obj);
   mainStore.setDragWg(newObj);
   return newObj;
+}
+
+function deleteCustomWg(index: number, name: string) {
+  ElMessageBox.confirm('确认删除自定义组件' + name, '提示', {
+    type: 'warning',
+  })
+    .then(() => {
+      // if (this.$refs.customWidget) {
+      //   const deleteRes = this.$refs.customWidget.deleteLocalWg(this.pageData.industry, index);
+      //   if (deleteRes) {
+      customWidgets.value.splice(index, 1);
+      ElMessage({
+        type: 'success',
+        message: '删除成功!',
+      });
+      //   } else {
+      //     ElMessage({
+      //       type: 'error',
+      //       message: '删除失败',
+      //     });
+      //   }
+      // }
+    })
+    .catch(() => null);
 }
 
 function handleWidget(item: any) {
