@@ -86,12 +86,17 @@ import { customWidgetsCloneData } from '@/assets/js/pageDataUtil';
 
 const CustomWidgetsKey = 'CustomWidgets';
 
+interface TypeCustomWidgetItem {
+  name: string;
+  customList: Record<string, any>;
+}
+
 const mainStore = useMainStore();
 const { pageData } = storeToRefs(mainStore);
 
 const widgetLevel2 = ref(widgetLevel1[0]);
 
-const customWidgets = ref([]);
+const customWidgets = ref<TypeCustomWidgetItem[]>([]);
 
 function customWidgetsClone(obj: Record<string, unknown>) {
   const newObj = customWidgetsCloneData(obj);
