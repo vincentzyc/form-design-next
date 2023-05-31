@@ -156,9 +156,6 @@ function cloneData(obj: Record<string, unknown>) {
 }
 
 onMounted(() => {
-  onCustomWidgetsSave(message => {
-    console.log(message);
-    getLocalCustomWidgets()
-  });
+  onCustomWidgetsSave(() => getLocalCustomWidgets());
 });
 </script>
