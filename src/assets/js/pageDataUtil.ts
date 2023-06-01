@@ -1,8 +1,4 @@
-import { Tabs } from '@/assets/js/widget/widgets-types';
-import { getNanoid } from '@/utils';
-import { deepClone } from '@/utils/deep-clone';
-
-const CustomWidgets = 'Custom_Widgets';
+import { Tabs, CustomWidget } from '@/assets/js/widget/widgets-types';
 
 /**
  * 获取 list 中指定组件类型的组件
@@ -87,32 +83,12 @@ export function setValueByKey(obj, objKey, value) {
  * @param {Number} index 替换的组件index
  */
 export function widgetsMerge(list, index) {
-  const newWgs = list[index];
-  if (newWgs.type === CustomWidgets) list.splice(index, 1, ...newWgs.customList);
+  if (Array.isArray(list) && list.length > 0) {
+    const newWgs = list[index];
+    if (newWgs.type === CustomWidget) list.splice(index, 1, ...newWgs.customList);
+    return list;
+  }
   return list;
-}
-/**
- * 更新组件key
- * @param {Array} arr 组件列表
- * @returns 组件列表
- */
-function updateWgKey(arr) {
-  arr.forEach(wg => {
-    if (wg.key) wg.key = wg.type + '_' + getNanoid();
-    if (wg.list) wg.list = updateWgKey(wg.list);
-    if (wg.popupList) wg.popupList = updateWgKey(wg.popupList);
-  });
-  return arr;
-}
-/**
- * 修改拖拽后自定义组件数据
- * @param {Object} obj 自定义组件obj
- * @returns 更新后自定义组件数据
- */
-export function customWidgetsCloneData(obj) {
-  obj.customList = updateWgKey(obj.customList);
-  obj.type = CustomWidgets;
-  return deepClone(obj);
 }
 
 /**
@@ -122,7 +98,7 @@ export function customWidgetsCloneData(obj) {
  * @returns {Boolean}
  */
 export function allowCustomWgPut(dragWg, arr = ['list']) {
-  if (dragWg.type === CustomWidgets) {
+  if (dragWg.type === CustomWidget) {
     const isListWg = dragWg.customList.find(v => {
       for (const key of arr) {
         if (Array.isArray(v[key]) && v[key].length > 0) return true;
