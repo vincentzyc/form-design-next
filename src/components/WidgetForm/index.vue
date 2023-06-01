@@ -61,6 +61,7 @@ import Draggable from 'vuedraggable'
 import WidgetFormList from './WidgetFormList'
 import { useMainStore } from '@/pinia'
 import { storeToRefs } from "pinia";
+import { widgetsMerge } from '@/assets/js/pageDataUtil'
 
 export default defineComponent({
   name: "WidgetForm",
@@ -88,6 +89,7 @@ export default defineComponent({
     }
     function handleWidgetAdd(evt: any) {
       const newIndex = evt.newIndex;
+      widgetsMerge(pageData.value?.list, newIndex);
       mainStore.setSelectWg(pageData.value?.list[newIndex])
       mainStore.setConfigTab("widget")
     }
