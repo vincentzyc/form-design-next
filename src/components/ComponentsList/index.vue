@@ -29,8 +29,9 @@
                 <template #item="{ index, element }">
                   <li class="form-edit-widget-label">
                     {{ element.name }}
-                    {{ index }}
-                    <!-- <i @click.stop="deleteCustomWg(index, element.name)" class="el-icon-close wg-close-icon"></i> -->
+                    <el-icon class="el-icon-close wg-close-icon" @click.stop="deleteCustomWg(index, element.name)">
+                      <CircleClose />
+                    </el-icon>
                   </li>
                 </template>
               </Draggable>
@@ -86,6 +87,7 @@ import { storeToRefs } from 'pinia';
 // import { ElMessage, ElMessageBox } from 'element-plus';
 import { getLocalStorage } from '@/utils/storage';
 import { onCustomWidgetsSave } from '@/bus';
+import { CircleClose } from '@element-plus/icons-vue';
 
 const CustomWidgetsKey = 'CustomWidgets';
 
@@ -101,29 +103,30 @@ const widgetLevel2 = ref(widgetLevel1[0]);
 
 const customWidgets = ref<TypeCustomWidgetItem[]>([]);
 
-// function deleteCustomWg(index: number, name: string) {
-//   ElMessageBox.confirm('确认删除自定义组件' + name, '提示', {
-//     type: 'warning',
-//   })
-//     .then(() => {
-//       // if (this.$refs.customWidget) {
-//       //   const deleteRes = this.$refs.customWidget.deleteLocalWg(this.pageData.industry, index);
-//       //   if (deleteRes) {
-//       customWidgets.value.splice(index, 1);
-//       ElMessage({
-//         type: 'success',
-//         message: '删除成功!',
-//       });
-//       //   } else {
-//       //     ElMessage({
-//       //       type: 'error',
-//       //       message: '删除失败',
-//       //     });
-//       //   }
-//       // }
-//     })
-//     .catch(() => null);
-// }
+function deleteCustomWg(index: number, name: string) {
+  console.log(index, name);
+  //   ElMessageBox.confirm('确认删除自定义组件' + name, '提示', {
+  //     type: 'warning',
+  //   })
+  //     .then(() => {
+  //       // if (this.$refs.customWidget) {
+  //       //   const deleteRes = this.$refs.customWidget.deleteLocalWg(this.pageData.industry, index);
+  //       //   if (deleteRes) {
+  //       customWidgets.value.splice(index, 1);
+  //       ElMessage({
+  //         type: 'success',
+  //         message: '删除成功!',
+  //       });
+  //       //   } else {
+  //       //     ElMessage({
+  //       //       type: 'error',
+  //       //       message: '删除失败',
+  //       //     });
+  //       //   }
+  //       // }
+  //     })
+  //     .catch(() => null);
+}
 
 function getLocalCustomWidgets() {
   let localCustomWidgets = getLocalStorage(CustomWidgetsKey);
@@ -154,7 +157,7 @@ function disFormList(wgItem: Record<string, unknown>) {
  * @param {Array} arr 组件列表
  * @returns 组件列表
  */
- function updateWgKey(arr) {
+function updateWgKey(arr) {
   arr.forEach(wg => {
     if (wg.key) wg.key = wg.type + '_' + getNanoid();
     if (wg.list) wg.list = updateWgKey(wg.list);
