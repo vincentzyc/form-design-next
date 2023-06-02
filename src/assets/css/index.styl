@@ -7,6 +7,7 @@ $primary-background-color = #ecf5ff;
   height: 100% !important;
   justify-content: center;
 }
+
 // 覆盖element-ui样式 end
 
 // 全局通用样式
@@ -97,10 +98,10 @@ $primary-background-color = #ecf5ff;
   }
 
   .form-edit-widget-label {
+    position: relative;
     width: 100%;
     font-size: 12px;
     line-height: 30px;
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     color: #333;
@@ -121,10 +122,31 @@ $primary-background-color = #ecf5ff;
     &:hover {
       color: $primary-color;
       box-shadow: 0 0 6px 3px $primary-color-alpha;
+
+      .wg-close-icon {
+        display: block;
+      }
     }
 
     &.disdraggable {
       cursor: no-drop;
+    }
+
+    .wg-close-icon {
+      cursor: pointer;
+      display: none;
+      position: absolute;
+      right: -8px;
+      top: -8px;
+      color: #409eff;
+      font-size: 24px;
+      border-radius: 20px;
+      transition: 0.3s;
+      background-color: #fff;
+
+      &:hover {
+        transform: scale(1.3);
+      }
     }
   }
 }
