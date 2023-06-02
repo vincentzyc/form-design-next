@@ -27,7 +27,7 @@
         </div>
         <Draggable
           :animation="100"
-          :class="{ 'widget-empty': pageData.list.length === 0 && !pageData.style.backgroundImage }"
+          :class="{ 'widget-empty': wgList.length === 0 && !pageData.style.backgroundImage }"
           :group="{ name: 'widget', put: true }"
           :swapThreshold="0.7"
           @add="handleWidgetAdd"
@@ -37,10 +37,10 @@
           filter=".disdraggable"
           ghostClass="ghost"
           item-key="key"
-          v-model="pageData.list"
+          v-model="wgList"
         >
           <template #item="{ element, index }">
-            <WidgetFormList v-model:data="pageData.list" :index="index" :item="element" />
+            <WidgetFormList v-model:data="wgList" :index="index" :item="element" />
           </template>
         </Draggable>
 
@@ -56,47 +56,77 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import Draggable from 'vuedraggable'
-import WidgetFormList from './WidgetFormList'
-import { useMainStore } from '@/pinia'
-import { storeToRefs } from "pinia";
-import { widgetsMerge } from '@/assets/js/pageDataUtil'
+import { defineComponent, computed } from 'vue';
+import Draggable from 'vuedraggable';
+import WidgetFormList from './WidgetFormList';
+import { useMainStore } from '@/pinia';
+import { storeToRefs } from 'pinia';
+import { CustomWidget } from '@/assets/js/widget/widgets-types';
+// import { widgetsMerge } from '@/assets/js/pageDataUtil';
 
 export default defineComponent({
-  name: "WidgetForm",
+  name: 'WidgetForm',
   components: {
-    WidgetFormList, Draggable
+    WidgetFormList,
+    Draggable,
   },
+  // computed:{
+  //   wgList:{
+  //     get(){
+  //       return
+  //     },
+  //     set(value){}
+  //   }
+  // },
   setup() {
-    const mainStore = useMainStore()
-    const { pageData } = storeToRefs(mainStore)
+    const mainStore = useMainStore();
+    const { pageData } = storeToRefs(mainStore);
+
+    const wgList = computed({
+      get() {
+        return pageData.value?.list;
+      },
+      set(value) {
+        if (Array.isArray(value) && value.length > 0) {
+          value.forEach((wg, index) => {
+            if (wg.type === CustomWidget) {
+              value.splice(index, 1, ...wg.customList);
+            }
+          });
+        }
+        if (pageData.value) pageData.value.list = value;
+      },
+    });
 
     function fixedCustomStyle(item: Record<string, any>) {
       if (item.position) {
         return {
           width: item.style.width,
           top: item.position.top + 'px',
-          [item.position.side]: item.position[item.position.side] + '%'
-        }
+          [item.position.side]: item.position[item.position.side] + '%',
+        };
       }
     }
     function dragStart(evt: any) {
-      mainStore.setDragWg(pageData.value?.list[evt.oldIndex])
+      mainStore.setDragWg(pageData.value?.list[evt.oldIndex]);
     }
     function dragEnd() {
-      mainStore.setDragWg(null)
+      mainStore.setDragWg(null);
     }
     function handleWidgetAdd(evt: any) {
       const newIndex = evt.newIndex;
-      widgetsMerge(pageData.value?.list, newIndex);
-      mainStore.setSelectWg(pageData.value?.list[newIndex])
-      mainStore.setConfigTab("widget")
+      // widgetsMerge(pageData.value?.list, newIndex);
+      mainStore.setSelectWg(pageData.value?.list[newIndex]);
+      mainStore.setConfigTab('widget');
     }
     return {
+      wgList,
       pageData,
-      fixedCustomStyle, dragStart, dragEnd, handleWidgetAdd
-    }
-  }
-})
+      fixedCustomStyle,
+      dragStart,
+      dragEnd,
+      handleWidgetAdd,
+    };
+  },
+});
 </script>
