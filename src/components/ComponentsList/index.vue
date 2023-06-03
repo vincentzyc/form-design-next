@@ -84,8 +84,8 @@ import widgetLevel1 from '@/assets/js/widget';
 import { CustomWidget } from '@/assets/js/widget/widgets-types';
 import { useMainStore } from '@/pinia';
 import { storeToRefs } from 'pinia';
-// import { ElMessage, ElMessageBox } from 'element-plus';
-import { getLocalStorage } from '@/utils/storage';
+import { ElMessage, ElMessageBox } from 'element-plus';
+import { getLocalStorage, setLocalStorage } from '@/utils/storage';
 import { onCustomWidgetsSave } from '@/bus';
 import { CircleClose } from '@element-plus/icons-vue';
 
@@ -104,28 +104,36 @@ const widgetLevel2 = ref(widgetLevel1[0]);
 const customWidgets = ref<TypeCustomWidgetItem[]>([]);
 
 function deleteCustomWg(index: number, name: string) {
-  console.log(index, name);
-  //   ElMessageBox.confirm('确认删除自定义组件' + name, '提示', {
-  //     type: 'warning',
-  //   })
-  //     .then(() => {
-  //       // if (this.$refs.customWidget) {
-  //       //   const deleteRes = this.$refs.customWidget.deleteLocalWg(this.pageData.industry, index);
-  //       //   if (deleteRes) {
-  //       customWidgets.value.splice(index, 1);
-  //       ElMessage({
-  //         type: 'success',
-  //         message: '删除成功!',
-  //       });
-  //       //   } else {
-  //       //     ElMessage({
-  //       //       type: 'error',
-  //       //       message: '删除失败',
-  //       //     });
-  //       //   }
-  //       // }
-  //     })
-  //     .catch(() => null);
+  ElMessageBox.confirm('确认删除自定义组件' + name, '提示', {
+    type: 'warning',
+  })
+    .then(() => {
+      // if (this.$refs.customWidget) {
+      //   const deleteRes = this.$refs.customWidget.deleteLocalWg(this.pageData.industry, index);
+      //   if (deleteRes) {
+      deleteLocalWg(index);
+      customWidgets.value.splice(index, 1);
+      ElMessage({
+        type: 'success',
+        message: '删除成功!',
+      });
+      //   } else {
+      //     ElMessage({
+      //       type: 'error',
+      //       message: '删除失败',
+      //     });
+      //   }
+      // }
+    })
+    .catch(() => null);
+}
+
+function deleteLocalWg(index: number) {
+  let localCustomWidgets = getLocalStorage(CustomWidgetsKey);
+  if (localCustomWidgets) {
+    localCustomWidgets.splice(index, 1);
+    setLocalStorage(CustomWidgetsKey, localCustomWidgets);
+  }
 }
 
 function getLocalCustomWidgets() {
