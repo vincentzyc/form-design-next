@@ -108,22 +108,19 @@ function deleteCustomWg(index: number, name: string) {
     type: 'warning',
   })
     .then(() => {
-      // if (this.$refs.customWidget) {
-      //   const deleteRes = this.$refs.customWidget.deleteLocalWg(this.pageData.industry, index);
-      //   if (deleteRes) {
-      deleteLocalWg(index);
-      customWidgets.value.splice(index, 1);
-      ElMessage({
-        type: 'success',
-        message: '删除成功!',
-      });
-      //   } else {
-      //     ElMessage({
-      //       type: 'error',
-      //       message: '删除失败',
-      //     });
-      //   }
-      // }
+      const deleteRes = deleteLocalWg(index);
+      if (deleteRes) {
+        customWidgets.value.splice(index, 1);
+        ElMessage({
+          type: 'success',
+          message: '删除成功!',
+        });
+      } else {
+        ElMessage({
+          type: 'error',
+          message: '删除失败',
+        });
+      }
     })
     .catch(() => null);
 }
@@ -133,6 +130,9 @@ function deleteLocalWg(index: number) {
   if (localCustomWidgets) {
     localCustomWidgets.splice(index, 1);
     setLocalStorage(CustomWidgetsKey, localCustomWidgets);
+    return true;
+  } else {
+    return false;
   }
 }
 
