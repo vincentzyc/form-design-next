@@ -1,7 +1,4 @@
-// import Vue from "vue";
-import Quill from 'quill';
-// import VueQuillEditor from 'vue-quill-editor'
-
+import { Quill } from '@vueup/vue-quill';
 import TextIndent from './text-indent';
 import LineHeight from './line-height';
 
@@ -14,5 +11,3 @@ Quill.register(SizeStyle, true);
 Quill.register(AlignStyle, true);
 Quill.register('formats/textIndent', TextIndent, true);
 Quill.register('formats/lineHeight', LineHeight, true);
-
-// Vue.use(VueQuillEditor)
