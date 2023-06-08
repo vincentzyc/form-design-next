@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.0.1",
+    "@vueup/vue-quill": "^1.2.0",
     "compressorjs": "^1.1.1",
     "core-js": "^3.8.3",
     "element-plus": "^2.1.7",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@pinia/testing": "^0.0.14",
     "@types/jest": "^27.0.1",
+    "@types/quill": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
