@@ -1,90 +1,5 @@
 <template>
-  <QuillEditor
-    @ready="quillEditorReady"
-    toolbar="#toolbar"
-    :options="editorOption"
-    theme="snow"
-    v-model:content="model"
-    contentType="html"
-  >
-    <template #toolbar>
-      <div id="toolbar">
-        <el-tooltip class="item" effect="dark" content="文字颜色" placement="top">
-          <span class="ql-color-picker">
-            <el-color-picker :predefine="predefineColors" size="mini" @active-change="pickerColor" />
-          </span>
-        </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="加粗" placement="top">
-          <button class="ql-bold"></button>
-        </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="斜体" placement="top">
-          <button class="ql-italic"></button>
-        </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="文字大小" placement="top">
-          <span>
-            <select class="ql-size">
-              <option value="8px"></option>
-              <option value="10px"></option>
-              <option value="12px"></option>
-              <option value="14px"></option>
-              <option value="16px"></option>
-              <option value="18px"></option>
-              <option value="20px"></option>
-              <option value="24px"></option>
-              <option value="36px"></option>
-              <option value="48px"></option>
-              <option value="64px"></option>
-            </select>
-          </span>
-        </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="对齐方式" placement="top">
-          <span>
-            <select class="ql-align"></select>
-          </span>
-        </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="行高" placement="top">
-          <span>
-            <select class="ql-lineHeight">
-              <option value="1"></option>
-              <option value="1.25"></option>
-              <option value="1.5"></option>
-              <option value="1.75"></option>
-              <option value="2"></option>
-              <option value="3"></option>
-            </select>
-          </span>
-        </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="缩进" placement="top">
-          <span>
-            <select class="ql-textIndent el-icon-s-fold">
-              <option value="0em"></option>
-              <option value="1em"></option>
-              <option value="2em"></option>
-              <option value="3em"></option>
-              <option value="4em"></option>
-              <option value="5em"></option>
-            </select>
-          </span>
-        </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="下划线" placement="top">
-          <button class="ql-underline"></button>
-        </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="删除线" placement="top">
-          <button class="ql-strike"></button>
-        </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="链接" placement="top">
-          <button class="ql-link"></button>
-        </el-tooltip>
-        <!-- <button class="ql-list" value="ordered"></button>
-      <button class="ql-list" value="bullet"></button>-->
-
-        <!-- Add subscript and superscript buttons -->
-        <!-- <button class="ql-script" value="sub"></button>
-      <button class="ql-script" value="super"></button>-->
-        <!-- You can also add your own -->
-        <!-- <button id="custom-button">[ Click me ]</button> -->
-      </div>
-    </template>
+  <QuillEditor @ready="quillEditorReady" toolbar="full" theme="snow" v-model:content="model" contentType="html">
   </QuillEditor>
 </template>
 
@@ -95,6 +10,7 @@ import { useMainStore } from '@/pinia';
 import { QuillEditor, Quill } from '@vueup/vue-quill';
 import { computed, reactive, ref } from 'vue';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+// import './quill-editor.styl';
 
 const mainStore = useMainStore();
 const { predefineColors } = storeToRefs(mainStore);
@@ -141,7 +57,7 @@ const model = computed({
 });
 
 function quillEditorReady(quill: Quill) {
-  console.log(quill);
+  if (quill) quillEditor.value = quill;
 }
 
 function pickerColor(v: string) {
