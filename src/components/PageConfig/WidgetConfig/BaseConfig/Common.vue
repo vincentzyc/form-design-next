@@ -31,7 +31,7 @@
     </el-form-item>
     <el-form-item label="文本内容" v-if="selectWg.type === 'StaticText'">
       <!-- <Editor v-model:modelValue="selectWg.value" /> -->
-      <FullQuillEditor v-model:modelValue="selectWg.value" />
+      <CustomQuillEditor v-model:modelValue="selectWg.value" />
     </el-form-item>
     <el-form-item label="跳转地址(空或格式错误都不会跳转)" v-if="hasKey(selectWg, 'link')">
       <el-input @change="checkLink" v-model="selectWg.link"></el-input>
@@ -94,8 +94,8 @@ import { useMainStore } from '@/pinia';
 import { storeToRefs } from 'pinia';
 import Draggable from 'vuedraggable';
 // import Editor from "@/components/Editor";
-// import CustomQuillEditor from '@/components/CustomQuillEditor/CustomQuillEditor.vue';
-import FullQuillEditor from '@/components/FullQuillEditor/index.vue';
+import CustomQuillEditor from '@/components/CustomQuillEditor/index.vue';
+// import FullQuillEditor from '@/components/FullQuillEditor/index.vue';
 import { hasKey } from '@/utils/index';
 import { isLink } from '@/utils/validate/link';
 import allFieldTypes from '@/assets/js/field-types.js';
