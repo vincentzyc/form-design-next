@@ -29,6 +29,12 @@
     display: none;
   }
 
+  .ql-picker-label {
+    border: none !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   // .ql-color-picker>.el-color-picker::before {
   // content: 'A';
   // position: absolute;
@@ -46,7 +52,7 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 0;
+      left: -3px;
       right: 0;
       color: #333;
       font-size: 20px;
@@ -59,6 +65,7 @@
 
   .ql-picker.ql-size > .ql-picker-label::before {
     content: 'T';
+    font-weight: bold;
   }
 
   // .ql-textIndent.el-icon-s-fold::before {

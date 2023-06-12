@@ -22,7 +22,7 @@
             <button class="ql-italic"></button>
           </el-tooltip>
           <el-tooltip effect="dark" content="文字大小" placement="top">
-            <span>
+            <button>
               <select class="ql-size">
                 <option value="8px"></option>
                 <option value="10px"></option>
@@ -36,7 +36,7 @@
                 <option value="48px"></option>
                 <option value="64px"></option>
               </select>
-            </span>
+            </button>
           </el-tooltip>
           <el-tooltip effect="dark" content="对齐方式" placement="top">
             <span>
@@ -67,7 +67,7 @@
               </select>
             </span>
           </el-tooltip>
-          <el-tooltip effect="dark" content="下划线" placement="top">
+          <!-- <el-tooltip effect="dark" content="下划线" placement="top">
             <button class="ql-underline"></button>
           </el-tooltip>
           <el-tooltip effect="dark" content="删除线" placement="top">
@@ -75,7 +75,7 @@
           </el-tooltip>
           <el-tooltip effect="dark" content="链接" placement="top">
             <button class="ql-link"></button>
-          </el-tooltip>
+          </el-tooltip> -->
           <!-- <button class="ql-list" value="ordered"></button>
       <button class="ql-list" value="bullet"></button>-->
 
