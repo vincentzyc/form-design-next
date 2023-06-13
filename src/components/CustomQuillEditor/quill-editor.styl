@@ -15,7 +15,6 @@
       cursor: pointer;
       display: inline-block;
       float: left;
-      padding: 3px 5px;
       margin-left: 0;
       margin-right: 0;
 
@@ -31,13 +30,15 @@
 
         .ql-picker-label {
           display: flex;
+          justify-content: center;
+          align-items: center;
           border: none !important;
           padding-left: 0;
           padding-right: 0;
-          justify-content: center;
 
-          &::before {
-            line-height: 20px;
+          & > svg {
+            width: 20px;
+            height: 20px;
           }
         }
       }
