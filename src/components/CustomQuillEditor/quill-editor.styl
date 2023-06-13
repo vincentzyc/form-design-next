@@ -43,6 +43,16 @@
       }
 
       .ql-custom-picker {
+        .ql-picker-label {
+          &::before {
+            font-size: 20px;
+          }
+
+          & > svg {
+            display: none;
+          }
+        }
+
         .ql-picker-options {
           .ql-picker-item {
             padding: 0 5px;
@@ -77,24 +87,11 @@
   // height: 100%;
   // font-size: 20px;
   // }
-  .ql-picker.ql-size > .ql-picker-label, .ql-picker.ql-textIndent > .ql-picker-label, .ql-picker.ql-lineHeight > .ql-picker-label {
-    &::before {
-      font-size: 20px;
-    }
-
-    & > svg {
-      display: none;
-    }
-  }
-
   .ql-picker.ql-size > .ql-picker-label::before {
     content: 'T';
     font-weight: bold;
   }
 
-  // .ql-textIndent.el-icon-s-fold::before {
-  // display: none;
-  // }
   .ql-lineHeight > .ql-picker-label::before {
     content: 'L';
     font-weight: bold;
