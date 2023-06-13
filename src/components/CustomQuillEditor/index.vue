@@ -22,8 +22,8 @@
             <button class="ql-italic"></button>
           </el-tooltip>
           <el-tooltip effect="dark" content="文字大小" placement="top">
-            <button>
-              <select class="ql-size">
+            <span class="ql-item">
+              <select class="ql-size ql-custom-picker">
                 <option value="8px"></option>
                 <option value="10px"></option>
                 <option value="12px"></option>
@@ -36,16 +36,16 @@
                 <option value="48px"></option>
                 <option value="64px"></option>
               </select>
-            </button>
+            </span>
           </el-tooltip>
           <el-tooltip effect="dark" content="对齐方式" placement="top">
-            <span>
+            <span class="ql-item">
               <select class="ql-align"></select>
             </span>
           </el-tooltip>
           <el-tooltip effect="dark" content="行高" placement="top">
-            <span>
-              <select class="ql-lineHeight">
+            <span class="ql-item">
+              <select class="ql-lineHeight ql-custom-picker">
                 <option value="1"></option>
                 <option value="1.25"></option>
                 <option value="1.5"></option>
@@ -56,8 +56,8 @@
             </span>
           </el-tooltip>
           <el-tooltip effect="dark" content="缩进" placement="top">
-            <span>
-              <select class="ql-indent">
+            <span class="ql-item">
+              <select class="ql-indent ql-custom-picker">
                 <option value="0em"></option>
                 <option value="1em"></option>
                 <option value="2em"></option>
