@@ -55,19 +55,13 @@
               </select>
             </span>
           </el-tooltip>
-          <el-tooltip effect="dark" content="缩进" placement="top">
-            <span class="ql-item">
-              <select class="ql-indent ql-custom-picker">
-                <option value="0em"></option>
-                <option value="1em"></option>
-                <option value="2em"></option>
-                <option value="3em"></option>
-                <option value="4em"></option>
-                <option value="5em"></option>
-              </select>
-            </span>
+          <el-tooltip effect="dark" content="左缩进" placement="top">
+            <button class="ql-indent" value="+1"></button>
           </el-tooltip>
-          <!-- <el-tooltip effect="dark" content="下划线" placement="top">
+          <el-tooltip effect="dark" content="右缩进" placement="top">
+            <button class="ql-indent" value="-1"></button>
+          </el-tooltip>
+          <el-tooltip effect="dark" content="下划线" placement="top">
             <button class="ql-underline"></button>
           </el-tooltip>
           <el-tooltip effect="dark" content="删除线" placement="top">
@@ -75,15 +69,7 @@
           </el-tooltip>
           <el-tooltip effect="dark" content="链接" placement="top">
             <button class="ql-link"></button>
-          </el-tooltip> -->
-          <!-- <button class="ql-list" value="ordered"></button>
-      <button class="ql-list" value="bullet"></button>-->
-
-          <!-- Add subscript and superscript buttons -->
-          <!-- <button class="ql-script" value="sub"></button>
-      <button class="ql-script" value="super"></button>-->
-          <!-- You can also add your own -->
-          <!-- <button id="custom-button">[ Click me ]</button> -->
+          </el-tooltip>
         </div>
       </template>
     </QuillEditor>
