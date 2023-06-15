@@ -77,12 +77,6 @@
               </select>
             </span>
           </el-tooltip>
-          <!-- <el-tooltip effect="dark" content="左缩进" placement="top">
-            <button class="ql-indent" value="+1"></button>
-          </el-tooltip>
-          <el-tooltip effect="dark" content="右缩进" placement="top">
-            <button class="ql-indent" value="-1"></button>
-          </el-tooltip> -->
           <el-tooltip effect="dark" content="下划线" placement="top">
             <button class="ql-underline"></button>
           </el-tooltip>
@@ -132,13 +126,12 @@ const editorOption = reactive({
             if (quillEditor) quillEditor.format('link', false);
           }
         },
-        textIndent: function (value) {
-          console.log(value);
+        textIndent: function (value: string) {
           if (value) {
             if (quillEditor) quillEditor.format('textIndent', value);
           }
         },
-        lineHeight: function (value) {
+        lineHeight: function (value: string) {
           if (value) {
             if (quillEditor) quillEditor.format('lineHeight', value);
           }
