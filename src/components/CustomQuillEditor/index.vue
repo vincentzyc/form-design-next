@@ -2,7 +2,6 @@
   <div class="quill-editor">
     <QuillEditor
       @ready="quillEditorReady"
-      toolbar="#toolbar"
       :options="editorOption"
       theme="snow"
       v-model:content="model"
@@ -15,6 +14,17 @@
             <el-color-picker :predefine="predefineColors" size="mini" @active-change="pickerColor" />
           </span>
         </el-tooltip> -->
+          <el-tooltip effect="dark" content="文字颜色" placement="top">
+            <span class="ql-item">
+              <select class="ql-color"></select>
+            </span>
+          </el-tooltip>
+          <el-tooltip effect="dark" content="文字背景" placement="top">
+            <span class="ql-item">
+              <select class="ql-background"></select>
+            </span>
+          </el-tooltip>
+
           <el-tooltip effect="dark" content="加粗" placement="top">
             <button class="ql-bold"></button>
           </el-tooltip>
@@ -55,12 +65,24 @@
               </select>
             </span>
           </el-tooltip>
-          <el-tooltip effect="dark" content="左缩进" placement="top">
+          <el-tooltip effect="dark" content="缩进" placement="top">
+            <span class="ql-item">
+              <select class="ql-textIndent ql-custom-picker">
+                <option value="0em"></option>
+                <option value="1em"></option>
+                <option value="2em"></option>
+                <option value="3em"></option>
+                <option value="4em"></option>
+                <option value="5em"></option>
+              </select>
+            </span>
+          </el-tooltip>
+          <!-- <el-tooltip effect="dark" content="左缩进" placement="top">
             <button class="ql-indent" value="+1"></button>
           </el-tooltip>
           <el-tooltip effect="dark" content="右缩进" placement="top">
             <button class="ql-indent" value="-1"></button>
-          </el-tooltip>
+          </el-tooltip> -->
           <el-tooltip effect="dark" content="下划线" placement="top">
             <button class="ql-underline"></button>
           </el-tooltip>
@@ -81,7 +103,7 @@ import '@/plugins/quill';
 // import { storeToRefs } from 'pinia';
 // import { useMainStore } from '@/pinia';
 import { QuillEditor, Quill } from '@vueup/vue-quill';
-import { computed, reactive, ref } from 'vue';
+import { computed, reactive } from 'vue';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import './quill-editor.styl';
 
@@ -94,7 +116,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
-const quillEditor = ref<Quill | null>(null);
+let quillEditor: Quill | null = null;
 
 const editorOption = reactive({
   placeholder: '请输入文本',
@@ -105,14 +127,20 @@ const editorOption = reactive({
         link: function (value: string) {
           if (value) {
             var href = prompt('请输入链接');
-            if (quillEditor.value) quillEditor.value.format('link', href);
+            if (quillEditor) quillEditor.format('link', href);
           } else {
-            if (quillEditor.value) quillEditor.value.format('link', false);
+            if (quillEditor) quillEditor.format('link', false);
+          }
+        },
+        textIndent: function (value) {
+          console.log(value);
+          if (value) {
+            if (quillEditor) quillEditor.format('textIndent', value);
           }
         },
         lineHeight: function (value) {
           if (value) {
-            if (quillEditor.value) quillEditor.value.format('lineHeight', value);
+            if (quillEditor) quillEditor.format('lineHeight', value);
           }
         },
       },
@@ -130,7 +158,7 @@ const model = computed({
 });
 
 function quillEditorReady(quill: Quill) {
-  console.log(quill);
+  quillEditor = quill;
 }
 
 // function pickerColor(v: string) {
