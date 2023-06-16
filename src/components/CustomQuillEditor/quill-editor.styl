@@ -27,7 +27,7 @@
         height: 100%;
         margin: 0;
 
-        .ql-picker-label {
+        .ql-picker-label, .el-color-picker {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -43,7 +43,7 @@
       }
 
       .ql-custom-picker {
-        .ql-picker-label {
+        .ql-picker-label, .el-color-picker {
           &::before {
             font-size: 20px;
           }
@@ -67,37 +67,26 @@
     }
   }
 
-  // .el-color-picker__trigger {
-  // border: none;
-  // }
+  .el-color-picker__trigger {
+    display: none;
+  }
 
-  // .el-color-picker__color {
-  // display: none;
-  // }
+  .ql-color-picker>.el-color-picker::before {
+    content: 'A';
+    font-weight: bold;
+  }
 
-  // .ql-color-picker>.el-color-picker::before {
-  // content: 'A';
-  // position: absolute;
-  // top: 0;
-  // bottom: 0;
-  // left: 0;
-  // right: 0;
-  // color: #333;
-  // width: 100%;
-  // height: 100%;
-  // font-size: 20px;
-  // }
   .ql-picker.ql-size > .ql-picker-label::before {
     content: 'T';
     font-weight: bold;
   }
 
-  .ql-lineHeight > .ql-picker-label::before {
+  .ql-picker.ql-lineHeight > .ql-picker-label::before {
     content: 'L';
     font-weight: bold;
   }
 
-  .ql-textIndent > .ql-picker-label::before {
+  .ql-picker.ql-textIndent > .ql-picker-label::before {
     content: '';
     width: 20px;
     height: 20px;
@@ -105,7 +94,7 @@
     font-weight: bold;
   }
 
-  .ql-textIndent > .ql-picker-label.ql-active::before {
+  .ql-picker.ql-textIndent > .ql-picker-label.ql-active::before {
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAMNJREFUOE9jZKAyYKSyeQy0M1A1+fV+BgYGBzJdfOD2XFFHkF64C6luIJkuw9BGuzBEtko1+c0xRgaGJ7fmioSR6nIUF6okfhZlYPymwsjAtIOBkYGPkYFxNamGEowUmKEEIo34WGZkYDh7a66oCckGIoeVWvKrVf8ZGEMZGBiv/v/HGHZnvvA1YsMSI5Y1015L/vnL8Iwcw1ASNrILVFLeyrD/Z/l2dS7/O2JdBlNHu3RI9axHdQNJDStc6mkXhtRyIQBMnEwVvyWvzQAAAABJRU5ErkJggg==');
   }
 }

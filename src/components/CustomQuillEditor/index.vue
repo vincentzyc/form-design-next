@@ -10,15 +10,24 @@
       <template #toolbar>
         <div id="toolbar">
           <!-- <el-tooltip effect="dark" content="文字颜色" placement="top">
-          <span class="ql-color-picker">
-            <el-color-picker :predefine="predefineColors" size="mini" @active-change="pickerColor" />
-          </span>
-        </el-tooltip> -->
+            <span class="ql-item">
+              <span class="ql-color-picker ql-picker ql-custom-picker">
+                <el-color-picker
+                  class="ql-picker-label"
+                  :predefine="predefineColors"
+                  size="small"
+                  @active-change="pickerColor"
+                />
+              </span>
+            </span>
+          </el-tooltip> -->
+
           <el-tooltip effect="dark" content="文字颜色" placement="top">
             <span class="ql-item">
               <select class="ql-color"></select>
             </span>
           </el-tooltip>
+
           <el-tooltip effect="dark" content="文字背景" placement="top">
             <span class="ql-item">
               <select class="ql-background"></select>
@@ -155,7 +164,8 @@ function quillEditorReady(quill: Quill) {
 }
 
 // function pickerColor(v: string) {
-//   if (quillEditor.value) quillEditor.value.format('color', v);
+//   console.log(v);
+//   // if (quillEditor.value) quillEditor.value.format('color', v);
 // }
 </script>
 
