@@ -9,24 +9,37 @@
     >
       <template #toolbar>
         <div id="toolbar">
-          <!-- <el-tooltip effect="dark" content="文字颜色" placement="top">
+          <el-tooltip effect="dark" content="文字颜色" placement="top">
             <span class="ql-item">
               <span class="ql-color-picker ql-picker ql-custom-picker">
                 <el-color-picker
-                  class="ql-picker-label"
+                  show-alpha
                   :predefine="predefineColors"
                   size="small"
                   @active-change="pickerColor"
+                  v-model="customColor"
                 />
               </span>
             </span>
-          </el-tooltip> -->
-
-          <el-tooltip effect="dark" content="文字颜色" placement="top">
-            <span class="ql-item">
-              <select class="ql-color"></select>
-            </span>
           </el-tooltip>
+
+          <!-- <el-tooltip effect="dark" content="文字颜色" placement="top">
+            <span class="ql-item">
+              <span class="ql-color ql-picker ql-color-picker">
+                <span
+                  class="ql-picker-label"
+                  tabindex="0"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="ql-picker-options-0"
+                  ><svg viewBox="0 0 18 18">
+                    <line class="ql-color-label ql-stroke ql-transparent" x1="3" x2="15" y1="15" y2="15"></line>
+                    <polyline class="ql-stroke" points="5.5 11 9 3 12.5 11"></polyline>
+                    <line class="ql-stroke" x1="11.63" x2="6.38" y1="9" y2="9"></line></svg
+                ></span>
+              </span>
+            </span>
+          </el-tooltip> -->
 
           <el-tooltip effect="dark" content="文字背景" placement="top">
             <span class="ql-item">
@@ -103,19 +116,21 @@
 
 <script lang="ts" setup>
 import '@/plugins/quill';
-// import { storeToRefs } from 'pinia';
-// import { useMainStore } from '@/pinia';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/pinia';
 import { QuillEditor, Quill } from '@vueup/vue-quill';
-import { computed, reactive } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import './quill-editor.styl';
 
-// const mainStore = useMainStore();
-// const { predefineColors } = storeToRefs(mainStore);
+const mainStore = useMainStore();
+const { predefineColors } = storeToRefs(mainStore);
 
 const props = defineProps({
   modelValue: String,
 });
+
+const customColor = ref('');
 
 const emit = defineEmits(['update:modelValue']);
 
@@ -163,10 +178,9 @@ function quillEditorReady(quill: Quill) {
   quillEditor = quill;
 }
 
-// function pickerColor(v: string) {
-//   console.log(v);
-//   // if (quillEditor.value) quillEditor.value.format('color', v);
-// }
+function pickerColor(v: string) {
+  if (v && quillEditor) quillEditor.format('color', v);
+}
 </script>
 
 <style></style>
