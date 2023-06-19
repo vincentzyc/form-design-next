@@ -43,7 +43,16 @@
 
           <el-tooltip effect="dark" content="文字背景" placement="top">
             <span class="ql-item">
-              <select class="ql-background"></select>
+              <!-- <select class="ql-background"></select> -->
+              <span class="ql-color-picker ql-picker ql-custom-picker">
+                <el-color-picker
+                  show-alpha
+                  :predefine="predefineColors"
+                  size="small"
+                  @active-change="pickerBackground"
+                  v-model="customBackground"
+                />
+              </span>
             </span>
           </el-tooltip>
 
@@ -131,6 +140,7 @@ const props = defineProps({
 });
 
 const customColor = ref('');
+const customBackground = ref('');
 
 const emit = defineEmits(['update:modelValue']);
 
@@ -180,6 +190,9 @@ function quillEditorReady(quill: Quill) {
 
 function pickerColor(v: string) {
   if (v && quillEditor) quillEditor.format('color', v);
+}
+function pickerBackground(v: string) {
+  if (v && quillEditor) quillEditor.format('background', v);
 }
 </script>
 
