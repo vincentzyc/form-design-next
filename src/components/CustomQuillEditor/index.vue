@@ -247,7 +247,6 @@ const model = computed({
 
 function quillEditorReady(quill: Quill) {
   quillEditor = quill;
-  // TODO : 回显color和background-color的toolbar颜色
 }
 
 function pickerColor(v: string) {
