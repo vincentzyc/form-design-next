@@ -185,7 +185,7 @@
 </template>
 
 <script lang="ts" setup>
-import '@/plugins/quill';
+import './formats';
 import { storeToRefs } from 'pinia';
 import { useMainStore } from '@/pinia';
 import { QuillEditor, Quill } from '@vueup/vue-quill';
