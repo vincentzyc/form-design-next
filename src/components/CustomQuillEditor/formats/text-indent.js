@@ -1,7 +1,19 @@
 import Quill from 'quill';
 const Parchment = Quill.import('parchment');
 
-class IndentStyleAttributor extends Parchment.Attributor.Style {}
+class IndentStyleAttributor extends Parchment.Attributor.Style {
+  // value(domNode) {
+  //   let value = super.value(domNode);
+  //   return value;
+  // }
+  // add(node,value) {
+  //   node.style.textIndent = value
+  //   return true;
+  // }
+  // remove(node) {
+  //   node.style.textIndent = '';
+  // }
+}
 
 const IndentStyle = new IndentStyleAttributor('textIndent', 'text-indent', {
   scope: Parchment.Scope.BLOCK,
