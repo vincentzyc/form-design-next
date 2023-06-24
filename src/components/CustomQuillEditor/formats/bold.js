@@ -2,18 +2,22 @@ import Quill from 'quill';
 const Parchment = Quill.import('parchment');
 
 class BoldStyleAttributor extends Parchment.Attributor.Style {
-  value(domNode) {
-    let value = super.value(domNode);
-    console.log(value);
-    return domNode.style.fontWeight === 'bold' ? true : undefined;
+  value(node) {
+    console.log(node);
+    return node.style.fontWeight === 'bold' || super.value(node);
   }
-  //   add(node, value) {
-  //     if (value) {
-  //       node.style.fontWeight = 'bold';
-  //     } else {
-  //       node.style.fontWeight = '';
-  //     }
-  //   }
+
+  add(node, value) {
+    node.style.fontWeight = 'bold';
+  }
+
+  remove(node) {
+    if (node.style.fontWeight === 'bold') {
+      node.style.fontWeight = '';
+    } else {
+      super.remove(node);
+    }
+  }
 }
 
 const BoldStyle = new BoldStyleAttributor('bold', 'font-weight', {
