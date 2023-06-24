@@ -9,7 +9,7 @@
     >
       <template #toolbar>
         <div id="toolbar">
-          <el-tooltip effect="dark" content="文字颜色" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="文字颜色" placement="top">
             <span class="ql-item">
               <span class="ql-color-picker ql-picker ql-custom-picker">
                 <el-color-picker
@@ -23,7 +23,7 @@
             </span>
           </el-tooltip>
 
-          <!-- <el-tooltip effect="dark" content="文字颜色" placement="top">
+          <!-- <el-tooltip :hide-after="0" effect="dark" content="文字颜色" placement="top">
             <span class="ql-item">
               <span class="ql-color ql-picker ql-color-picker">
                 <span
@@ -44,7 +44,7 @@
           <!-- <select class="ql-color"></select>
           <select class="ql-background"></select> -->
 
-          <!-- <el-tooltip effect="dark" content="文字背景" placement="top">
+          <!-- <el-tooltip :hide-after="0" effect="dark" content="文字背景" placement="top">
             <span class="ql-item">
               <svg viewBox="0 0 18 18">
                 <g class="ql-fill ql-color-label">
@@ -103,7 +103,7 @@
             </span>
           </el-tooltip> -->
 
-          <el-tooltip effect="dark" content="文字背景" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="文字背景" placement="top">
             <span class="ql-item">
               <span class="ql-color-picker ql-picker ql-custom-picker">
                 <el-color-picker
@@ -117,13 +117,13 @@
             </span>
           </el-tooltip>
 
-          <el-tooltip effect="dark" content="加粗" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="加粗" placement="top">
             <button class="ql-bold"></button>
           </el-tooltip>
-          <el-tooltip effect="dark" content="斜体" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="斜体" placement="top">
             <button class="ql-italic"></button>
           </el-tooltip>
-          <el-tooltip effect="dark" content="文字大小" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="文字大小" placement="top">
             <span class="ql-item">
               <select class="ql-size ql-custom-picker">
                 <option value="8px"></option>
@@ -140,12 +140,12 @@
               </select>
             </span>
           </el-tooltip>
-          <el-tooltip effect="dark" content="对齐方式" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="对齐方式" placement="top">
             <span class="ql-item">
               <select class="ql-align"></select>
             </span>
           </el-tooltip>
-          <el-tooltip effect="dark" content="行高" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="行高" placement="top">
             <span class="ql-item">
               <select class="ql-lineHeight ql-custom-picker">
                 <option value="1"></option>
@@ -157,7 +157,7 @@
               </select>
             </span>
           </el-tooltip>
-          <el-tooltip effect="dark" content="缩进" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="缩进" placement="top">
             <span class="ql-item">
               <select class="ql-textIndent ql-custom-picker">
                 <option value="0em"></option>
@@ -169,13 +169,13 @@
               </select>
             </span>
           </el-tooltip>
-          <el-tooltip effect="dark" content="下划线" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="下划线" placement="top">
             <button class="ql-underline"></button>
           </el-tooltip>
-          <el-tooltip effect="dark" content="删除线" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="删除线" placement="top">
             <button class="ql-strike"></button>
           </el-tooltip>
-          <el-tooltip effect="dark" content="链接" placement="top">
+          <el-tooltip :hide-after="0" effect="dark" content="链接" placement="top">
             <button class="ql-link"></button>
           </el-tooltip>
         </div>
