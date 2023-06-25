@@ -1,7 +1,6 @@
 import { Quill } from '@vueup/vue-quill';
 import TextIndent from './text-indent';
 import LineHeight from './line-height';
-// import Bold from './bold';
 
 const SizeStyle = Quill.import('attributors/style/size');
 const AlignStyle = Quill.import('attributors/style/align');
@@ -12,4 +11,3 @@ Quill.register(SizeStyle, true);
 Quill.register(AlignStyle, true);
 Quill.register('formats/textIndent', TextIndent, true);
 Quill.register('formats/lineHeight', LineHeight, true);
-// Quill.register('formats/bold', Bold, true);
