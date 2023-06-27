@@ -221,16 +221,6 @@ const editorOption = reactive({
             if (quillEditor) quillEditor.format('link', false);
           }
         },
-        textIndent: function (value: string) {
-          if (value) {
-            if (quillEditor) quillEditor.format('textIndent', value);
-          }
-        },
-        lineHeight: function (value: string) {
-          if (value) {
-            if (quillEditor) quillEditor.format('lineHeight', value);
-          }
-        },
       },
     },
   },
